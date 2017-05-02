@@ -1,0 +1,40 @@
+<script src='./libs/bootstrapTable/js/bootstrap-table.js'></script>
+<script src='./libs/bootstrapTable/js/bootstrap-table-i18n-enhance.js'></script>
+
+<table data-toggle="table"
+       data-pagination="true"
+       id="monitorTableId"
+       data-side-pagination="server"
+       data-page-list="[5, 10, 20, 50, 100]"
+       data-search="true"
+       data-show-refresh="true"
+       data-show-columns="true">
+  <thead>
+  <tr>
+    <th data-field="scenarioName" data-halign="center"></th>
+    <th data-field="scenarioId" data-visible="false" data-halign="center"></th>
+    <th data-field="executionId" data-visible="false" data-halign="center"></th>
+    <th data-field="taskId" data-visible="false" data-halign="center"></th>
+    <th data-field="commitTime" data-halign="center"></th>
+    <th data-field="status" data-halign="center" data-formatter="progress2"></th>
+    <th data-field="progress" data-formatter="progress" data-halign="center"></th>
+    <th data-field="userName" data-halign="center"></th>
+    <th data-field="runTime" data-halign="center"></th>
+    <th data-field="detail" data-formatter="operateFormatter" data-events="operateEvents"
+        data-halign="center"></th>
+  </tr>
+  </thead>
+</table>
+<!--<script>-->
+<!--function ajaxRequest(params){-->
+<!--alert(11)-->
+<!--settings.HttpClient("GET", null,'/service/v1/schedule/pagejobs', function (response) {-->
+<!--var result=response.result;-->
+<!--console.log(1111111111111111);-->
+<!--console.log(result);-->
+<!--delete result.graphRaw;-->
+<!--console.log(result);-->
+<!--params.success(result);-->
+<!--})-->
+<!--}-->
+<!--</script>-->

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html class="login-bg">
+<head>
+  <title>Ark2</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- bootstrap -->
+  <link href="public/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+  <!--<link href="libs/bootstrap-3.3.5/css/bootstrap-responsive.css" rel="stylesheet"/>-->
+
+  <!-- bootstrap validate -->
+  <link href="public/libs/bootstrapvalidator/css/bootstrapValidator.min.css" rel="stylesheet">
+
+  <!-- this page specific styles -->
+  <link rel="stylesheet" href="public/css/login.css" type="text/css" media="screen"/>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+<body>
+
+<div class="row-fluid login-wrapper">
+  <a>
+    <img class="logo" src="public/img/login/log-login.png"/>
+  </a>
+
+  <form class="span4 box" role="form" id="formSignin">
+    <div class="content-wrap">
+      <h6 class="content-title" id="I_span_logoName"></h6>
+
+      <div class="form-group">
+        <input type="text" class="form-control" name="userName" placeholder=""/>
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" name="userPassword" placeholder=""/>
+      </div>
+      <div class="remember">
+        <input type="checkbox"/>
+        <label for="I_input_remember" id="I_label_remeberme"></label>
+        <a href="#" class="forgot" id="I_label_forgetPSD"></a>
+      </div>
+      <a href="#" class="btn-glow primary login" id="I_a_login"></a>
+      <!-- <a class="btn-glow primary login">Reset</a> -->
+    </div>
+  </form>
+</div>
+
+
+<script src="public/libs/plugins/jQuery/jquery.min.js"></script>
+<script src="public/libs/bootstrap/js/bootstrap.min.js"></script>
+<script src="public/libs/bootstrapvalidator/js/bootstrapValidator.min.js"></script>
+<script src="public/libs/socket.io/socket.io.js"></script>
+<script src="public/libs/requirejs-2.1.9/require.min.js"></script>
+<script src="public/js/login/login-script.js"></script>
+<script src="public/libs/dflow/jquery.base64.js"></script>
+</body>
+</html>

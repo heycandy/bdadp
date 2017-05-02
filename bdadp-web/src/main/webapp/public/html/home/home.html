@@ -1,0 +1,185 @@
+<style>
+    /* 设置滚动条的样式 */
+    ::-webkit-scrollbar {
+        width: 7px;
+        height: 7px;
+    }
+
+    /* 滚动槽 */
+    ::-webkit-scrollbar-track {
+    / / -webkit-box-shadow : inset 0 0 6 px rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+    }
+
+    /* 滚动条滑块 */
+    ::-webkit-scrollbar-thumb {
+        opacity: 0.5;
+        border-radius: 15px;
+        background: #999999;
+        -webkit-box-shadow: inset 0 0 6px #999999;
+    }
+
+    ::-webkit-scrollbar-thumb:horizontal {
+        opacity: 0.5;
+        border-radius: 15px;
+        background: #999999;
+        -webkit-box-shadow: inset 0 0 6px #999999;
+    }
+
+    ::-webkit-scrollbar-thumb:window-inactive {
+        background: #999999;
+    }
+
+    .info-box {
+        display: block;
+        min-height: 300px;
+        background: #fff;
+        width: 100%;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        margin-bottom: 5px;
+    }
+
+    .info-box-half {
+        display: block;
+        min-height: 145px;
+        background: #fff;
+        width: 88%;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        margin-left: 6%;
+        margin-bottom: 0px;
+    }
+
+    .senario-circle-menu {
+        display: block;
+        width: 45px;
+        height: 45px;
+        background: url(img/home/cicle-menu/top.png) no-repeat;
+        background-size: 45px 45px;
+        cursor: pointer;
+        position: relative;
+        margin-top: 45%;
+        margin-left: 56%;
+    }
+
+    @media screen and (min-width: 1400px) {
+        .senario-circle-menu {
+            margin-top: 38%;
+            margin-left: 72%;
+        }
+    }
+
+    @media screen and (min-width: 1700px) {
+        .senario-circle-menu {
+            margin-top: 31%;
+        }
+    }
+
+    ul.cicle-menu li {
+        display: block;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    ul.cicle-menu li {
+        position: absolute;
+    }
+
+    ul.cicle-menu li img {
+        border: none;
+    }
+
+    ul.cicle-menu li img:hover {
+        -webkit-box-shadow: 0px 0px 2px 2px lightblue;
+        -moz-box-shadow: 0px 0px 2px 2px lightblue;
+        box-shadow: 0px 0px 2px 2px lightblue;
+        transform: scale(1.5, 1.5);
+    }
+
+</style>
+<!--<div class="row">
+    <div class="col-md-4 col-xs-12">
+
+    </div>
+</div>-->
+<div class="row">
+    <div class="col-md-4" style="padding:0px 10px">
+
+        <div class="info-box senario-pie">
+            <div id="reportrange" class="pull-left"
+                 style="background: #fff; cursor: pointer; padding: 5px 5px; border: 1px solid #ccc; margin: 10px ;">
+                <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+                <span></span> <b class="caret"></b>
+            </div>
+            <canvas id="scenarioPie" height="205px" style="margin-top: -10px;"></canvas>
+        </div>
+    </div>
+    <div class="col-md-6" style="padding:0px 0px">
+        <div class="info-box" style="position: relative">
+            <div style="padding-top: 10px;font-size: 14px;font-family: 微软雅黑"><label
+                style="margin-left: 40%;-moz-user-select: none;user-select:none;-webkit-user-select:none;"
+                id="I_label_home_hotScenario"></label></div>
+            <div class="row">
+                <div class="col-md-4">
+                    <!--  <div class="senario-circle-menu" style="float: left;"></div>-->
+                    <div class="senario-circle-menu"></div>
+                </div>
+                <div class="col-md-8">
+                    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                    <div id="radarChart" style="width: 100%;height:260px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2" style="padding:0px 10px">
+
+        <div class="info-box" style="background: transparent;">
+            <div class="row">
+                <div class="info-box-half">
+                    <label style="margin: 10%;font-family: 微软雅黑;margin-top: 10px;"
+                           id="I_label_home_scenarioTotality"></label>
+
+                    <div>
+                        <img src="html/home/img/scenarioTotal.png"
+                             style="width: 15px; float: left;margin-left: 25%;"/>
+                        <span class="senario-count"
+                              style="display:block;margin-top: 5%;margin-left: 50%;font-size: 20px;color: #418ea7;"></span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="info-box-half">
+                    <label style="margin: 10%;font-family: 微软雅黑;margin-top: 10px;"
+                           id="I_label_home_executeTotality"></label>
+
+                    <div>
+                        <img src="html/home/img/execTotal.png"
+                             style="width: 25px;float: left;margin-left: 25%;"/>
+                        <span class="execution-count"
+                              style="display:block;margin-top: 5%;margin-left: 50%;font-size: 20px;color: #418ea7;"></span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12" style="padding:0px 10px">
+        <div class="info-box">
+            <div id="scenarioLine" style="width: 100%;height: 450px;"></div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12" style="padding:0px 10px">
+        <div class="info-box">
+            <div id="scenarioBar" style="width: 100%;height: 450px;"></div>
+        </div>
+    </div>
+</div>
+<script src="./js/home/home-datetimer.js" defer></script>
