@@ -507,8 +507,16 @@ define(["js/scene-edit/eidt-attributeTabs", "js/scene-edit/edit-form", "js/scene
                                     $("#" + sceneId + " .transitionGifDiv").css("display", "none");
                                     $("#" + sceneId + " .col-md-12").css("visibility", "visible");
                                 } else {
+                                    //20170502-- fix the bug for baseUrl change
+                                    var modelJson = JSON.parse($.base64.atob(result.graph_raw, true));
+                                    if(modelJson && modelJson.nodeDataArray && modelJson.nodeDataArray.length > 0){
+                                        modelJson.nodeDataArray.forEach(function(val, index, arr){
+                                            var requestXUrl =val.img.substring(val.img.indexOf("/service"));
+                                            val.img = settings.globalVariableUrl() + requestXUrl;
+                                        })
+                                    }
                                     diagram[0].diagram.model =
-                                        go.Model.fromJson($.base64.atob(result.graph_raw, true));  //1,load diagram
+                                        go.Model.fromJson(modelJson);  //1,load diagram
                                     graph = new Graph(result);
                                     graph.drawPanels(sceneId, tabPanelArr); //return tabPanelArr
                                     graph_id.setGraphId(response.result.graph_id);
