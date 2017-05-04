@@ -20,6 +20,7 @@ import com.chinasofti.ark.bdadp.service.scenario.bean.ScenarioServiceException;
 import com.chinasofti.ark.bdadp.util.common.UUID;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
+import java8.util.stream.Collectors;
 import java8.util.stream.StreamSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -113,7 +114,7 @@ public class ScenarioGraphDagServiceImpl implements ScenarioGraphDagService {
                     }
                 }
 
-                StreamSupport.stream(taskConfigs)
+                List<TaskConfig> sortedByOrderId = StreamSupport.stream(taskConfigs)
                         .sorted((o1, o2) -> {
                             if (o1 == null || o1.getComponentConfig() == null ||
                                     o2 == null || o2.getComponentConfig() == null) {
@@ -121,7 +122,9 @@ public class ScenarioGraphDagServiceImpl implements ScenarioGraphDagService {
                             } else {
                                 return o1.getComponentConfig().getOrderId() - o2.getComponentConfig().getOrderId();
                             }
-                        });
+                        }).collect(Collectors.toList());
+
+                task.setTaskConfigs(sortedByOrderId);
             }
         }
 
