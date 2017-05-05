@@ -511,8 +511,11 @@ define(["js/scene-edit/eidt-attributeTabs", "js/scene-edit/edit-form", "js/scene
                                     var modelJson = JSON.parse($.base64.atob(result.graph_raw, true));
                                     if(modelJson && modelJson.nodeDataArray && modelJson.nodeDataArray.length > 0){
                                         modelJson.nodeDataArray.forEach(function(val, index, arr){
-                                            var requestXUrl =val.img.substring(val.img.indexOf("/service"));
-                                            val.img = settings.globalVariableUrl() + requestXUrl;
+                                            if(val.pid.indexOf("_scenario") == -1){
+                                                var requestXUrl =val.img.substring(val.img.indexOf("/service"));
+                                                val.img = settings.globalVariableUrl() + requestXUrl;
+                                            }
+
                                         })
                                     }
                                     diagram[0].diagram.model =

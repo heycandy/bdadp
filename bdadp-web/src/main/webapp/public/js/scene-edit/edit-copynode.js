@@ -150,8 +150,10 @@ define([], function () {
                             start = _nodes[i].name;
                             arr.push(start);
                         } else {
-                            start = _nodes[i].name.substring(0, _nodes[i].name.indexOf('('));
-                            arr.push(_nodes[i].name);
+                            if(_nodes[i] != undefined && _nodes[i].name != undefined){
+                                start = _nodes[i].name.substring(0, _nodes[i].name.indexOf('('));
+                                arr.push(_nodes[i].name);
+                            }
                         }
                       if (start == undefined) {
                         return;
