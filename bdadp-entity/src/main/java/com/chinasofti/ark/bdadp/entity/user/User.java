@@ -12,6 +12,7 @@ import java.util.List;
  * Created by White on 2016/08/30.
  */
 @Entity
+@Table(name = "Users")
 public class User {
 
     @Id

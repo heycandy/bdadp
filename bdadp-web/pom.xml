@@ -223,8 +223,26 @@
               </outputDirectory>
               <resources>
                 <resource>
-                  <directory>${project.basedir}/../${product.misc}/components
-                  </directory>
+                  <directory>${project.basedir}/../${product.misc}/components</directory>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+          <execution>
+            <id>copy-scripts</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <includeEmptyDirs>true</includeEmptyDirs>
+              <overwrite>true</overwrite>
+              <outputDirectory>
+                ${project.build.directory}/${project.artifactId}-${project.version}/scripts
+              </outputDirectory>
+              <resources>
+                <resource>
+                  <directory>${project.basedir}/../${product.misc}/src/main</directory>
                 </resource>
               </resources>
             </configuration>
