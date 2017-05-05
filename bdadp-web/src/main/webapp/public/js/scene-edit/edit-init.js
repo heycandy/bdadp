@@ -389,6 +389,10 @@ define(["js/scene-edit/eidt-attributeTabs", "js/scene-edit/edit-form", "js/scene
                             }
                         })
 
+                        diagram[0].diagram.commandHandler.undo = function(){
+                            //override the raw function
+                        }
+                  
                         new Copy().init(sceneId, diagram[0].diagram, function (data) {
                             data.forEach(function (_d) {
                                 var srcSceneId = _d.node.formId.split('_')[0],
