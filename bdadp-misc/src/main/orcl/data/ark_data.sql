@@ -27,7 +27,7 @@ INSERT INTO Scope   VALUES ('c535d63fb2ec4f97b54aa37325a66d90', 'admin', 'admini
 
 
 -- ----------------------------
--- Records of User
+-- Records of Users
 -- ----------------------------
 INSERT INTO Users   VALUES ('9cee02c6a9f848eeba3119b8a828c66d', 'admin', 'Q2hhbmdlbWVfMTIz', 'administrator', '0', TO_DATE('2016-09-20 15:15:03', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2016-10-28 16:37:30', 'YYYY-MM-DD HH24:MI:SS'));
 
@@ -35,12 +35,5 @@ INSERT INTO Users   VALUES ('9cee02c6a9f848eeba3119b8a828c66d', 'admin', 'Q2hhbm
 -- ----------------------------
 -- Records of UserJoinRole
 -- ----------------------------
-INSERT INTO UserJoinRole   VALUES ('2209a47118f04a3bad37b6192c92d4f7', '5297eac423d845308c656cfc1808c320');
-INSERT INTO UserJoinRole   VALUES ('60d29edaa1174031b837c72ad146e93c', '5297eac423d845308c656cfc1808c320');
-INSERT INTO UserJoinRole   VALUES ('87fc148b44764466a238ac6f9c5d6a10', '5297eac423d845308c656cfc1808c320');
-INSERT INTO UserJoinRole   VALUES ('972024f17c2c44a59da30ae7d29fd96c', '5297eac423d845308c656cfc1808c320');
 INSERT INTO UserJoinRole   VALUES ('9cee02c6a9f848eeba3119b8a828c66d', '5297eac423d845308c656cfc1808c320');
-INSERT INTO UserJoinRole   VALUES ('a30d9dc1f28540219d676ba2919e8b2e', '1a9f8265c51e4be395b18a4f0cb6c782');
-INSERT INTO UserJoinRole   VALUES ('a35538df5f2a4b94a8a90918982cdb6b', '4a8ee65731324e5fbb71e1be0c0c60cc');
-INSERT INTO UserJoinRole   VALUES ('fb666fb759df4efe85019370d487c9fe', '1a9f8265c51e4be395b18a4f0cb6c782');
 

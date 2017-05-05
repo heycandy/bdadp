@@ -1,13 +1,13 @@
 
 
 CREATE TABLE Component   (
-  componenid   NVARCHAR2(255) NOT NULL ,
-  componenname   NVARCHAR2(255) NULL ,
-  componendesc   NVARCHAR2(255) NULL ,
-  componenstatus   NUMBER NULL ,
-  componenpid   NVARCHAR2(255) NULL ,
-  componenbase   NUMBER NULL ,
-  componentype   NVARCHAR2(255) NULL 
+  component_id   NVARCHAR2(255) NOT NULL ,
+  component_name   NVARCHAR2(255) NULL ,
+  component_desc   NVARCHAR2(255) NULL ,
+  component_status   NUMBER NULL ,
+  component_pid   NVARCHAR2(255) NULL ,
+  component_base   NUMBER NULL ,
+  component_type   NVARCHAR2(255) NULL 
 )
 LOGGING
 NOCOMPRESS
@@ -28,11 +28,11 @@ CREATE TABLE ComponentConfig   (
   param_name   NVARCHAR2(255) NULL ,
   param_desc   NVARCHAR2(255) NULL ,
   param_type   NVARCHAR2(255) NULL ,
-  defaulvalue   NVARCHAR2(255) NULL ,
-  defauloptions   NVARCHAR2(255) NULL ,
+  default_value   NVARCHAR2(255) NULL ,
+  default_options   NVARCHAR2(255) NULL ,
   nullable   NUMBER NULL ,
   order_id   NUMBER NULL ,
-  componenid   NVARCHAR2(255) NULL 
+  component_id   NVARCHAR2(255) NULL 
 )
 LOGGING
 NOCOMPRESS
@@ -124,8 +124,8 @@ CREATE TABLE Scenario   (
   create_user   NVARCHAR2(255) NULL ,
   modified_time   DATE NULL ,
   modified_user   NVARCHAR2(255) NULL ,
-  inspectime   DATE NULL ,
-  inspecuser   NVARCHAR2(255) NULL ,
+  inspect_time   DATE NULL ,
+  inspect_user   NVARCHAR2(255) NULL ,
   online_time   DATE NULL ,
   online_user   NVARCHAR2(255) NULL ,
   offline_time   DATE NULL ,
@@ -194,7 +194,7 @@ CREATE TABLE ScenarioExecuteHistory   (
   execution_id   NVARCHAR2(255) NOT NULL ,
   execute_status   NUMBER NULL ,
   execute_progress   NUMBER NULL ,
-  startime   DATE NULL ,
+  start_time   DATE NULL ,
   end_time   DATE NULL ,
   scenario_id   NVARCHAR2(255) NULL ,
   task_id   NVARCHAR2(255) NOT NULL ,
@@ -357,10 +357,10 @@ NOCACHE
 
 CREATE TABLE Schedule   (
   scenario_id   NVARCHAR2(255) NOT NULL ,
-  startime   DATE NULL ,
+  start_time   DATE NULL ,
   end_time   DATE NULL ,
-  repeacount   NUMBER NULL ,
-  repeainterval   NUMBER NULL ,
+  repeat_count   NUMBER NULL ,
+  repeat_interval   NUMBER NULL ,
   cron_expression   NVARCHAR2(255) NULL ,
   trigger_type   NVARCHAR2(255) NULL ,
   job_group   NVARCHAR2(255) NULL ,
@@ -387,7 +387,7 @@ NOCACHE
 
 CREATE TABLE ScheduleHistory   (
   scenario_id   NVARCHAR2(255) NOT NULL ,
-  startime   DATE NULL ,
+  start_time   DATE NULL ,
   schedule_status   NVARCHAR2(255) NULL ,
   schedulehistory_id   NVARCHAR2(255) NULL ,
   end_time   DATE NULL 
@@ -551,7 +551,7 @@ NOCACHE
 -- ----------------------------
 -- Primary Key structure for table Component
 -- ----------------------------
-ALTER TABLE Component   ADD PRIMARY KEY (  componenid  );
+ALTER TABLE Component   ADD PRIMARY KEY (  component_id  );
 
 -- ----------------------------
 -- Indexes structure for table ComponentConfig
