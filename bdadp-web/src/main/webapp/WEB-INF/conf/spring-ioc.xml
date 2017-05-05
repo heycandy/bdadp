@@ -186,7 +186,7 @@
   </context:component-scan>
 
   <!-- orm.properties -->
-  <!-- <context:property-placeholder location="/WEB-INF/orm.properties"/> -->
+   <context:property-placeholder location="/WEB-INF/orm.properties"/>
 
   <aop:config expose-proxy="true">
     <aop:pointcut expression="execution(* com.chinasofti.ark.bdadp.service..*.*(..))"
@@ -221,25 +221,5 @@
   </tx:advice>
 
   <jpa:repositories base-package="com.chinasofti.ark.bdadp.dao"/>
-
-  <!-- 本地环境配置文件 -->
-  <beans profile="local">
-    <context:property-placeholder location="/WEB-INF/local-orm.properties"/>
-  </beans>
-
-  <!-- 开发环境配置文件 -->
-  <beans profile="dev">
-    <context:property-placeholder location="/WEB-INF/dev-orm.properties"/>
-  </beans>
-
-  <!-- 测试环境配置文件 -->
-  <beans profile="test">
-    <context:property-placeholder location="/WEB-INF/test-orm.properties"/>
-  </beans>
-
-  <!-- 产品环境配置文件 -->
-  <beans profile="prod">
-    <context:property-placeholder location="/WEB-INF/prod-orm.properties"/>
-  </beans>
 
 </beans>
