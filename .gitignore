@@ -22,7 +22,3 @@ out/
 .settings/
 */src/main/java/META-INF/
 
-#config
-bdadp-web/src/main/webapp/WEB-INF/orm.properties
-bdadp-web/src/main/webapp/WEB-INF/hadoop/conf/jaas.conf
-
