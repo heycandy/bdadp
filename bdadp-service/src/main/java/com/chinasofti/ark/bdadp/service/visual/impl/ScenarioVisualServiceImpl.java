@@ -243,30 +243,30 @@ public class ScenarioVisualServiceImpl implements ScenarioVisualService {
                 + " SELECT\n"
                 + "   count(*) cnt\n"
                 + " FROM scenario s\n"
-                + " WHERE s.scenario_status = 3 AND s.online_time >= ? AND s.online_time <= ?\n"
+                + " WHERE s.scenario_status = 3 AND s.online_time >= to_date((?1),'yyyy-mm-dd hh24:mi:ss') AND s.online_time <= to_date((?2),'yyyy-mm-dd hh24:mi:ss')\n"
                 + ") s0, (\n"
                 + " SELECT\n"
                 + "   count(*) cnt\n"
                 + " FROM scenario s\n"
                 + " WHERE s.scenario_status != 5\n"
-                + ") s1;";
+                + ") s1";
 
         return new QueryTransformer<String, Double>(startTime, endTime).nativeQuery(s);
     }
 
     private Map<String, Double> queryTotalExecuteResult(Integer executeStatus, String startTime,
                                                         String endTime) {
-        String s = "SELECT 'total' total, s0.cnt / s1.cnt percent FROM (\n"
+        String s = "SELECT 'total' total, case when s1.cnt = 0 then 0 else s0.cnt / s1.cnt end percent FROM (\n"
                 + " SELECT\n"
-                + "   count(*) cnt\n"
+                + " count(*) cnt\n"
                 + " FROM scenarioexecutehistory s\n"
-                + " WHERE s.task_id = s.scenario_id and s.execute_status = ? AND s.start_time >= ? AND s.end_time <= ?\n"
+                + " WHERE s.task_id = s.scenario_id and s.execute_status = ?1 AND s.start_time >= to_date(?2,'yyyy-mm-dd hh24:mi:ss') AND s.end_time <= to_date(?3,'yyyy-mm-dd hh24:mi:ss')\n"
                 + ") s0, (\n"
                 + " SELECT\n"
-                + "   count(*) cnt\n"
+                + "  count(*) cnt\n"
                 + " FROM scenarioexecutehistory s\n"
-                + " WHERE s.task_id = s.scenario_id and s.execute_status > 1 AND s.start_time >= ? AND s.end_time <= ?\n"
-                + ") s1;";
+                + " WHERE s.task_id = s.scenario_id and s.execute_status > 1 AND s.start_time >= to_date(?4,'yyyy-mm-dd hh24:mi:ss') AND s.end_time <= to_date(?5,'yyyy-mm-dd hh24:mi:ss')\n"
+                + ") s1";
 
         return new QueryTransformer<String, Double>(executeStatus, startTime, endTime, startTime,
                 endTime).nativeQuery(s);
@@ -279,16 +279,16 @@ public class ScenarioVisualServiceImpl implements ScenarioVisualService {
                 + "    s.scenario_id,\n"
                 + "    count(*) cnt\n"
                 + "  FROM scenarioexecutehistory s\n"
-                + "  WHERE s.task_id = s.scenario_id AND s.execute_status = ? AND s.start_time >= ? AND s.end_time <= ?\n"
+                + "  WHERE s.task_id = s.scenario_id AND s.execute_status = ? AND s.start_time >= to_date(?,'yyyy-mm-dd hh24:mi:ss') AND s.end_time <= to_date(?,'yyyy-mm-dd hh24:mi:ss')\n"
                 + "  GROUP BY s.scenario_id\n"
                 + ") s0, (\n"
                 + "  SELECT\n"
                 + "    s.scenario_id,\n"
                 + "    count(*) total\n"
                 + "  FROM scenarioexecutehistory s\n"
-                + "  WHERE s.task_id = s.scenario_id AND s.execute_status > 1 AND s.start_time >= ? AND s.end_time <= ?\n"
+                + "  WHERE s.task_id = s.scenario_id AND s.execute_status > 1 AND s.start_time >= to_date(?,'yyyy-mm-dd hh24:mi:ss') AND s.end_time <= to_date(?,'yyyy-mm-dd hh24:mi:ss')\n"
                 + "  GROUP BY s.scenario_id\n"
-                + ") s1 WHERE s0.scenario_id = s1.scenario_id;";
+                + ") s1 WHERE s0.scenario_id = s1.scenario_id";
 
         return new QueryTransformer<String, Double>(executeStatus, startTime, endTime, startTime,
                 endTime).nativeQuery(s);
@@ -297,13 +297,13 @@ public class ScenarioVisualServiceImpl implements ScenarioVisualService {
     private Map<String, Double> queryScheduleSuccessResult(String startTime, String endTime) {
         String s = "SELECT s0.scenario_id,s0.cnt/s1.total percent FROM\n" +
                 "    (SELECT sh.scenario_id,count(sh.scenario_id)cnt FROM schedulehistory sh\n" +
-                "    WHERE sh.schedule_status = 'success' AND sh.start_time >= ? AND sh.end_time <= ?\n"
+                "    WHERE sh.schedule_status = 'success' AND sh.start_time >= to_date(?,'yyyy-mm-dd hh24:mi:ss') AND sh.end_time <= to_date(?,'yyyy-mm-dd hh24:mi:ss')\n"
                 +
                 "    GROUP BY sh.scenario_id)s0,\n" +
                 "    (SELECT sh.scenario_id,count(sh.scenario_id)total FROM schedulehistory sh\n" +
-                "    WHERE sh.start_time >= ? AND sh.end_time <= ?\n" +
+                "    WHERE sh.start_time >= to_date(?,'yyyy-mm-dd hh24:mi:ss') AND sh.end_time <= to_date(?,'yyyy-mm-dd hh24:mi:ss')\n" +
                 "    GROUP BY sh.scenario_id)s1\n" +
-                "  WHERE s0.scenario_id = s1.scenario_id;";
+                "  WHERE s0.scenario_id = s1.scenario_id";
 
         return new QueryTransformer<String, Double>(startTime, endTime, startTime,
                 endTime).nativeQuery(s);
@@ -322,7 +322,7 @@ public class ScenarioVisualServiceImpl implements ScenarioVisualService {
                 + "    count(*) total\n"
                 + "  FROM task t\n"
                 + "  WHERE t.task_type = 'scenario'\n"
-                + ") t1;";
+                + ") t1";
 
         return new QueryTransformer<String, Double>().nativeQuery(s);
     }
@@ -333,14 +333,14 @@ public class ScenarioVisualServiceImpl implements ScenarioVisualService {
                 + "    s.scenario_id,\n"
                 + "    sum(s.end_time - s.start_time) duration\n"
                 + "  FROM scenarioexecutehistory s\n"
-                + "  WHERE s.task_id = s.scenario_id AND s.execute_status > 1 AND s.start_time >= ? AND s.end_time <= ?\n"
+                + "  WHERE s.task_id = s.scenario_id AND s.execute_status > 1 AND s.start_time >= to_date(?,'yyyy-mm-dd hh24:mi:ss') AND s.end_time <= to_date(?,'yyyy-mm-dd hh24:mi:ss')\n"
                 + "  GROUP BY s.scenario_id\n"
                 + ") s0, (\n"
                 + "  SELECT\n"
                 + "    sum(s.end_time - s.start_time) total\n"
                 + "  FROM scenarioexecutehistory s\n"
-                + "  WHERE s.task_id = s.scenario_id AND s.execute_status > 1 AND s.start_time >= ? AND s.end_time <= ?\n"
-                + ") s1;";
+                + "  WHERE s.task_id = s.scenario_id AND s.execute_status > 1 AND s.start_time >= to_date(?,'yyyy-mm-dd hh24:mi:ss') AND s.end_time <= to_date(?,'yyyy-mm-dd hh24:mi:ss')\n"
+                + ") s1";
 
         return new QueryTransformer<String, Double>(startTime, endTime, startTime, endTime)
                 .nativeQuery(s);
@@ -349,47 +349,56 @@ public class ScenarioVisualServiceImpl implements ScenarioVisualService {
     private Map<String, Double> queryTotalCount(String startTime, String endTime) {
         String s = "SELECT 'total' total, count(*) / 1.0 cnt \n"
                 + "FROM scenario s \n"
-                + "WHERE s.scenario_status != 5;";
+                + "WHERE s.scenario_status != 5";
 
         return new QueryTransformer<String, Double>().nativeQuery(s);
     }
 
     private Map<String, Double> queryTotalExecuteCount(String startTime, String endTime) {
-        String s = "SELECT 'total' total, count(*) / 1.0 cnt\n"
-                + "FROM scenarioexecutehistory s\n"
-                + "WHERE s.task_id = s.scenario_id;";
+        String s = "SELECT 'total' total, count(*) / 1.0 cnt "
+                + "FROM scenarioexecutehistory s "
+                + "WHERE s.task_id = s.scenario_id";
 
         return new QueryTransformer<String, Double>().nativeQuery(s);
     }
 
     private Map<String, Double> queryTotalExecuteCount(Integer executeStatus, String startTime,
                                                        String endTime) {
-        String s = "SELECT DATE_FORMAT(s.end_time, '%Y.%m.%d') axis, count(*) / 1.0 cnt\n"
-                + "FROM scenarioexecutehistory s\n"
-                + "WHERE s.task_id = s.scenario_id AND s.execute_status = ? AND s.start_time >= ? AND s.end_time <= ?\n"
-                + "GROUP BY DATE_FORMAT(s.end_time, '%Y%m%d');";
+        String s = "SELECT to_char(s.end_time, 'yyyy-mm-dd') axis, count(*) / 1.0 cnt "
+                + "FROM scenarioexecutehistory s "
+                + "WHERE s.task_id = s.scenario_id AND s.execute_status = ? AND s.start_time >= to_date(?,'yyyy-mm-dd hh24:mi:ss') AND s.end_time <= to_date(?,'yyyy-mm-dd hh24:mi:ss') "
+                + "GROUP BY to_char(s.end_time, 'yyyy-mm-dd')";
 
         return new QueryTransformer<String, Double>(executeStatus, startTime, endTime).nativeQuery(s);
     }
 
     private Map<String, Double> queryExecuteResultForColumn(Integer executeStatus, String startTime,
                                                             String endTime) {
-        String s = "SELECT sr.cate_id,avg(percent) successRate FROM\n" +
+    /*    String s = "SELECT sr.cate_id,avg(percent) successRate FROM\n" +
                 "  (SELECT s0.cate_id cate_id,s0.scenario_id,s0.cnt / s1.total percent FROM\n" +
                 "    ((SELECT scd.cate_id cate_id,scd.scenario_id scenario_id,count(scd.scenario_id) cnt FROM scenariocategorydetail scd  LEFT JOIN scenarioexecutehistory seh ON scd.scenario_id=seh.scenario_id\n"
                 +
-                "    WHERE seh.task_id = seh.scenario_id AND seh.execute_status = ? AND seh.start_time >= ?\n"
+                "    WHERE seh.task_id = seh.scenario_id AND seh.execute_status = ? AND seh.start_time >= to_date(?,'yyyy-mm-dd hh24:mi:ss')\n"
                 +
-                "          AND seh.end_time <= ?\n" +
+                "          AND seh.end_time <= to_date(?,'yyyy-mm-dd hh24:mi:ss')\n" +
                 "    GROUP BY scd.scenario_id,scd.cate_id)s0,\n" +
                 "      (SELECT scd.cate_id cate_id,scd.scenario_id scenario_id,count(scd.scenario_id) total FROM scenariocategorydetail scd  LEFT JOIN scenarioexecutehistory seh ON scd.scenario_id=seh.scenario_id\n"
                 +
-                "      WHERE seh.task_id = seh.scenario_id AND seh.execute_status >1 AND seh.start_time >= ? AND seh.end_time <= ?\n"
+                "      WHERE seh.task_id = seh.scenario_id AND seh.execute_status >1 AND seh.start_time >= to_date(?,'yyyy-mm-dd hh24:mi:ss') AND seh.end_time <= to_date(?,'yyyy-mm-dd hh24:mi:ss')\n"
                 +
                 "      GROUP BY scd.scenario_id,scd.cate_id)s1)\n" +
                 "  WHERE s0.scenario_id = s1.scenario_id AND s0.cate_id = s1.cate_id\n" +
-                "  )sr\n" +
-                "GROUP BY sr.cate_id; ";
+                "  ) sr\n" +
+                "GROUP BY sr.cate_id";*/
+        String s = "SELECT sr.cate_id, avg(percent) successRate FROM (\n" +
+                " SELECT s0.cate_id cate_id,s0.scenario_id, s0.cnt / s1.total percent FROM ( \n" +
+                " SELECT scd.cate_id cate_id,scd.scenario_id scenario_id, count(scd.scenario_id) cnt FROM scenariocategorydetail scd LEFT JOIN SCENARIOEXECUTEHISTORY seh ON scd.SCENARIO_ID = seh.SCENARIO_ID \n" +
+                " WHERE seh.task_id = seh.SCENARIO_ID AND seh.EXECUTE_STATUS = ? AND seh.start_time >= to_date(?,'yyyy-mm-dd hh24:mi:ss') \n" +
+                " AND seh.end_time <= to_date(?,'yyyy-mm-dd hh24:mi:ss')  GROUP BY scd.scenario_id,scd.cate_id) s0,(\n" +
+                " SELECT scd.cate_id cate_id, scd.scenario_id scenario_id,count(scd.scenario_id) total FROM scenariocategorydetail scd  LEFT JOIN scenarioexecutehistory seh ON scd.scenario_id=seh.scenario_id\n" +
+                " WHERE seh.task_id = seh.scenario_id AND seh.execute_status > 1 AND seh.start_time >= to_date(?,'yyyy-mm-dd hh24:mi:ss')  AND seh.end_time <= to_date(?,'yyyy-mm-dd hh24:mi:ss')\n" +
+                "GROUP BY scd.scenario_id,scd.cate_id) s1 WHERE s0.scenario_id = s1.scenario_id AND s0.cate_id = s1.cate_id ) sr\n" +
+                " GROUP BY sr.cate_id";
         return new QueryTransformer<String, Double>(executeStatus, startTime, endTime, startTime,
                 endTime).nativeQuery(s);
     }
@@ -400,57 +409,80 @@ public class ScenarioVisualServiceImpl implements ScenarioVisualService {
                 "  (SELECT s0.cate_id,s0.scenario_id,s0.cnt/s1.total percent FROM\n" +
                 "    (SELECT scd.scenario_id,scd.cate_id,count(scd.scenario_id) cnt FROM scenariocategorydetail scd LEFT JOIN schedulehistory sh ON sh.scenario_id = scd.scenario_id\n"
                 +
-                "    WHERE sh.schedule_status = 'success' AND sh.start_time >= ? AND sh.end_time <= ?\n"
+                "    WHERE sh.schedule_status = 'success' AND sh.start_time >= to_date(?,'yyyy-mm-dd hh24:mi:ss') AND sh.end_time <= to_date(?,'yyyy-mm-dd hh24:mi:ss')\n"
                 +
                 "    GROUP BY scd.scenario_id,scd.cate_id)s0,\n" +
                 "    (SELECT scd.cate_id,scd.scenario_id,count(scd.scenario_id) total FROM scenariocategorydetail scd LEFT JOIN schedulehistory sh ON sh.scenario_id = scd.scenario_id\n"
                 +
-                "    WHERE sh.start_time >= ? AND sh.end_time <= ?\n" +
+                "    WHERE sh.start_time >= to_date(?,'yyyy-mm-dd hh24:mi:ss') AND sh.end_time <= to_date(?,'yyyy-mm-dd hh24:mi:ss')\n" +
                 "    GROUP BY scd.scenario_id,scd.cate_id)s1\n" +
                 "  WHERE s0.scenario_id = s1.scenario_id AND s0.cate_id = s1.cate_id)er\n" +
-                "GROUP BY er.cate_id;";
+                "GROUP BY er.cate_id";
 
         return new QueryTransformer<String, Double>(startTime, endTime, startTime,
                 endTime).nativeQuery(s);
     }
 
     private Map<String, Double> queryScenarioUsageResultForColumn(String startTime, String endTime) {
-        String s = "SELECT su.cate_id,avg(su.percent) usageRate FROM\n" +
+       /* String s = "SELECT su.cate_id,avg(su.percent) usageRate FROM\n" +
                 "  (SELECT s0.cate_id cate_id,s0.scenario_id,s0.cnt/s1.total percent FROM\n" +
                 "    (SELECT scd.cate_id cate_id,scd.scenario_id scenario_id,count(scd.scenario_id) cnt FROM (scenariocategorydetail scd LEFT JOIN task t ON scd.scenario_id = t.relation_id)\n"
                 +
-                "      LEFT JOIN scenarioexecutehistory seh ON seh.scenario_id = scd.scenario_id WHERE seh.start_time >= ? AND seh.end_time <= ? AND t.task_type = 'scenario'\n"
+                "      LEFT JOIN scenarioexecutehistory seh ON seh.scenario_id = scd.scenario_id WHERE seh.start_time >= to_date(?,'yyyy-mm-dd hh24:mi:ss') AND seh.end_time <= to_date(?,'yyyy-mm-dd hh24:mi:ss') AND t.task_type = 'scenario'\n"
                 +
                 "    GROUP BY scd.scenario_id,scd.cate_id)s0,\n" +
                 "    (SELECT scd.cate_id cate_id,scd.scenario_id scenario_id,count(scd.scenario_id) total FROM(scenariocategorydetail scd LEFT JOIN task t ON scd.scenario_id = t.relation_id)\n"
                 +
-                "      LEFT JOIN scenarioexecutehistory seh ON seh.scenario_id = scd.scenario_id WHERE seh.start_time >= ? AND seh.end_time <= ? AND t.task_type = 'scenario'\n"
+                "      LEFT JOIN scenarioexecutehistory seh ON seh.scenario_id = scd.scenario_id WHERE seh.start_time >= to_date(?,'yyyy-mm-dd hh24:mi:ss') AND seh.end_time <= to_date(?,'yyyy-mm-dd hh24:mi:ss') AND t.task_type = 'scenario'\n"
                 +
                 "    GROUP BY scd.cate_id)s1\n" +
                 "  WHERE s0.cate_id = s1.cate_id)su\n" +
-                "GROUP BY su.cate_id;";
+                "GROUP BY su.cate_id";*/
+        String s = "SELECT su.cate_id,avg(su.percent) usageRate FROM ( \n" +
+                "SELECT s0.cate_id cate_id,s0.scenario_id,s0.cnt/s1.total percent FROM (\n" +
+                "SELECT scd.cate_id cate_id,scd.scenario_id scenario_id,count(scd.scenario_id) cnt FROM(\n" +
+                "scenariocategorydetail scd LEFT JOIN task t ON scd.scenario_id = t.relation_id\n" +
+                ")  LEFT JOIN scenarioexecutehistory seh ON seh.scenario_id = scd.scenario_id WHERE seh.start_time >= to_date(?,'yyyy-mm-dd hh24:mi:ss') AND seh.end_time <= to_date(?,'yyyy-mm-dd hh24:mi:ss') AND t.task_type = 'scenario'\n" +
+                "GROUP BY scd.scenario_id,scd.cate_id) s0, (\n" +
+                "SELECT scd.cate_id cate_id,scd.scenario_id scenario_id,count(scd.scenario_id) total FROM (\n" +
+                " scenariocategorydetail scd LEFT JOIN task t ON scd.scenario_id = t.relation_id\n" +
+                " ) LEFT JOIN scenarioexecutehistory seh ON seh.scenario_id = scd.scenario_id WHERE seh.start_time >= to_date(?,'yyyy-mm-dd hh24:mi:ss') AND seh.end_time <= to_date(?,'yyyy-mm-dd hh24:mi:ss') AND t.task_type = 'scenario'\n" +
+                "GROUP BY scd.cate_id,scd.scenario_id) s1 WHERE s0.cate_id = s1.cate_id\n" +
+                ") su GROUP BY su.cate_id";
 
         return new QueryTransformer<String, Double>(startTime, endTime, startTime,
                 endTime).nativeQuery(s);
     }
 
     private Map<String, Double> queryResourceUsageResultForColumn(String startTime, String endTime) {
-        String s = "SELECT ru.cate_id,avg(ru.percent) resourceRate FROM\n" +
+       /* String s = "SELECT ru.cate_id,avg(ru.percent) resourceRate FROM\n" +
                 "  (SELECT s0.cate_id cate_id,s0.scenario_id,s0.cnt/s1.total percent FROM\n" +
                 "    (SELECT scd.cate_id,scd.scenario_id,sum(seh.end_time - seh.start_time) cnt\n" +
                 "     FROM scenariocategorydetail scd LEFT JOIN scenarioexecutehistory seh ON scd.scenario_id = seh.scenario_id\n"
                 +
-                "     WHERE seh.task_id = seh.scenario_id AND seh.execute_status > 1 AND seh.start_time >= ? AND seh.end_time <= ?\n"
+                "     WHERE seh.task_id = seh.scenario_id AND seh.execute_status > 1 AND seh.start_time >= to_date(?,'yyyy-mm-dd hh24:mi:ss') AND seh.end_time <= to_date(?,'yyyy-mm-dd hh24:mi:ss')\n"
                 +
                 "     GROUP BY scd.scenario_id,scd.cate_id)s0,\n" +
                 "    (SELECT scd.cate_id,sum(seh.end_time - seh.start_time) total\n" +
                 "     FROM scenariocategorydetail scd LEFT JOIN scenarioexecutehistory seh ON scd.scenario_id = seh.scenario_id\n"
                 +
-                "     WHERE seh.task_id = seh.scenario_id AND seh.execute_status > 1 AND seh.start_time >= ? AND seh.end_time <= ?\n"
+                "     WHERE seh.task_id = seh.scenario_id AND seh.execute_status > 1 AND seh.start_time >= to_date(?,'yyyy-mm-dd hh24:mi:ss') AND seh.end_time <= to_date(?,'yyyy-mm-dd hh24:mi:ss')\n"
                 +
                 "     GROUP BY scd.cate_id)s1\n" +
                 "  WHERE s0.cate_id = s1.cate_id)ru\n" +
-                "GROUP BY ru.cate_id;";
+                "GROUP BY ru.cate_id";*/
+        String s = "SELECT ru.cate_id,avg(ru.percent) resourceRate FROM (\n" +
+                "SELECT s0.cate_id cate_id,s0.scenario_id,s0.cnt/s1.total percent FROM(\n" +
+                "SELECT scd.cate_id,scd.scenario_id,sum(seh.end_time - seh.start_time) cnt\n" +
+                "FROM scenariocategorydetail scd LEFT JOIN scenarioexecutehistory seh ON scd.scenario_id = seh.scenario_id\n" +
+                "WHERE seh.task_id = seh.scenario_id AND seh.execute_status > 1 AND seh.start_time >= to_date(?,'yyyy-mm-dd hh24:mi:ss') AND seh.end_time <= to_date(?,'yyyy-mm-dd hh24:mi:ss')\n" +
+                "GROUP BY scd.cate_id,scd.scenario_id) s0,(\n" +
+                "SELECT scd.cate_id,sum(seh.end_time - seh.start_time) total\n" +
+                "FROM scenariocategorydetail scd LEFT JOIN scenarioexecutehistory seh ON scd.scenario_id = seh.scenario_id\n" +
+                "WHERE seh.task_id = seh.scenario_id AND seh.execute_status > 1 AND seh.start_time >= to_date(?,'yyyy-mm-dd hh24:mi:ss') AND seh.end_time <= to_date(?,'yyyy-mm-dd hh24:mi:ss')\n" +
+                "GROUP BY scd.cate_id) s1\n" +
+                "WHERE s0.cate_id = s1.cate_id) ru " +
+                "GROUP BY ru.cate_id";
 
         return new QueryTransformer<String, Double>(startTime, endTime, startTime, endTime)
                 .nativeQuery(s);
@@ -487,7 +519,7 @@ public class ScenarioVisualServiceImpl implements ScenarioVisualService {
                 }
 
             }
-
+            entityManager.close();
             return map;
         }
 
