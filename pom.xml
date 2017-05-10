@@ -95,6 +95,13 @@
                 <scope>provided</scope>
             </dependency>
 
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>1.0.0.GA</version>
+                <scope>provided</scope>
+            </dependency>
+
             <!-- Jackson -->
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
@@ -343,13 +350,6 @@
                 <version>${hibernate.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>javax.validation</groupId>
-                <artifactId>validation-api</artifactId>
-                <version>1.0.0.GA</version>
-                <scope>provided</scope>
-            </dependency>
-
             <!--enable hibernate to use its proxy model-->
             <dependency>
                 <groupId>org.javassist</groupId>
@@ -439,7 +439,6 @@
                 <groupId>org.scala-lang</groupId>
                 <artifactId>scala-library</artifactId>
                 <version>${scala.version}</version>
-                <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>org.scala-lang</groupId>
@@ -451,7 +450,6 @@
                 <groupId>org.scala-lang</groupId>
                 <artifactId>scala-reflect</artifactId>
                 <version>${scala.version}</version>
-                <scope>provided</scope>
             </dependency>
 
             <!-- hadoop -->
@@ -459,7 +457,6 @@
                 <groupId>org.apache.hadoop</groupId>
                 <artifactId>hadoop-common</artifactId>
                 <version>${hadoop.version}</version>
-                <scope>provided</scope>
                 <exclusions>
                     <exclusion>
                         <groupId>org.xerial.snappy</groupId>
@@ -471,7 +468,6 @@
                 <groupId>org.apache.hadoop</groupId>
                 <artifactId>hadoop-auth</artifactId>
                 <version>${hadoop.version}</version>
-                <scope>provided</scope>
             </dependency>
 
             <!--hive-->
@@ -479,7 +475,6 @@
                 <groupId>org.apache.hive</groupId>
                 <artifactId>hive-jdbc</artifactId>
                 <version>${hive.version}</version>
-                <scope>provided</scope>
             </dependency>
 
             <!--hbase -->
@@ -487,7 +482,6 @@
                 <groupId>org.apache.hbase</groupId>
                 <artifactId>hbase-client</artifactId>
                 <version>${hbase.version}</version>
-                <scope>provided</scope>
             </dependency>
 
             <!-- spark -->
@@ -495,19 +489,16 @@
                 <groupId>org.apache.spark</groupId>
                 <artifactId>spark-core_${scala.binary.version}</artifactId>
                 <version>${spark.version}</version>
-                <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>org.apache.spark</groupId>
                 <artifactId>spark-sql_${scala.binary.version}</artifactId>
                 <version>${spark.version}</version>
-                <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>org.apache.spark</groupId>
                 <artifactId>spark-hive_${scala.binary.version}</artifactId>
                 <version>${spark.version}</version>
-                <scope>provided</scope>
                 <exclusions>
                     <exclusion>
                         <groupId>org.xerial.snappy</groupId>
@@ -519,19 +510,16 @@
                 <groupId>org.apache.spark</groupId>
                 <artifactId>spark-streaming_${scala.binary.version}</artifactId>
                 <version>${spark.version}</version>
-                <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>org.apache.spark</groupId>
                 <artifactId>spark-graphx_${scala.binary.version}</artifactId>
                 <version>${spark.version}</version>
-                <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>org.apache.spark</groupId>
                 <artifactId>spark-mllib_${scala.binary.version}</artifactId>
                 <version>${spark.version}</version>
-                <scope>provided</scope>
             </dependency>
 
             <!-- external datasource -->
