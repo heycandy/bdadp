@@ -8,8 +8,9 @@ var settings = (function () {
         globalVariableUrl: function () {
             var strFullPath = window.document.location.href;
             var strPath = window.document.location.pathname;
-            var pos = strFullPath.indexOf(strPath);
-            var path = strFullPath.substring(0, pos);
+            var pos = strFullPath.indexOf("strPath");
+            // var path = strFullPath.substring(0, pos);
+            var path = window.document.location.origin;
             var href = window.location.href;
             if(href.indexOf("/public") !== -1) {
                 var pos = href.indexOf("/public");
