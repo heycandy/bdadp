@@ -2,647 +2,648 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>com.chinasofti.ark</groupId>
-    <artifactId>bdadp</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <packaging>pom</packaging>
-    <name>Ark-BDADP</name>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.chinasofti.ark</groupId>
+  <artifactId>bdadp</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Ark-BDADP</name>
 
-    <properties>
-        <java.version>1.8</java.version>
-        <scala.binary.version>2.10</scala.binary.version>
-        <scala.version>2.10.4</scala.version>
+  <properties>
+    <java.version>1.8</java.version>
+    <scala.binary.version>2.10</scala.binary.version>
+    <scala.version>2.10.4</scala.version>
 
-        <hadoop.version>2.7.2</hadoop.version>
-        <hive.version>1.2.1</hive.version>
-        <hbase.version>1.0.2</hbase.version>
-        <spark.version>1.5.1</spark.version>
+    <hadoop.version>2.7.2</hadoop.version>
+    <hive.version>1.2.1</hive.version>
+    <hbase.version>1.0.2</hbase.version>
+    <spark.version>1.6.3</spark.version>
 
-        <spring.version>4.2.4.RELEASE</spring.version>
-        <spring.jpa.version>1.10.2.RELEASE</spring.jpa.version>
-        <hibernate.version>4.2.21.Final</hibernate.version>
-        <jackson.version>2.4.4</jackson.version>
+    <spring.version>4.2.4.RELEASE</spring.version>
+    <spring.jpa.version>1.10.2.RELEASE</spring.jpa.version>
+    <hibernate.version>4.2.21.Final</hibernate.version>
+    <jackson.version>2.4.4</jackson.version>
 
-        <build.sourceEncoding>UTF-8</build.sourceEncoding>
-        <build.outputDir>output</build.outputDir>
+    <build.sourceEncoding>UTF-8</build.sourceEncoding>
+    <build.outputDir>output</build.outputDir>
 
-        <product.component>bdadp-component</product.component>
-        <product.controller>bdadp-controller</product.controller>
-        <product.dao>bdadp-dao</product.dao>
-        <product.engine>bdadp-engine</product.engine>
-        <product.entity>bdadp-entity</product.entity>
-        <product.executor>bdadp-executor</product.executor>
-        <product.expression>bdadp-expression</product.expression>
-        <product.flow>bdadp-flow</product.flow>
-        <product.misc>bdadp-misc</product.misc>
-        <product.security>bdadp-security</product.security>
-        <product.service>bdadp-service</product.service>
-        <product.servlet>bdadp-servlet</product.servlet>
-        <product.standalong>bdadp-standalong</product.standalong>
-        <product.util>bdadp-util</product.util>
-        <product.web>bdadp-web</product.web>
+    <product.component>bdadp-component</product.component>
+    <product.controller>bdadp-controller</product.controller>
+    <product.dao>bdadp-dao</product.dao>
+    <product.engine>bdadp-engine</product.engine>
+    <product.entity>bdadp-entity</product.entity>
+    <product.executor>bdadp-executor</product.executor>
+    <product.expression>bdadp-expression</product.expression>
+    <product.flow>bdadp-flow</product.flow>
+    <product.misc>bdadp-misc</product.misc>
+    <product.security>bdadp-security</product.security>
+    <product.service>bdadp-service</product.service>
+    <product.servlet>bdadp-servlet</product.servlet>
+    <product.standalong>bdadp-standalong</product.standalong>
+    <product.util>bdadp-util</product.util>
+    <product.web>bdadp-web</product.web>
 
-    </properties>
+  </properties>
 
-    <profiles>
-        <profile>
-            <!-- For standalong distribution -->
-            <id>standalong</id>
-            <modules>
-                <module>${product.controller}</module>
-                <module>${product.dao}</module>
-                <module>${product.entity}</module>
-                <module>${product.service}</module>
-                <module>${product.servlet}</module>
-                <module>${product.util}</module>
-                <module>${product.standalong}</module>
-            </modules>
-        </profile>
-        <profile>
-            <!-- For WAR distribution -->
-            <id>war</id>
-            <modules>
-                <module>${product.component}</module>
-                <module>${product.controller}</module>
-                <module>${product.dao}</module>
-                <module>${product.entity}</module>
-                <module>${product.expression}</module>
-                <module>${product.security}</module>
-                <module>${product.service}</module>
-                <module>${product.servlet}</module>
-                <module>${product.util}</module>
-                <module>${product.web}</module>
-            </modules>
-        </profile>
-    </profiles>
+  <profiles>
+    <profile>
+      <!-- For standalong distribution -->
+      <id>standalong</id>
+      <modules>
+        <module>${product.controller}</module>
+        <module>${product.dao}</module>
+        <module>${product.entity}</module>
+        <module>${product.service}</module>
+        <module>${product.servlet}</module>
+        <module>${product.util}</module>
+        <module>${product.standalong}</module>
+      </modules>
+    </profile>
+    <profile>
+      <!-- For WAR distribution -->
+      <id>war</id>
+      <modules>
+        <module>${product.component}</module>
+        <module>${product.controller}</module>
+        <module>${product.dao}</module>
+        <module>${product.entity}</module>
+        <module>${product.expression}</module>
+        <module>${product.security}</module>
+        <module>${product.service}</module>
+        <module>${product.servlet}</module>
+        <module>${product.util}</module>
+        <module>${product.web}</module>
+      </modules>
+    </profile>
+  </profiles>
 
-    <dependencyManagement>
-        <dependencies>
-
-            <!-- servlet -->
-            <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>javax.servlet-api</artifactId>
-                <version>3.1.0</version>
-                <scope>provided</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>servlet-api</artifactId>
-                <version>2.5</version>
-                <scope>provided</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>javax.validation</groupId>
-                <artifactId>validation-api</artifactId>
-                <version>1.0.0.GA</version>
-                <scope>provided</scope>
-            </dependency>
-
-            <!-- Jackson -->
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-annotations</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-core</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-databind</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
-
-            <!--utils-->
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>14.0.1</version>
-            </dependency>
-
-            <!-- Apache Commons -->
-            <dependency>
-                <groupId>commons-lang</groupId>
-                <artifactId>commons-lang</artifactId>
-                <version>2.6</version>
-            </dependency>
-            <dependency>
-                <groupId>commons-collections</groupId>
-                <artifactId>commons-collections</artifactId>
-                <version>3.2.2</version>
-            </dependency>
-            <dependency>
-                <groupId>commons-beanutils</groupId>
-                <artifactId>commons-beanutils</artifactId>
-                <version>1.9.2</version>
-            </dependency>
-            <dependency>
-                <groupId>commons-dbutils</groupId>
-                <artifactId>commons-dbutils</artifactId>
-                <version>1.10</version>
-            </dependency>
-            <dependency>
-                <groupId>commons-fileupload</groupId>
-                <artifactId>commons-fileupload</artifactId>
-                <version>1.3.2</version>
-            </dependency>
-            <dependency>
-                <groupId>commons-codec</groupId>
-                <artifactId>commons-codec</artifactId>
-                <version>1.10</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-compress</artifactId>
-                <version>1.10</version>
-            </dependency>
-            <dependency>
-                <groupId>commons-configuration</groupId>
-                <artifactId>commons-configuration</artifactId>
-                <version>1.10</version>
-            </dependency>
-            <dependency>
-                <groupId>commons-io</groupId>
-                <artifactId>commons-io</artifactId>
-                <version>2.4</version>
-            </dependency>
-
-            <!-- slf4j -->
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-log4j12</artifactId>
-                <version>1.7.12</version>
-            </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>1.7.12</version>
-            </dependency>
-
-            <!-- log4j -->
-            <dependency>
-                <groupId>log4j</groupId>
-                <artifactId>log4j</artifactId>
-                <version>1.2.17</version>
-            </dependency>
-
-            <!-- mysql driver -->
-            <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>5.1.39</version>
-            </dependency>
-
-            <!-- oracle driver -->
-            <dependency>
-                <groupId>com.oracle</groupId>
-                <artifactId>ojdbc6</artifactId>
-                <version>11.2.0.3</version>
-            </dependency>
-
-            <!-- c3p0 datasource -->
-            <dependency>
-                <groupId>c3p0</groupId>
-                <artifactId>c3p0</artifactId>
-                <version>0.9.1.2</version>
-            </dependency>
-
-            <!-- HikariCP datasource -->
-            <dependency>
-                <groupId>com.zaxxer</groupId>
-                <artifactId>HikariCP</artifactId>
-                <version>2.4.7</version>
-            </dependency>
-
-            <!-- BoneCP datasource -->
-            <dependency>
-                <groupId>com.jolbox</groupId>
-                <artifactId>bonecp</artifactId>
-                <version>0.8.0.RELEASE</version>
-            </dependency>
-
-            <!-- JUnit -->
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.12</version>
-                <scope>test</scope>
-            </dependency>
-
-            <!-- spring -->
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-core</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-webmvc</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-context</artifactId>
-                <version>${spring.version}</version>
-                <exclusions>
-                    <!-- Exclude Commons Logging in favor of SLF4j -->
-                    <exclusion>
-                        <groupId>commons-logging</groupId>
-                        <artifactId>commons-logging</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-orm</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-aspects</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-expression</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-context-support</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-web</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-jdbc</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-aop</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-beans</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-tx</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-jms</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-test</artifactId>
-                <version>${spring.version}</version>
-                <scope>test</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.data</groupId>
-                <artifactId>spring-data-jpa</artifactId>
-                <version>${spring.jpa.version}</version>
-            </dependency>
-
-            <!-- AspectJ -->
-            <dependency>
-                <groupId>org.aspectj</groupId>
-                <artifactId>aspectjrt</artifactId>
-                <version>1.8.9</version>
-            </dependency>
-            <dependency>
-                <groupId>org.aspectj</groupId>
-                <artifactId>aspectjweaver</artifactId>
-                <version>1.8.9</version>
-            </dependency>
-
-            <!-- hiberante -->
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-core</artifactId>
-                <version>${hibernate.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-entitymanager</artifactId>
-                <version>${hibernate.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-validator</artifactId>
-                <version>${hibernate.version}</version>
-            </dependency>
-
-            <!--enable hibernate to use its proxy model-->
-            <dependency>
-                <groupId>org.javassist</groupId>
-                <artifactId>javassist</artifactId>
-                <version>3.20.0-GA</version>
-            </dependency>
-
-            <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>1.14.4</version>
-            </dependency>
-
-            <!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->
-            <dependency>
-                <groupId>org.quartz-scheduler</groupId>
-                <artifactId>quartz</artifactId>
-                <version>2.2.1</version>
-            </dependency>
-
-            <!-- io.netty -->
-            <dependency>
-                <groupId>io.netty</groupId>
-                <artifactId>netty-all</artifactId>
-                <version>4.0.23.Final</version>
-            </dependency>
-            <dependency>
-                <groupId>com.corundumstudio.socketio</groupId>
-                <artifactId>netty-socketio</artifactId>
-                <version>1.7.7</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>io.netty</groupId>
-                        <artifactId>netty-buffer</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>io.netty</groupId>
-                        <artifactId>netty-common</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>io.netty</groupId>
-                        <artifactId>netty-transport</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>io.netty</groupId>
-                        <artifactId>netty-handler</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>io.netty</groupId>
-                        <artifactId>netty-codec-http</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>io.netty</groupId>
-                        <artifactId>netty-codec</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>io.netty</groupId>
-                        <artifactId>netty-transport-native-epoll</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>com.fasterxml.jackson.core</groupId>
-                        <artifactId>jackson-core</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>com.fasterxml.jackson.core</groupId>
-                        <artifactId>jackson-databind</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-
-            <!-- dom4j -->
-            <dependency>
-                <groupId>dom4j</groupId>
-                <artifactId>dom4j</artifactId>
-                <version>1.6.1</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.jcraft</groupId>
-                <artifactId>jsch</artifactId>
-                <version>0.1.42</version>
-            </dependency>
-
-            <!-- scala -->
-            <dependency>
-                <groupId>org.scala-lang</groupId>
-                <artifactId>scala-library</artifactId>
-                <version>${scala.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.scala-lang</groupId>
-                <artifactId>scala-compiler</artifactId>
-                <version>${scala.version}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.scala-lang</groupId>
-                <artifactId>scala-reflect</artifactId>
-                <version>${scala.version}</version>
-            </dependency>
-
-            <!-- hadoop -->
-            <dependency>
-                <groupId>org.apache.hadoop</groupId>
-                <artifactId>hadoop-common</artifactId>
-                <version>${hadoop.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.xerial.snappy</groupId>
-                        <artifactId>snappy-java</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.hadoop</groupId>
-                <artifactId>hadoop-auth</artifactId>
-                <version>${hadoop.version}</version>
-            </dependency>
-
-            <!--hive-->
-            <dependency>
-                <groupId>org.apache.hive</groupId>
-                <artifactId>hive-jdbc</artifactId>
-                <version>${hive.version}</version>
-            </dependency>
-
-            <!--hbase -->
-            <dependency>
-                <groupId>org.apache.hbase</groupId>
-                <artifactId>hbase-client</artifactId>
-                <version>${hbase.version}</version>
-            </dependency>
-
-            <!-- spark -->
-            <dependency>
-                <groupId>org.apache.spark</groupId>
-                <artifactId>spark-core_${scala.binary.version}</artifactId>
-                <version>${spark.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.spark</groupId>
-                <artifactId>spark-sql_${scala.binary.version}</artifactId>
-                <version>${spark.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.spark</groupId>
-                <artifactId>spark-hive_${scala.binary.version}</artifactId>
-                <version>${spark.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.xerial.snappy</groupId>
-                        <artifactId>snappy-java</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.spark</groupId>
-                <artifactId>spark-streaming_${scala.binary.version}</artifactId>
-                <version>${spark.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.spark</groupId>
-                <artifactId>spark-graphx_${scala.binary.version}</artifactId>
-                <version>${spark.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.spark</groupId>
-                <artifactId>spark-mllib_${scala.binary.version}</artifactId>
-                <version>${spark.version}</version>
-            </dependency>
-
-            <!-- external datasource -->
-            <dependency>
-                <groupId>com.databricks</groupId>
-                <artifactId>spark-csv_${scala.binary.version}</artifactId>
-                <version>1.5.0</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.xerial.snappy</groupId>
-                        <artifactId>snappy-java</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>com.databricks</groupId>
-                <artifactId>spark-avro_${scala.binary.version}</artifactId>
-                <version>3.1.0</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.xerial.snappy</groupId>
-                        <artifactId>snappy-java</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>com.databricks</groupId>
-                <artifactId>spark-xml_${scala.binary.version}</artifactId>
-                <version>0.4.1</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.velocity</groupId>
-                <artifactId>velocity</artifactId>
-                <version>1.7</version>
-            </dependency>
-
-            <!-- Backport of Java 8 java.util.stream API to Java 6/7 -->
-            <dependency>
-                <groupId>net.sourceforge.streamsupport</groupId>
-                <artifactId>streamsupport</artifactId>
-                <version>1.5.3</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
+  <dependencyManagement>
     <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
 
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
+      <!-- servlet -->
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>3.1.0</version>
+        <scope>provided</scope>
+      </dependency>
 
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>servlet-api</artifactId>
+        <version>2.5</version>
+        <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>javax.validation</groupId>
+        <artifactId>validation-api</artifactId>
+        <version>1.0.0.GA</version>
+        <scope>provided</scope>
+      </dependency>
+      <!-- Jackson -->
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-annotations</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-core</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
+
+      <!--utils-->
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>14.0.1</version>
+      </dependency>
+
+      <!-- Apache Commons -->
+      <dependency>
+        <groupId>commons-lang</groupId>
+        <artifactId>commons-lang</artifactId>
+        <version>2.6</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-collections</groupId>
+        <artifactId>commons-collections</artifactId>
+        <version>3.2.2</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-beanutils</groupId>
+        <artifactId>commons-beanutils</artifactId>
+        <version>1.9.2</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-dbutils</groupId>
+        <artifactId>commons-dbutils</artifactId>
+        <version>1.10</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-fileupload</groupId>
+        <artifactId>commons-fileupload</artifactId>
+        <version>1.3.2</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-codec</groupId>
+        <artifactId>commons-codec</artifactId>
+        <version>1.10</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-compress</artifactId>
+        <version>1.10</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-configuration</groupId>
+        <artifactId>commons-configuration</artifactId>
+        <version>1.10</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>2.4</version>
+      </dependency>
+
+      <!-- slf4j -->
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-log4j12</artifactId>
+        <version>1.7.12</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>1.7.12</version>
+      </dependency>
+
+      <!-- log4j -->
+      <dependency>
+        <groupId>log4j</groupId>
+        <artifactId>log4j</artifactId>
+        <version>1.2.17</version>
+      </dependency>
+
+      <!-- mysql driver -->
+      <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>5.1.39</version>
+      </dependency>
+
+      <!-- oracle driver -->
+      <dependency>
+        <groupId>com.oracle</groupId>
+        <artifactId>ojdbc6</artifactId>
+        <version>11.2.0.3</version>
+      </dependency>
+      <!-- c3p0 datasource -->
+      <dependency>
+        <groupId>c3p0</groupId>
+        <artifactId>c3p0</artifactId>
+        <version>0.9.1.2</version>
+      </dependency>
+
+      <!-- HikariCP datasource -->
+      <dependency>
+        <groupId>com.zaxxer</groupId>
+        <artifactId>HikariCP</artifactId>
+        <version>2.4.7</version>
+      </dependency>
+
+      <!-- BoneCP datasource -->
+      <dependency>
+        <groupId>com.jolbox</groupId>
+        <artifactId>bonecp</artifactId>
+        <version>0.8.0.RELEASE</version>
+      </dependency>
+      <!-- JUnit -->
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.12</version>
+        <scope>test</scope>
+      </dependency>
+
+      <!-- spring -->
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-core</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-webmvc</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-beans</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>${spring.version}</version>
+        <exclusions>
+          <!-- Exclude Commons Logging in favor of SLF4j -->
+          <exclusion>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-orm</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-aspects</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-expression</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context-support</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-web</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-jdbc</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-aop</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-beans</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-tx</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-jms</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-test</artifactId>
+        <version>${spring.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.data</groupId>
+        <artifactId>spring-data-jpa</artifactId>
+        <version>${spring.jpa.version}</version>
+      </dependency>
+
+      <!-- AspectJ -->
+      <dependency>
+        <groupId>org.aspectj</groupId>
+        <artifactId>aspectjrt</artifactId>
+        <version>1.8.9</version>
+      </dependency>
+      <dependency>
+        <groupId>org.aspectj</groupId>
+        <artifactId>aspectjweaver</artifactId>
+        <version>1.8.9</version>
+      </dependency>
+
+      <!-- hiberante -->
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-core</artifactId>
+        <version>${hibernate.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-entitymanager</artifactId>
+        <version>${hibernate.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-validator</artifactId>
+        <version>${hibernate.version}</version>
+      </dependency>
+
+      <!--enable hibernate to use its proxy model-->
+      <dependency>
+        <groupId>org.javassist</groupId>
+        <artifactId>javassist</artifactId>
+        <version>3.20.0-GA</version>
+      </dependency>
+
+      <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>1.14.4</version>
+      </dependency>
+
+      <!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->
+      <dependency>
+        <groupId>org.quartz-scheduler</groupId>
+        <artifactId>quartz</artifactId>
+        <version>2.2.1</version>
+      </dependency>
+
+      <!-- io.netty -->
+      <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-all</artifactId>
+        <version>4.0.23.Final</version>
+      </dependency>
+      <dependency>
+        <groupId>com.corundumstudio.socketio</groupId>
+        <artifactId>netty-socketio</artifactId>
+        <version>1.7.7</version>
+        <exclusions>
+          <exclusion>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-buffer</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-common</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-transport</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-handler</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-codec-http</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-codec</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-transport-native-epoll</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
+      <!-- dom4j -->
+      <dependency>
+        <groupId>dom4j</groupId>
+        <artifactId>dom4j</artifactId>
+        <version>1.6.1</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.jcraft</groupId>
+        <artifactId>jsch</artifactId>
+        <version>0.1.42</version>
+      </dependency>
+
+      <!-- scala -->
+      <dependency>
+        <groupId>org.scala-lang</groupId>
+        <artifactId>scala-library</artifactId>
+        <version>${scala.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.scala-lang</groupId>
+        <artifactId>scala-compiler</artifactId>
+        <version>${scala.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.scala-lang</groupId>
+        <artifactId>scala-reflect</artifactId>
+        <version>${scala.version}</version>
+      </dependency>
+
+      <!-- hadoop -->
+      <dependency>
+        <groupId>org.apache.hadoop</groupId>
+        <artifactId>hadoop-common</artifactId>
+        <version>${hadoop.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>org.xerial.snappy</groupId>
+            <artifactId>snappy-java</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.hadoop</groupId>
+        <artifactId>hadoop-auth</artifactId>
+        <version>${hadoop.version}</version>
+      </dependency>
+
+      <!--hive-->
+      <dependency>
+        <groupId>org.apache.hive</groupId>
+        <artifactId>hive-jdbc</artifactId>
+        <version>${hive.version}</version>
+      </dependency>
+
+      <!--hbase -->
+      <dependency>
+        <groupId>org.apache.hbase</groupId>
+        <artifactId>hbase-client</artifactId>
+        <version>${hbase.version}</version>
+      </dependency>
+
+      <!-- spark -->
+      <dependency>
+        <groupId>org.apache.spark</groupId>
+        <artifactId>spark-core_${scala.binary.version}</artifactId>
+        <version>${spark.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.spark</groupId>
+        <artifactId>spark-sql_${scala.binary.version}</artifactId>
+        <version>${spark.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.spark</groupId>
+        <artifactId>spark-hive_${scala.binary.version}</artifactId>
+        <version>${spark.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>org.xerial.snappy</groupId>
+            <artifactId>snappy-java</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.spark</groupId>
+        <artifactId>spark-streaming_${scala.binary.version}</artifactId>
+        <version>${spark.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.spark</groupId>
+        <artifactId>spark-graphx_${scala.binary.version}</artifactId>
+        <version>${spark.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.spark</groupId>
+        <artifactId>spark-mllib_${scala.binary.version}</artifactId>
+        <version>${spark.version}</version>
+      </dependency>
+
+      <!-- external datasource -->
+      <dependency>
+        <groupId>com.databricks</groupId>
+        <artifactId>spark-csv_${scala.binary.version}</artifactId>
+        <version>1.5.0</version>
+        <exclusions>
+          <exclusion>
+            <groupId>org.xerial.snappy</groupId>
+            <artifactId>snappy-java</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>com.databricks</groupId>
+        <artifactId>spark-avro_${scala.binary.version}</artifactId>
+        <version>3.1.0</version>
+        <exclusions>
+          <exclusion>
+            <groupId>org.xerial.snappy</groupId>
+            <artifactId>snappy-java</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>com.databricks</groupId>
+        <artifactId>spark-xml_${scala.binary.version}</artifactId>
+        <version>0.4.1</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.velocity</groupId>
+        <artifactId>velocity</artifactId>
+        <version>1.7</version>
+      </dependency>
+
+      <!-- Backport of Java 8 java.util.stream API to Java 6/7 -->
+      <dependency>
+        <groupId>net.sourceforge.streamsupport</groupId>
+        <artifactId>streamsupport</artifactId>
+        <version>1.5.3</version>
+      </dependency>
     </dependencies>
+  </dependencyManagement>
 
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.3</version>
-                    <configuration>
-                        <source>${java.version}</source>
-                        <target>${java.version}</target>
-                    </configuration>
-                </plugin>
-                <!-- Backport of Java 8's lambda expressions to Java 7, 6 and 5 -->
-                <plugin>
-                    <groupId>net.orfjackal.retrolambda</groupId>
-                    <artifactId>retrolambda-maven-plugin</artifactId>
-                    <version>2.5.1</version>
-                    <executions>
-                        <execution>
-                            <phase>compile</phase>
-                            <goals>
-                                <goal>process-main</goal>
-                                <goal>process-test</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.19.1</version>
-                    <executions>
-                        <execution>
-                            <id>default-test</id>
-                            <phase>test</phase>
-                            <goals>
-                                <goal>test</goal>
-                            </goals>
-                            <configuration>
-                                <argLine>${surefireArgLine}</argLine>
-                            </configuration>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <skipTests>true</skipTests>
-                        <argLine>-XX:MaxPermSize=512m</argLine>
-                    </configuration>
-                </plugin>
-                <!-- assembly war artifact -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-war-plugin</artifactId>
-                    <version>2.6</version>
-                    <configuration>
-                        <includeEmptyDirectories>true</includeEmptyDirectories>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-        <plugins>
-            <plugin>
-                <groupId>net.orfjackal.retrolambda</groupId>
-                <artifactId>retrolambda-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.3</version>
+          <configuration>
+            <source>${java.version}</source>
+            <target>${java.version}</target>
+          </configuration>
+        </plugin>
+        <!-- Backport of Java 8's lambda expressions to Java 7, 6 and 5 -->
+        <plugin>
+          <groupId>net.orfjackal.retrolambda</groupId>
+          <artifactId>retrolambda-maven-plugin</artifactId>
+          <version>2.5.1</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>process-main</goal>
+                <goal>process-test</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.19.1</version>
+          <executions>
+            <execution>
+              <id>default-test</id>
+              <phase>test</phase>
+              <goals>
+                <goal>test</goal>
+              </goals>
+              <configuration>
+                <argLine>${surefireArgLine}</argLine>
+              </configuration>
+            </execution>
+          </executions>
+          <configuration>
+            <skipTests>true</skipTests>
+            <argLine>-XX:MaxPermSize=512m</argLine>
+          </configuration>
+        </plugin>
+        <!-- assembly war artifact -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>2.6</version>
+          <configuration>
+            <includeEmptyDirectories>true</includeEmptyDirectories>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>net.orfjackal.retrolambda</groupId>
+        <artifactId>retrolambda-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>

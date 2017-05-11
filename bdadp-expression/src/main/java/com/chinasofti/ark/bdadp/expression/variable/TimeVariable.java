@@ -16,7 +16,7 @@ public class TimeVariable {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.WEEK_OF_YEAR, amount);
         return new SimpleDateFormat(pattern).format(calendar.getTime());
-    }
+  }
 
 //	/**
 //	 * 计算某一天日期
@@ -58,6 +58,6 @@ public class TimeVariable {
         cal.set(Calendar.DAY_OF_MONTH, 1);// 设置为1号,当前日期既为本月第一天
 
         return new SimpleDateFormat(pattern).format(cal.getTime());
-    }
+  }
 
 }
