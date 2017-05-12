@@ -39,6 +39,7 @@
     <product.security>bdadp-security</product.security>
     <product.service>bdadp-service</product.service>
     <product.servlet>bdadp-servlet</product.servlet>
+    <product.standalone>bdadp-standalone</product.standalone>
     <product.standalong>bdadp-standalong</product.standalong>
     <product.util>bdadp-util</product.util>
     <product.web>bdadp-web</product.web>
@@ -71,6 +72,7 @@
         <module>${product.security}</module>
         <module>${product.service}</module>
         <module>${product.servlet}</module>
+        <module>${product.standalone}</module>
         <module>${product.util}</module>
         <module>${product.web}</module>
       </modules>
