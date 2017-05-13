@@ -3,10 +3,11 @@ package com.chinasofti.ark.bdadp.entity.scenario;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.Date;
 
 /**
  * Created by zhangweigang on 2016/08/27.
@@ -43,6 +44,10 @@ public class ScenarioGraphEdge implements java.io.Serializable {
     @Column(name = "graph_id")
     @JsonProperty("graph_id")
     private String graphId;
+
+  @Column(name = "order_id")
+  @JsonProperty("order_id")
+  private int orderId;
 
     public String getEdgeId() {
         return edgeId;
@@ -92,15 +97,24 @@ public class ScenarioGraphEdge implements java.io.Serializable {
         this.graphId = graphId;
     }
 
-    @Override
-    public String toString() {
-        return "ScenarioGraphEdge{" +
-                "edgeId='" + edgeId + '\'' +
-                ", fromKey=" + fromKey +
-                ", toKey=" + toKey +
-                ", createTime=" + createTime +
-                ", createUser='" + createUser + '\'' +
-                ", graphId='" + graphId + '\'' +
-                '}';
+  public int getOrderId() {
+    return orderId;
     }
+
+  public void setOrderId(int orderId) {
+    this.orderId = orderId;
+  }
+
+  @Override
+  public String toString() {
+    return "ScenarioGraphEdge{" +
+           "edgeId='" + edgeId + '\'' +
+           ", fromKey=" + fromKey +
+           ", toKey=" + toKey +
+           ", createTime=" + createTime +
+           ", createUser='" + createUser + '\'' +
+           ", graphId='" + graphId + '\'' +
+           ", orderId=" + orderId +
+           '}';
+  }
 }

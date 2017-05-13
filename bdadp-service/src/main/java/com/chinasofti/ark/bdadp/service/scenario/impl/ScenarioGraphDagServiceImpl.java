@@ -1,5 +1,8 @@
 package com.chinasofti.ark.bdadp.service.scenario.impl;
 
+import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
+
 import com.chinasofti.ark.bdadp.dao.scenario.ScenarioDao;
 import com.chinasofti.ark.bdadp.dao.scenario.ScenarioGraphDagDao;
 import com.chinasofti.ark.bdadp.dao.scenario.ScenarioGraphEdgeDao;
@@ -18,10 +21,7 @@ import com.chinasofti.ark.bdadp.service.scenario.ScenarioVersionService;
 import com.chinasofti.ark.bdadp.service.scenario.bean.ScenarioServiceAssert;
 import com.chinasofti.ark.bdadp.service.scenario.bean.ScenarioServiceException;
 import com.chinasofti.ark.bdadp.util.common.UUID;
-import com.google.common.base.Strings;
-import com.google.common.collect.Lists;
-import java8.util.stream.Collectors;
-import java8.util.stream.StreamSupport;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +29,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import java8.util.stream.Collectors;
+import java8.util.stream.StreamSupport;
 
 /**
  * Created by wgzhang on 2016/8/28.
@@ -175,11 +178,14 @@ public class ScenarioGraphDagServiceImpl implements ScenarioGraphDagService {
         scenarioGraphDAG.setGraphId(graphId);
         scenarioGraphDAG.setVersionId(versionId);
 
-        Iterable<ScenarioGraphEdge> edges = scenarioGraphDAG.getGraphEdges();
-        for (ScenarioGraphEdge edge : edges) {
+      List<ScenarioGraphEdge> edges = scenarioGraphDAG.getGraphEdges();
+      for (int i = 0; i < edges.size(); i++) {
+        ScenarioGraphEdge edge = edges.get(i);
+
             String edgeId = UUID.randomUUID().toString();
 
             edge.setEdgeId(edgeId);
+        edge.setOrderId(i);
             edge.setCreateTime(new Date());
             edge.setGraphId(graphId);
         }
