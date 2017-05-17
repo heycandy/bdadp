@@ -175,11 +175,14 @@ public class ScenarioGraphDagServiceImpl implements ScenarioGraphDagService {
         scenarioGraphDAG.setGraphId(graphId);
         scenarioGraphDAG.setVersionId(versionId);
 
-        Iterable<ScenarioGraphEdge> edges = scenarioGraphDAG.getGraphEdges();
-        for (ScenarioGraphEdge edge : edges) {
+        List<ScenarioGraphEdge> edges = scenarioGraphDAG.getGraphEdges();
+        for (int i = 0; i < edges.size(); i++) {
+            ScenarioGraphEdge edge = edges.get(i);
+
             String edgeId = UUID.randomUUID().toString();
 
             edge.setEdgeId(edgeId);
+            edge.setOrderId(i);
             edge.setCreateTime(new Date());
             edge.setGraphId(graphId);
         }

@@ -36,6 +36,7 @@ public class ScenarioGraphDAG implements java.io.Serializable {
     @OneToMany(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
     @JoinColumn(name = "graph_id")
+    @OrderBy(value = "order_id")
     @JsonProperty("graph_edges")
     private List<ScenarioGraphEdge> graphEdges;
 

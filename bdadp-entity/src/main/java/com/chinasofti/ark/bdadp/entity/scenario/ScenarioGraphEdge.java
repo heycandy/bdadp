@@ -44,6 +44,10 @@ public class ScenarioGraphEdge implements java.io.Serializable {
     @JsonProperty("graph_id")
     private String graphId;
 
+    @Column(name = "order_id")
+    @JsonProperty("order_id")
+    private int orderId;
+
     public String getEdgeId() {
         return edgeId;
     }
@@ -92,6 +96,14 @@ public class ScenarioGraphEdge implements java.io.Serializable {
         this.graphId = graphId;
     }
 
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
     @Override
     public String toString() {
         return "ScenarioGraphEdge{" +
@@ -101,6 +113,7 @@ public class ScenarioGraphEdge implements java.io.Serializable {
                 ", createTime=" + createTime +
                 ", createUser='" + createUser + '\'' +
                 ", graphId='" + graphId + '\'' +
+                ", orderId=" + orderId +
                 '}';
     }
 }
