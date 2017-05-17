@@ -134,5 +134,5 @@ public class ScenarioExecuteHistory implements Serializable {
 
     public void setExecuteProgress(double executeProgress) {
         this.executeProgress = executeProgress;
-    }
+  }
 }

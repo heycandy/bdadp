@@ -2,11 +2,13 @@ package com.chinasofti.ark.bdadp.service.schedule.impl;
 
 import com.chinasofti.ark.bdadp.dao.scenario.ScenarioDao;
 import com.chinasofti.ark.bdadp.dao.scenario.ScenarioGraphDagDao;
+import com.chinasofti.ark.bdadp.dao.schedule.HolidayDao;
 import com.chinasofti.ark.bdadp.dao.schedule.ScheduleDao;
 import com.chinasofti.ark.bdadp.dao.schedule.ScheduleExecuteHistoryDao;
 import com.chinasofti.ark.bdadp.dao.task.TaskDao;
 import com.chinasofti.ark.bdadp.dao.user.UserDao;
 import com.chinasofti.ark.bdadp.entity.scenario.Scenario;
+import com.chinasofti.ark.bdadp.entity.schedule.Holiday;
 import com.chinasofti.ark.bdadp.entity.schedule.ScenarioExecuteHistory;
 import com.chinasofti.ark.bdadp.entity.schedule.ScenarioExecuteHistoryPK;
 import com.chinasofti.ark.bdadp.entity.schedule.Schedule;
@@ -29,6 +31,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -45,6 +48,10 @@ public class ScheduleServiceImpl implements ScheduleService {
     private final Logger LOG = LoggerFactory.getLogger(ScheduleService.class);
     @Autowired
     private ScenarioDao scenarioDao;
+
+    @Autowired
+    private HolidayDao holidayDao;
+
 
     @Autowired
     private ScheduleDao scheduleDao;
@@ -290,12 +297,23 @@ public class ScheduleServiceImpl implements ScheduleService {
                     scheduler.scheduleJob(jobDetail, cronTrigger);
                 }
             }
-            scheduler.start();
+            if (!isHoliDay()) {
+                scheduler.start();
+            }
         } catch (SchedulerException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
+    }
+
+    public Boolean isHoliDay() {
+        Boolean isHoliday = true;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        Holiday d = holidayDao.findByHolidayValue(sdf.format(new Date()));
+        if (null == d) {
+            isHoliday = false;
+        }
+        return isHoliday;
     }
 
     public void pauseJob(JobKey jobKey) {

@@ -2,12 +2,20 @@ package com.chinasofti.ark.bdadp.entity.scenario;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 /**
  * Created by zhangweigang on 2016/08/27.
@@ -36,6 +44,7 @@ public class ScenarioGraphDAG implements java.io.Serializable {
     @OneToMany(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
     @JoinColumn(name = "graph_id")
+    @OrderBy(value = "order_id")
     @JsonProperty("graph_edges")
     private List<ScenarioGraphEdge> graphEdges;
 

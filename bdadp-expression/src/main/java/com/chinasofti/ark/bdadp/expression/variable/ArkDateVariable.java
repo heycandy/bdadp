@@ -8,31 +8,31 @@ import java.util.Calendar;
  */
 public class ArkDateVariable implements ArkVariable {
 
-    private final String name = "date";
+  private final String name = "date";
 
-    @Override
-    public String getName() {
-        return this.name;
-    }
+  @Override
+  public String getName() {
+    return this.name;
+  }
 
-    public String day(int amount, String pattern) {
-        Calendar calendar = Calendar.getInstance();
+  public String day(int amount, String pattern) {
+    Calendar calendar = Calendar.getInstance();
 
-        calendar.add(Calendar.DAY_OF_YEAR, amount);
+    calendar.add(Calendar.DAY_OF_YEAR, amount);
 
-        return new SimpleDateFormat(pattern).format(calendar.getTime());
-    }
+    return new SimpleDateFormat(pattern).format(calendar.getTime());
+  }
 
-    public String day(int amount) {
-        return day(amount, "yyyyMMdd");
-    }
+  public String day(int amount) {
+    return day(amount, "yyyyMMdd");
+  }
 
-    public String day() {
-        return day(0);
-    }
+  public String day() {
+    return day(0);
+  }
 
-    @Override
-    public String toString() {
-        return day();
-    }
+  @Override
+  public String toString() {
+    return day();
+  }
 }

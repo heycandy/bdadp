@@ -52,6 +52,12 @@
     </dependency>
     <dependency>
       <groupId>com.chinasofti.ark</groupId>
+      <artifactId>bdadp-standalone</artifactId>
+      <version>${project.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.chinasofti.ark</groupId>
       <artifactId>bdadp-util</artifactId>
       <version>${project.version}</version>
       <scope>runtime</scope>
@@ -243,6 +249,25 @@
               <resources>
                 <resource>
                   <directory>${project.basedir}/../${product.misc}/src/main</directory>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+          <execution>
+            <id>copy-bin</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <includeEmptyDirs>true</includeEmptyDirs>
+              <overwrite>true</overwrite>
+              <outputDirectory>
+                ${project.build.directory}/${project.artifactId}-${project.version}/bin
+              </outputDirectory>
+              <resources>
+                <resource>
+                  <directory>${project.basedir}/../${product.misc}/bin</directory>
                 </resource>
               </resources>
             </configuration>

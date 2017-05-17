@@ -22,3 +22,6 @@ out/
 .settings/
 */src/main/java/META-INF/
 
+#shade-plugin
+dependency-reduced-pom.xml
+

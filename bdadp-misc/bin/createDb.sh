@@ -21,7 +21,7 @@ PASSWD=`get_prop $KEY_PASSWORD`
 DB=`get_prop $KEY_DBNAME`
 
 echo -e "\033[1m\033[36mConnectInfo: user=$USER password=$PASSWD db=$DB \033[0m"
-cd $BASE_DIR/src/main/sql
+cd $BASE_DIR/scripts/sql
 
 for ele in `ls ./|grep .sql`
 do

@@ -6,8 +6,7 @@ import com.chinasofti.ark.bdadp.service.push.bean.EventBody;
 import com.chinasofti.ark.bdadp.service.user.UserSecurityService;
 import com.corundumstudio.socketio.Configuration;
 import com.corundumstudio.socketio.SocketIOServer;
-import java8.util.stream.Collectors;
-import java8.util.stream.StreamSupport;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Properties;
+
+import java8.util.stream.Collectors;
+import java8.util.stream.StreamSupport;
 
 /**
  * Created by White on 2016/09/13.
@@ -55,7 +57,7 @@ public class PushServiceImpl implements PushService {
 
         server.addDisconnectListener(
                 socketIOClient ->
-                        logger.info("onConnect {} {}",
+                    logger.info("onDisconnect {} {}",
                                 socketIOClient.getRemoteAddress(), socketIOClient.getSessionId()));
 
         server.start();
