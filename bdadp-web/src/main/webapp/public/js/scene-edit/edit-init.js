@@ -90,7 +90,9 @@ define(["js/scene-edit/eidt-attributeTabs", "js/scene-edit/edit-form", "js/scene
                         +
                         '<div><ul>' +
                         '<li class="ion-social-youtube"><span>'
-                        + $.i18n.prop("d_span_edit_execution") + '</span></li>' +
+                        + $.i18n.prop("d_span_edit_execution") + '</span></li>'
+                        + '<li class=" icon-share-alt"><span>'                  // restore execution
+                        + $.i18n.prop("d_span_edit_selectexec") + '</span></li>' +
                         '<li class="ion-archive"><span>' + $.i18n.prop("d_span_edit_save")
                         + '</span></li>' +
                         '<li class="glyphicon glyphicon-export"><span>'
@@ -98,7 +100,10 @@ define(["js/scene-edit/eidt-attributeTabs", "js/scene-edit/edit-form", "js/scene
                         '<li class="ion-help-circled"><span>' + $.i18n.prop("d_span_edit_help")
                         + '</span></li><li class="ion-trash-a" style="display: none" title="清除状态"><span>'
                         + $.i18n.prop("d_span_edit_eliminate") + '</span></li>' +
-                        '</ul></div></div>' +
+                        '</ul>' +
+                        '<ul style="float: left;"><li class=" icon-share-alt"><span></span></li>' +
+                        '</ul>' +
+                        '</div></div>' +
                         '<div style="position:relative;">' +
                         '<div class="dropzone" id="' + _diagramId
                         + '" style="position: absolute;border: solid 1px #b3b3b3; width:100%;background-color:white"></div>'
