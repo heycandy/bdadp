@@ -12,6 +12,8 @@ public class SimpleTaskVertex implements TaskVertex {
 
     private VertexState state;
 
+  private boolean skip;
+
     public SimpleTaskVertex(Task task) {
         this.id = task.getId();
         this.task = task;
@@ -38,12 +40,23 @@ public class SimpleTaskVertex implements TaskVertex {
         return task;
     }
 
+  @Override
+  public boolean isSkip() {
+    return skip;
+  }
+
+  @Override
+  public void setSkip(boolean skip) {
+    this.skip = skip;
+  }
+
     @Override
     public String toString() {
-        return "TaskVertex{" +
-                "id='" + id + '\'' +
-                ", state=" + state +
-                '}';
+      return "SimpleTaskVertex{" +
+             "id='" + id + '\'' +
+             ", task=" + task +
+             ", state=" + state +
+             ", skip=" + skip +
+             '}';
     }
-
 }

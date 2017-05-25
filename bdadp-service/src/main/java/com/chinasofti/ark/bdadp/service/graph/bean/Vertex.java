@@ -7,6 +7,10 @@ public interface Vertex {
 
     String getId();
 
+  boolean isSkip();
+
+  void setSkip(boolean skip);
+
     int getState();
 
     void setState(String name);

@@ -1,14 +1,15 @@
 package com.chinasofti.ark.bdadp.service.flow.impl;
 
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
+
 import com.chinasofti.ark.bdadp.service.flow.FlowExecutorService;
 import com.chinasofti.ark.bdadp.service.flow.bean.CallableFlow;
 import com.chinasofti.ark.bdadp.service.flow.bean.CallableFlowVertex;
 import com.chinasofti.ark.bdadp.service.graph.bean.TaskVertex;
 import com.chinasofti.ark.bdadp.service.graph.bean.Vertex;
-import com.google.common.util.concurrent.FutureCallback;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListeningExecutorService;
-import com.google.common.util.concurrent.MoreExecutors;
 
 import java.util.concurrent.Executors;
 
@@ -22,11 +23,11 @@ public class SimpleFlowExecutorService implements FlowExecutorService {
     @Override
     public void submit(CallableFlow flow, Vertex vertex) {
         Futures.addCallback(executor.submit(() -> {
-            if (vertex instanceof TaskVertex) {
+          if (vertex instanceof TaskVertex && !vertex.isSkip()) {
                 TaskVertex taskVertex = ((TaskVertex) vertex);
                 taskVertex.get().run();
 
-            } else if (vertex instanceof CallableFlowVertex) {
+          } else if (vertex instanceof CallableFlowVertex && !vertex.isSkip()) {
                 CallableFlowVertex flowVertex = ((CallableFlowVertex) vertex);
                 flowVertex.get().onSubmit().call(getExecutor());
             }

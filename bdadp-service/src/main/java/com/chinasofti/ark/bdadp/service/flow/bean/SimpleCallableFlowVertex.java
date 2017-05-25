@@ -12,6 +12,8 @@ public class SimpleCallableFlowVertex implements CallableFlowVertex {
 
     private VertexState state;
 
+  private boolean skip;
+
     public SimpleCallableFlowVertex(CallableFlow flow) {
         this.id = flow.getId();
         this.flow = flow;
@@ -39,12 +41,23 @@ public class SimpleCallableFlowVertex implements CallableFlowVertex {
         return this.id;
     }
 
+  @Override
+  public boolean isSkip() {
+    return skip;
+  }
+
+  @Override
+  public void setSkip(boolean skip) {
+    this.skip = skip;
+  }
+
     @Override
     public String toString() {
-        return "FlowVertex{" +
-                "id='" + id + '\'' +
-                ", flow=" + flow +
-                ", state=" + state +
-                '}';
+      return "SimpleCallableFlowVertex{" +
+             "id='" + id + '\'' +
+             ", flow=" + flow +
+             ", state=" + state +
+             ", skip=" + skip +
+             '}';
     }
 }
