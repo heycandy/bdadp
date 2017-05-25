@@ -111,12 +111,18 @@ define(["js/scene-edit/edit-dialog"], function (Dialog) {
             return new Monitor(sceneId, myDiagram);
         }
 
-        function getAjaxComponentArg(scene_id, callback) {
+        function getAjaxComponentArg(scene_id,keyArr,callback) {
+            var dataStr ={selected:keyArr}
+            var dataJson = JSON.stringify(dataStr)
+            console.log(dataStr)
             var url_component = baseUrl + '/service/v1/scenario/' + scene_id + '/execute'
                 , ajax_com = $.ajax({
                     type: 'POST',
                     async: false,
                     cache:false,
+                    data:dataJson,
+                    contentType:"application/json;charset=utf-8",
+                    dataType:'json',
                     url: url_component
                 });
             $.when(ajax_com).done(function (componentArg) {
@@ -141,7 +147,7 @@ define(["js/scene-edit/edit-dialog"], function (Dialog) {
             })
         }
 
-        function _socketIO(sceneId, myDiagram) {
+        function _socketIO(sceneId, myDiagram,keyArr) {
             //clear
             $("#" + sceneId + " .dropzone-top li.ion-trash-a").trigger('click');
             if (settings.testLangType() == 'zh' || settings.testLangType() == 'zh-CN'
@@ -163,7 +169,7 @@ define(["js/scene-edit/edit-dialog"], function (Dialog) {
                         }
                     }))
                     console.log(_map.get());
-                    getAjaxComponentArg(sceneId, function (data) {
+                    getAjaxComponentArg(sceneId, keyArr,function (data) {
                         if (data.resultCode == 1) {  //exception
                             new Dialog().initConfirmDialog(function () {
                                                            }, function () {   //cancel

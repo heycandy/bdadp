@@ -91,19 +91,19 @@ define(["js/scene-edit/eidt-attributeTabs", "js/scene-edit/edit-form", "js/scene
                         '<div><ul>' +
                         '<li class="ion-social-youtube"><span>'
                         + $.i18n.prop("d_span_edit_execution") + '</span></li>'
-                        + '<li class=" icon-share-alt"><span>'                  // restore execution
-                        + $.i18n.prop("d_span_edit_selectexec") + '</span></li>' +
-                        '<li class="ion-archive"><span>' + $.i18n.prop("d_span_edit_save")
+                        + '<li class="selectexec"><span>'                  // restore execution
+                        + $.i18n.prop("d_span_edit_selectexec") + '</span><span class = "glyphicon glyphicon-triangle-bottom"></span></li>'
+                        /*+'<li><input class="excute-isCheck" type="checkbox" data-size = "mini"></li>'*/
+                        +'<li class="ion-archive"><span>' + $.i18n.prop("d_span_edit_save")
                         + '</span></li>' +
-                        '<li class="glyphicon glyphicon-export"><span>'
+                        '<li class="glyphicon glyphicon-export" style="display: none"><span>'
                         + $.i18n.prop("d_span_edit_export") + '</span></li>' +
                         '<li class="ion-help-circled"><span>' + $.i18n.prop("d_span_edit_help")
                         + '</span></li><li class="ion-trash-a" style="display: none" title="清除状态"><span>'
                         + $.i18n.prop("d_span_edit_eliminate") + '</span></li>' +
                         '</ul>' +
-                        '<ul style="float: left;"><li class=" icon-share-alt"><span></span></li>' +
-                        '</ul>' +
                         '</div></div>' +
+                        '<div><ul class="select-dropdown dropdown-menu" style="display: none"><li role="separator" class="divider"></li><li style="text-align: center"><button class="btn btn-default clearSelected">清除</button></li></ul></div>'+
                         '<div style="position:relative;">' +
                         '<div class="dropzone" id="' + _diagramId
                         + '" style="position: absolute;border: solid 1px #b3b3b3; width:100%;background-color:white"></div>'
@@ -132,6 +132,17 @@ define(["js/scene-edit/eidt-attributeTabs", "js/scene-edit/edit-form", "js/scene
                             function (e, node) {
                                 var n = node;
                             }, function (e, node) {     //the dbclick callbck of node
+                                var isShow = $(".select-dropdown").css("display")
+                                if(isShow != "none" && e.Hq.type != "mousemove") {
+                                    $("#"+sceneId+" li.divider").before('<li class = "selectedComponents"  style="border-bottom: 1px solid #bdaeae;padding: 5px;" key='+node.data.key+'><img width = 30 src= '+node.data.img+'>'+node.data.text+'<span class="glyphicon glyphicon-remove pull-right" style="color: red;padding: 9px;"></span></li>')
+                                    $("#" + sceneId + " .glyphicon-remove").click(function () {
+                                        $(this).parent().remove()
+                                    })
+
+                                    $("#" + sceneId + " .clearSelected").click(function () {
+                                        $("#" + sceneId + " .selectedComponents").remove()
+                                    })
+                                }
                                 var thatId = sceneId;
                                 var componentId = node.data.pid, componentType = "component";    // judge
                                                                                                  // system,
@@ -729,8 +740,16 @@ define(["js/scene-edit/eidt-attributeTabs", "js/scene-edit/edit-form", "js/scene
                 execute(sceneId, diagram, graphResponse.getResponse());
                 save(sceneId, diagram, graph_id);
                 clear(sceneId, diagram);
+                selectExcute(sceneId)
             }
 
+            function selectExcute(sceneId) {
+                $("#" + sceneId + " .dropzone-top span.glyphicon-triangle-bottom").click(function () {
+                    $("#"+sceneId+" ul.select-dropdown").toggle()
+                })
+
+                // $("#" + sceneId + " .excute-isCheck").bootstrapSwitch();
+            }
             function clear(sceneId, diagram) {
                 $("#" + sceneId + " .dropzone-top li.ion-trash-a").click(function () {
                     var _model = diagram.model;
@@ -752,13 +771,18 @@ define(["js/scene-edit/eidt-attributeTabs", "js/scene-edit/edit-form", "js/scene
             }
 
             function execute(sceneId, diagram, response) {
-
+               // selectedComponents
                 var diagram = diagram;
                 monitor = new Emonitor();
                 $("#" + sceneId + " .dropzone-top li.ion-social-youtube").click(function () {
-
+                    var selectedComponents = $("#" + sceneId + " li.selectedComponents")
+                    var keyArr = []
+                    for (var i = 0;i<selectedComponents.length;i++){
+                        var selectedKey = $(selectedComponents[i]).attr("key")
+                        keyArr.push(parseInt(selectedKey))
+                    }
                     if (_options.isDiagramModified || !diagram.isModified) {
-                        monitor.socketIO(sceneId, diagram);
+                        monitor.socketIO(sceneId, diagram,keyArr);
                     } else {
                         // alert('please save your DAG,firstly!')
                         new Dialog().initConfirmDialog(function () {
