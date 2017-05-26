@@ -133,7 +133,7 @@ define(["js/scene-edit/eidt-attributeTabs", "js/scene-edit/edit-form", "js/scene
                                 var n = node;
                             }, function (e, node) {     //the dbclick callbck of node
                                 var isShow = $(".select-dropdown").css("display")
-                                if(isShow != "none" && e.Hq.type != "mousemove") {
+                                if(isShow != "none" && e.Hq.type != "mousemove" && e.targetObject.Qn != "Circle") {
                                     $("#"+sceneId+" li.divider").before('<li class = "selectedComponents"  style="border-bottom: 1px solid #bdaeae;padding: 5px;" key='+node.data.key+'><img width = 30 src= '+node.data.img+'>'+node.data.text+'<span class="glyphicon glyphicon-remove pull-right" style="color: red;padding: 9px;"></span></li>')
                                     $("#" + sceneId + " .glyphicon-remove").click(function () {
                                         $(this).parent().remove()
@@ -249,8 +249,8 @@ define(["js/scene-edit/eidt-attributeTabs", "js/scene-edit/edit-form", "js/scene
                                 });
                                 return true;
                             }, function (monitorKey) {   // monitor
-                                var md = monitor.monitorData.get();
-                                for (var i = 0; i < md.length; i++) {
+                                  var md = monitor.monitorData.get();
+                                  for (var i = 0; i < md.length; i++) {
                                     if (monitorKey == md[i]['key']) {  //params.sceneId  params.taskId  params.executionId
                                         var params = {};
                                         params['sceneId'] = md[i]['sceneId'], params.taskId = md[i]['taskId']
