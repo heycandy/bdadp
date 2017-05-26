@@ -143,7 +143,18 @@ define(["js/scene-edit/eidt-attributeTabs", "js/scene-edit/edit-form", "js/scene
                                             KeyData.push(parseInt(key))
                                         }
                                         if(KeyData.indexOf(node.data.key) != -1){
-                                            alert("该组件已被选择！")
+                                            new Dialog().initConfirmDialog(function () {
+
+                                            }, function () {   //cancel
+                                                // diagram.commandHandler.undo();
+                                            }
+                                            , {"message": $.i18n.prop('d_edit_repeatSelecting')}, function () {
+                                                $('#cancelBtn').remove();
+                                                $('.modal-dialog .modal-body .messContent span:eq(0)').attr('class',
+                                                    'glyphicon glyphicon-remove-sign')
+                                            });
+
+                                           //  alert("该组件已被选择！")
                                         }else{
                                             $("#"+sceneId+" ul.checkedData").append('<li class = "selectedComponents"  style="list-style: none" key='+node.data.key+'><img width = 25 src= '+node.data.img+'>'+node.data.text+'<span class="glyphicon glyphicon-remove pull-right" title="删除" style="color: #e66864;padding: 9px;cursor: pointer"></span></li>')
                                         }
