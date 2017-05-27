@@ -6,3 +6,41 @@
 .modal {
     background: rgba(0, 0, 0, 0);
 }
+.checkedData{
+    height: 215px;
+    padding: 0px;
+    overflow: overlay;
+}
+.checkedData li {
+    padding: 5px 0px 5px 10px;
+}
+.checkedData li:hover {
+    background-color: #f3f6fa;
+}
+.select-dropdown {
+    left: 40px;
+    margin: 0px;
+    padding: 0px;
+    border-radius: 0px;
+}
+.select-dropdown .user-down {
+    top: -4%;
+    left: 50%;
+}
+.select-dropdown li {
+    border: 1px solid #eee;
+}
+.clear-li{
+    text-align: center;
+    list-style: none;
+    padding: 0px;
+    line-height: 40px
+}
+.clear-li a {
+    color:#446087;
+}
+.clear-li a:hover {
+    text-decoration:none;
+    cursor: pointer;
+    color:#446087;
+}

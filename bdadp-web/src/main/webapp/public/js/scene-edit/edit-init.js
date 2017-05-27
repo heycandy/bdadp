@@ -103,7 +103,7 @@ define(["js/scene-edit/eidt-attributeTabs", "js/scene-edit/edit-form", "js/scene
                         + $.i18n.prop("d_span_edit_eliminate") + '</span></li>' +
                         '</ul>' +
                         '</div></div>' +
-                        '<div><ul class="select-dropdown dropdown-menu" style="display: none"><li role="separator" class="divider"></li><li style="text-align: center"><button class="btn btn-default clearSelected">清除</button></li></ul></div>'+
+                        '<div><ul class="select-dropdown dropdown-menu" style="display: none"><div class="user-down"></div><ul class="checkedData" style="list-style: none"></ul><ul style="padding: 0px;background-color: #e6e6e6;"><li class = "clear-li" style="text-align: center;list-style: none;padding: 0px"><a class="clearSelected">全部清除</a></li></ul></ul></div>'+
                         '<div style="position:relative;">' +
                         '<div class="dropzone" id="' + _diagramId
                         + '" style="position: absolute;border: solid 1px #b3b3b3; width:100%;background-color:white"></div>'
@@ -134,7 +134,34 @@ define(["js/scene-edit/eidt-attributeTabs", "js/scene-edit/edit-form", "js/scene
                             }, function (e, node) {     //the dbclick callbck of node
                                 var isShow = $(".select-dropdown").css("display")
                                 if(isShow != "none" && e.Hq.type != "mousemove" && e.targetObject.Qn != "Circle") {
-                                    $("#"+sceneId+" li.divider").before('<li class = "selectedComponents"  style="border-bottom: 1px solid #bdaeae;padding: 5px;" key='+node.data.key+'><img width = 30 src= '+node.data.img+'>'+node.data.text+'<span class="glyphicon glyphicon-remove pull-right" style="color: red;padding: 9px;"></span></li>')
+                                    // $("#"+sceneId+" li.empty-li").hide()
+                                    var selectedComponents = $("#" + sceneId + " li.selectedComponents")
+                                    if(selectedComponents.length != 0){
+                                        var KeyData = []
+                                        for (var k = 0; k< selectedComponents.length ;k++){
+                                            var key = $(selectedComponents[k]).attr("key")
+                                            KeyData.push(parseInt(key))
+                                        }
+                                        if(KeyData.indexOf(node.data.key) != -1){
+                                            new Dialog().initConfirmDialog(function () {
+
+                                            }, function () {   //cancel
+                                                // diagram.commandHandler.undo();
+                                            }
+                                            , {"message": $.i18n.prop('d_edit_repeatSelecting')}, function () {
+                                                $('#cancelBtn').remove();
+                                                $('.modal-dialog .modal-body .messContent span:eq(0)').attr('class',
+                                                    'glyphicon glyphicon-remove-sign')
+                                            });
+
+                                           //  alert("该组件已被选择！")
+                                        }else{
+                                            $("#"+sceneId+" ul.checkedData").append('<li class = "selectedComponents"  style="list-style: none" key='+node.data.key+'><img width = 25 src= '+node.data.img+'>'+node.data.text+'<span class="glyphicon glyphicon-remove pull-right" title="删除" style="color: #e66864;padding: 9px;cursor: pointer"></span></li>')
+                                        }
+                                    }else {
+                                        $("#"+sceneId+" ul.checkedData").append('<li class = "selectedComponents"  style="list-style: none" key='+node.data.key+'><img width = 25 src= '+node.data.img+'>'+node.data.text+'<span class="glyphicon glyphicon-remove pull-right" title="删除" style="color: #e66864;padding: 9px;cursor: pointer"></span></li>')
+                                    }
+                                    //$("#"+sceneId+" ul.checkedData").append('<li class = "selectedComponents"  style="list-style: none" key='+node.data.key+'><img width = 25 src= '+node.data.img+'>'+node.data.text+'<span class="glyphicon glyphicon-remove pull-right" title="删除" style="color: #e66864;padding: 9px;cursor: pointer"></span></li>')
                                     $("#" + sceneId + " .glyphicon-remove").click(function () {
                                         $(this).parent().remove()
                                     })
@@ -747,6 +774,7 @@ define(["js/scene-edit/eidt-attributeTabs", "js/scene-edit/edit-form", "js/scene
                 $("#" + sceneId + " .dropzone-top span.glyphicon-triangle-bottom").click(function () {
                     $("#"+sceneId+" ul.select-dropdown").toggle()
                 })
+                // $("#"+sceneId+" li.empty-li").hide()
 
                 // $("#" + sceneId + " .excute-isCheck").bootstrapSwitch();
             }
