@@ -22,10 +22,11 @@
     margin: 0px;
     padding: 0px;
     border-radius: 0px;
+    min-width: 200px;
 }
 .select-dropdown .user-down {
     top: -4%;
-    left: 50%;
+    left: 40%;
 }
 .select-dropdown li {
     border: 1px solid #eee;
