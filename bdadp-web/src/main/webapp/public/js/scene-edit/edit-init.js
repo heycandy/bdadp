@@ -92,13 +92,13 @@ define(["js/scene-edit/eidt-attributeTabs", "js/scene-edit/edit-form", "js/scene
                         '<li class="ion-social-youtube"><span>'
                         + $.i18n.prop("d_span_edit_execution") + '</span></li>'
                         + '<li class="selectexec"><span>'                  // restore execution
-                        + $.i18n.prop("d_span_edit_selectexec") + '</span><span class = "glyphicon glyphicon-triangle-bottom"></span></li>'
+                        + $.i18n.prop("d_span_edit_selectexec") + '</span><span class = "selectIcon glyphicon glyphicon-triangle-bottom"></span></li>'
                         /*+'<li><input class="excute-isCheck" type="checkbox" data-size = "mini"></li>'*/
                         +'<li class="ion-archive"><span>' + $.i18n.prop("d_span_edit_save")
                         + '</span></li>' +
                         '<li class="glyphicon glyphicon-export" style="display: none"><span>'
                         + $.i18n.prop("d_span_edit_export") + '</span></li>' +
-                        '<li class="ion-help-circled"><span>' + $.i18n.prop("d_span_edit_help")
+                        '<li><span class="ion-help-circled" style="font-size: 15px;"></span><span>' + $.i18n.prop("d_span_edit_help")
                         + '</span></li><li class="ion-trash-a" style="display: none" title="清除状态"><span>'
                         + $.i18n.prop("d_span_edit_eliminate") + '</span></li>' +
                         '</ul>' +
@@ -770,9 +770,17 @@ define(["js/scene-edit/eidt-attributeTabs", "js/scene-edit/edit-form", "js/scene
                 selectExcute(sceneId)
             }
 
+            var flagIcon = true
             function selectExcute(sceneId) {
-                $("#" + sceneId + " .dropzone-top span.glyphicon-triangle-bottom").click(function () {
+                $("#" + sceneId + " .dropzone-top li.selectexec").click(function () {
                     $("#"+sceneId+" ul.select-dropdown").toggle()
+                    if(flagIcon){
+                        $("#" + sceneId + " .dropzone-top span.selectIcon").removeClass('glyphicon-triangle-bottom').addClass('glyphicon-triangle-top')
+                    }else {
+                        $("#" + sceneId + " .dropzone-top span.selectIcon").removeClass('glyphicon-triangle-top').addClass('glyphicon-triangle-bottom')
+                    }
+                    flagIcon = !flagIcon
+
                 })
                 // $("#"+sceneId+" li.empty-li").hide()
 
