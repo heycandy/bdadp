@@ -108,7 +108,7 @@ public class DESUtil {
       kg = KeyGenerator.getInstance(DES_ALGORITHM);
     } catch (NoSuchAlgorithmException e) {
     }
-    kg.init(secureRandom);
+    kg.init(56,secureRandom);
 
     return kg.generateKey();
   }
