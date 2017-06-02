@@ -2,8 +2,10 @@ package com.chinasofti.ark.bdadp.util.common;
 
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.security.SecureRandom;
 
+import java.security.Security;
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -17,8 +19,11 @@ public class DESUtil {
   private static final String key = "ark-key";
 
   public static void main(String[] args){
-    System.out.print(getEncryptString("rootadmin"));
+    System.out.println(getEncryptString("arkdba"));
+    System.out.println(getDecryptString("cw7+zqBKF58="));
   }
+
+
 
   /**
    * DES加密
@@ -78,7 +83,6 @@ public class DESUtil {
       cipher = Cipher.getInstance(DES_ALGORITHM);
       cipher.init(Cipher.DECRYPT_MODE, generateKey(key));
       buf = cipher.doFinal(Base64Utils.decode(secretData.toCharArray()));
-
     } catch (NoSuchAlgorithmException e) {
       e.printStackTrace();
     } catch (NoSuchPaddingException e) {
@@ -100,17 +104,31 @@ public class DESUtil {
    * @return
    * @throws NoSuchAlgorithmException
    */
-  private static SecretKey generateKey(String secretKey) throws NoSuchAlgorithmException {
-    SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
-    secureRandom.setSeed(secretKey.getBytes());
-    KeyGenerator kg = null;
-    try {
-      kg = KeyGenerator.getInstance(DES_ALGORITHM);
-    } catch (NoSuchAlgorithmException e) {
-    }
-    kg.init(56,secureRandom);
+//  private static SecretKey generateKey(String secretKey) throws NoSuchAlgorithmException {
+//    SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
+//    secureRandom.setSeed(secretKey.getBytes());
+//    KeyGenerator kg = null;
+//    try {
+//      kg = KeyGenerator.getInstance(DES_ALGORITHM);
+//    } catch (NoSuchAlgorithmException e) {
+//    }
+//    kg.init(secureRandom);
+//
+//    return kg.generateKey();
+//  }
 
-    return kg.generateKey();
+  private static SecretKey generateKey(String secretKey) throws NoSuchAlgorithmException {
+    KeyGenerator _generator = KeyGenerator.getInstance("DES");
+    Security.addProvider(new sun.security.provider.Sun());
+    SecureRandom sr = null;
+    try {
+      sr = SecureRandom.getInstance("SHA1PRNG", "SUN");
+    } catch (NoSuchProviderException e) {
+      e.printStackTrace();
+    }
+    sr.setSeed(secretKey.getBytes());
+    _generator.init(sr);
+    return _generator.generateKey();
   }
 
 
