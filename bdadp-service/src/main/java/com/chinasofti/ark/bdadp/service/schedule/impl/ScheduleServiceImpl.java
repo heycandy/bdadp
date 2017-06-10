@@ -12,16 +12,27 @@ import com.chinasofti.ark.bdadp.entity.schedule.Holiday;
 import com.chinasofti.ark.bdadp.entity.schedule.ScenarioExecuteHistory;
 import com.chinasofti.ark.bdadp.entity.schedule.ScenarioExecuteHistoryPK;
 import com.chinasofti.ark.bdadp.entity.schedule.Schedule;
-import com.chinasofti.ark.bdadp.entity.task.Task;
 import com.chinasofti.ark.bdadp.service.scenario.bean.ScenarioStatus;
 import com.chinasofti.ark.bdadp.service.schedule.ScheduleService;
 import com.chinasofti.ark.bdadp.util.common.BeanHelper;
 import com.chinasofti.ark.bdadp.util.common.DateUtil;
 import com.chinasofti.ark.bdadp.util.constant.Constants;
-import com.chinasofti.ark.bdadp.util.dto.*;
+import com.chinasofti.ark.bdadp.util.dto.MonitorDTO;
+import com.chinasofti.ark.bdadp.util.dto.PageDTO;
+import com.chinasofti.ark.bdadp.util.dto.ResultDTO;
+import com.chinasofti.ark.bdadp.util.dto.ScheduleDTO;
+import com.chinasofti.ark.bdadp.util.dto.ScheduleJobRunBean;
 import com.chinasofti.ark.bdadp.util.schedule.ScheduleUtils;
+
 import org.apache.commons.lang.StringUtils;
-import org.quartz.*;
+import org.quartz.CronExpression;
+import org.quartz.CronTrigger;
+import org.quartz.JobBuilder;
+import org.quartz.JobDetail;
+import org.quartz.JobKey;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
+import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +43,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Author : water
@@ -150,9 +165,9 @@ public class ScheduleServiceImpl implements ScheduleService {
     public Page<MonitorDTO> transform(Page<MonitorDTO> resultPage) {
         for (MonitorDTO monitorDTO : resultPage) {
             String scenarioId = monitorDTO.getScenarioId();
-            String taskId = monitorDTO.getTaskId();
+//            String taskId = monitorDTO.getTaskId();
             Date startTime;
-            if (scenarioId.equals(taskId)) {
+          if (monitorDTO.getDateCreateTime() != null) {
                 startTime = monitorDTO.getDateCreateTime();
             } else {
                 startTime = monitorDTO.getDateCommitTime();
@@ -160,7 +175,7 @@ public class ScheduleServiceImpl implements ScheduleService {
             Date endTime = monitorDTO.getEndTime();
             String runTime = ScheduleUtils.getRunTime(startTime, endTime);
             String status = ScheduleUtils.statusIntToString(monitorDTO.getIntStatus());
-            Task task = taskDao.findOne(taskId);
+//            Task task = taskDao.findOne(taskId);
 //			if (null == task) {
 //				monitorDTO.setTaskName("taskName为空");
 //			} else {
@@ -169,7 +184,7 @@ public class ScheduleServiceImpl implements ScheduleService {
             String scenarioName = scenarioDao.findOne(scenarioId).getScenarioName();
             Schedule schedule = scheduleDao.findOne(scenarioId);
             if (null == schedule) {
-                monitorDTO.setUserName("userName为空");
+              monitorDTO.setUserName("-");
             } else {
                 monitorDTO.setUserName(userDao.findOne(schedule.getUserId()).getUserName());
             }
