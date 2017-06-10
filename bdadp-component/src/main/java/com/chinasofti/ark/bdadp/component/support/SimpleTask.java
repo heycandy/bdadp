@@ -26,7 +26,7 @@ public class SimpleTask<K extends Component> extends AbstractTask<Data> {
 
   public SimpleTask(String id, String name, ScenarioOptions options, Class<K> clazz)
       throws IOException {
-    super(id, name, TaskLogProvider.getLog(id, options.getExecutionId()), options);
+    super(id, name, options);
 
     _options = options;
     _clazz = clazz;
