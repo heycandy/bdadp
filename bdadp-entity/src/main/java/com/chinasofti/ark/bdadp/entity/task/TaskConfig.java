@@ -1,15 +1,16 @@
 package com.chinasofti.ark.bdadp.entity.task;
 
 import com.chinasofti.ark.bdadp.entity.components.ComponentConfig;
-//import com.chinasofti.ark.bdadp.util.common.DESUtil;
+import com.chinasofti.ark.bdadp.util.common.DESUtil;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Transient;
-import java.util.Date;
 
 /**
  * Created by TongTong on 2016/08/29.
@@ -67,31 +68,31 @@ public class TaskConfig implements java.io.Serializable {
         this.paramId = paramId;
     }
 
-//    public String getParamValue() {
-//        if (null != paramValue && !"".equals(paramValue)) {
-//            return DESUtil.getDecryptString(paramValue);
-//        } else {
-//            return "";
-//        }
-//
-//    }
-//
-//    public void setParamValue(String paramValue) {
-//
-//        if (null != paramValue && !"".equals(paramValue)) {
-//            this.paramValue = DESUtil.getEncryptString(paramValue);
-//        } else {
-//            this.paramValue = "";
-//        }
-//    }
-
     public String getParamValue() {
-        return paramValue;
+      if (null != paramValue && !"".equals(paramValue)) {
+        return DESUtil.getDecryptString(paramValue);
+      } else {
+        return "";
+      }
+
     }
 
     public void setParamValue(String paramValue) {
-        this.paramValue = paramValue;
+
+      if (null != paramValue && !"".equals(paramValue)) {
+        this.paramValue = DESUtil.getEncryptString(paramValue);
+      } else {
+        this.paramValue = "";
+      }
     }
+
+//    public String getParamValue() {
+//        return paramValue;
+//    }
+//
+//    public void setParamValue(String paramValue) {
+//        this.paramValue = paramValue;
+//    }
 
     public Date getCreateTime() {
         return createTime;
