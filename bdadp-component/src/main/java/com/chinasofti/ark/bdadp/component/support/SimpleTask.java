@@ -13,6 +13,8 @@ import org.slf4j.Logger;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by White on 2016/09/04.
@@ -44,6 +46,24 @@ public class SimpleTask<K extends Component> extends AbstractTask<Data> {
 
   protected void configure() {
     if (this.obj instanceof Configureable) {
+      // match param var value ${xxx} replace to scenario var value
+      String regex = "\\$\\{(.+?)\\}";
+      Pattern pattern = Pattern.compile(regex);
+      for (String paramKey : props.getKeySet()) {
+        String paramValue = props.getString(paramKey);
+        Matcher matcher = pattern.matcher(paramValue);
+        while (matcher.find()) {
+          String matched = matcher.group(0);
+          String key = matched.substring(2, matched.length() - 1);
+          String value = _options.getSettings().get(key);
+          if (value != null) {
+            paramValue = paramValue.replace(matched, value);
+          }
+        }
+
+        props.setProperty(paramKey, paramValue);
+      }
+      
       ((Configureable) this.obj).configure(props);
     }
     if (this.obj instanceof Optional) {
