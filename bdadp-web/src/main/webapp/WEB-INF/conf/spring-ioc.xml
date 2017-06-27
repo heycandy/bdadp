@@ -17,30 +17,6 @@
        http://www.springframework.org/schema/data/jpa
        http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
-  <!-- dataSource -->
-  <!--<bean id="dataSource" class="${c3p0.pool.dataSourceClassName}"> -->
-  <!--<property name="driverClass" value="${database.driverClassName}"/> -->
-  <!--<property name="jdbcUrl" value="${database.jdbcUrl}"/> -->
-  <!--<property name="user" value="${database.username}"/> -->
-  <!--<property name="password" value="${database.password}"/> -->
-  <!--<property name="initialPoolSize" value="${c3p0.pool.initialPoolSize}"/> -->
-  <!--<property name="minPoolSize" value="${c3p0.pool.minPoolSize}"/> -->
-  <!--<property name="maxPoolSize" value="${c3p0.pool.maxPoolSize}"/> -->
-  <!--<property name="maxIdleTime" value="${c3p0.pool.maxIdleTime}"/> -->
-  <!--<property name="acquireIncrement" value="${c3p0.pool.acquireIncrement}"/> -->
-  <!--<property name="acquireRetryAttempts" value="${c3p0.pool.acquireRetryAttempts}"/> -->
-  <!--</bean> -->
-
-  <!-- HikariCP configuration -->
-  <!--<bean id="dataSource" class="${hikari.pool.dataSourceClassName}">-->
-    <!--<property name="driverClassName" value="${database.driverClassName}"/>-->
-    <!--<property name="jdbcUrl" value="${database.jdbcUrl}"/>-->
-    <!--<property name="username" value="${database.username}"/>-->
-    <!--<property name="password" value="${database.password}"/>-->
-    <!--<property name="minimumIdle" value="${hikari.pool.minimumIdle}"/>-->
-    <!--<property name="maximumPoolSize" value="${hikari.pool.maximumPoolSize}"/>-->
-  <!--</bean>-->
-
   <!-- BoneCP configuration -->
   <bean id="dataSource" class="${bonecp.pool.dataSourceClassName}">
     <property name="driverClass" value="${database.driverClassName}" />
@@ -60,39 +36,6 @@
   <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
     <property name="dataSource" ref="dataSource"/>
   </bean>
-
-  <!-- sessionFactory -->
-  <!--<bean id="sessionFactory" -->
-  <!--class="org.springframework.orm.hibernate5.LocalSessionFactoryBean"> -->
-  <!--<property name="dataSource" ref="dataSource"/> -->
-  <!--<property name="packagesToScan" value="com.chinasofti.ark.bdadp.entity"/> -->
-  <!--<property name="hibernateProperties"> -->
-  <!--<props> -->
-  <!--<prop key="hibernate.dialect">${hibernate.dialect}</prop> -->
-  <!--<prop key="hibernate.show_sql">${hibernate.show_sql}</prop> -->
-  <!--<prop key="hibernate.format_sql">${hibernate.format_sql}</prop> -->
-  <!--<prop key="hibernate.jdbc.batch_size">${hibernate.jdbc.batch_size}</prop> -->
-  <!--<prop key="hibernate.hibernate.connection.SetBigStringTryClob"> -->
-  <!--${hibernate.connection.SetBigStringTryClob} -->
-  <!--</prop> -->
-  <!--<prop key="hibernate.hibernate.archive.autodetection"> -->
-  <!--${hibernate.archive.autodetection} -->
-  <!--</prop> -->
-  <!--<prop key="hibernate.hibernate.connection.charSet"> -->
-  <!--${hibernate.connection.charSet} -->
-  <!--</prop> -->
-  <!--<prop key="hibernate.hibernate.cache.use_query_cache"> -->
-  <!--${hibernate.cache.use_query_cache} -->
-  <!--</prop> -->
-  <!--<prop key="hibernate.hibernate.cache.use_second_level_cache"> -->
-  <!--${hibernate.cache.use_second_level_cache} -->
-  <!--</prop> -->
-  <!--<prop key="hibernate.hibernate.ejb.naming_strategy"> -->
-  <!--${hibernate.ejb.naming_strategy} -->
-  <!--</prop> -->
-  <!--</props> -->
-  <!--</property> -->
-  <!--</bean> -->
 
   <!-- entityManagerFactory -->
   <bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
@@ -130,11 +73,6 @@
     </property>
   </bean>
 
-  <!-- transactionManager -->
-  <!--<bean id="transactionManager" -->
-  <!--class="org.springframework.orm.hibernate5.HibernateTransactionManager"> -->
-  <!--<property name="sessionFactory" ref="sessionFactory"/> -->
-  <!--</bean> -->
   <bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager">
     <property name="entityManagerFactory" ref="entityManagerFactory"/>
   </bean>
@@ -205,25 +143,6 @@
   <!-- txAdvice -->
   <tx:advice id="txAdvice" transaction-manager="transactionManager">
     <tx:attributes>
-      <!--<tx:method name="save*" propagation="REQUIRED" />-->
-      <!--<tx:method name="add*" propagation="REQUIRED" />-->
-      <!--<tx:method name="create*" propagation="REQUIRED" />-->
-      <!--<tx:method name="insert*" propagation="REQUIRED" />-->
-      <!--<tx:method name="update*" propagation="REQUIRED" />-->
-      <!--<tx:method name="merge*" propagation="REQUIRED" />-->
-      <!--<tx:method name="del*" propagation="REQUIRED" />-->
-      <!--<tx:method name="remove*" propagation="REQUIRED" />-->
-      <!--<tx:method name="put*" propagation="REQUIRED" />-->
-      <!--<tx:method name="use*" propagation="REQUIRED" />-->
-      <!--<tx:method name="run*" propagation="REQUIRED" />-->
-      <!--<tx:method name="execute*" propagation="REQUIRED" />-->
-      <!--<tx:method name="change*" propagation="REQUIRED" />-->
-      <!--<tx:method name="offline*" propagation="REQUIRED" />-->
-      <!--<tx:method name="get*" propagation="REQUIRED" read-only="true" />-->
-      <!--<tx:method name="count*" propagation="REQUIRED" read-only="true" />-->
-      <!--<tx:method name="find*" propagation="REQUIRED" read-only="true" />-->
-      <!--<tx:method name="list*" propagation="REQUIRED" read-only="true" />-->
-      <!--<tx:method name="*" read-only="true" />-->
       <tx:method name="*" propagation="REQUIRED"/>
     </tx:attributes>
   </tx:advice>
