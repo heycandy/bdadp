@@ -4,14 +4,19 @@ import com.chinasofti.ark.bdadp.component.ComponentProps;
 import com.chinasofti.ark.bdadp.component.support.Task;
 import com.chinasofti.ark.bdadp.component.support.TaskLogProvider;
 import com.chinasofti.ark.bdadp.service.flow.FlowExecutorService;
-import com.chinasofti.ark.bdadp.service.graph.bean.*;
+import com.chinasofti.ark.bdadp.service.graph.bean.Edge;
+import com.chinasofti.ark.bdadp.service.graph.bean.Graph;
+import com.chinasofti.ark.bdadp.service.graph.bean.TaskVertex;
+import com.chinasofti.ark.bdadp.service.graph.bean.Vertex;
+import com.chinasofti.ark.bdadp.service.graph.bean.VertexState;
 import com.chinasofti.ark.bdadp.util.hdfs.common.ConfigurationClient;
-import java8.util.stream.StreamSupport;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collection;
+
+import java8.util.stream.StreamSupport;
 
 /**
  * Created by White on 2016/09/22.
@@ -83,7 +88,6 @@ public class CacheableFlow extends SimpleCallableFlow {
         };
     }
 
-    @Override
     protected void completing() {
         if (super.isDone()) {
             boolean isSuccess = StreamSupport.stream(getGraph().getEndVertexes())

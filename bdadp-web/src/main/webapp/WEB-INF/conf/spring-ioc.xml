@@ -124,15 +124,15 @@
   </context:component-scan>
 
   <!-- orm.properties -->
-  <context:property-placeholder location="/WEB-INF/orm.properties"/>
-  <!--<bean class="com.chinasofti.ark.bdadp.util.common.DecryptPropertyPlaceholderConfigurer">-->
-    <!--<property name="ignoreUnresolvablePlaceholders" value="true"></property>-->
-    <!--<property name="locations">-->
-      <!--<list>-->
-        <!--<value>/WEB-INF/orm.properties</value>-->
-      <!--</list>-->
-    <!--</property>-->
-  <!--</bean>-->
+  <!--<context:property-placeholder location="/WEB-INF/orm.properties"/>-->
+  <bean class="com.chinasofti.ark.bdadp.util.common.DecryptPropertyPlaceholderConfigurer">
+    <property name="ignoreUnresolvablePlaceholders" value="true"></property>
+    <property name="locations">
+      <list>
+        <value>/WEB-INF/orm.properties</value>
+      </list>
+    </property>
+  </bean>
 
   <aop:config expose-proxy="true">
     <aop:pointcut expression="execution(* com.chinasofti.ark.bdadp.service..*.*(..))"
