@@ -1,15 +1,6 @@
 -- ----------------------------
 -- Records of Holiday
 -- ----------------------------
-prompt Created on 2017年5月11日 by Water
-set feedback off
-set define off
-prompt Disabling triggers for HOLIDAY...
-alter table HOLIDAY disable all triggers;
-prompt Deleting HOLIDAY...
-delete from HOLIDAY;
-commit;
-prompt Loading HOLIDAY...
 insert into HOLIDAY (holiday_id, holiday_value)
 values (3, '20170107');
 insert into HOLIDAY (holiday_id, holiday_value)
@@ -210,8 +201,6 @@ insert into HOLIDAY (holiday_id, holiday_value)
 values (99, '20171104');
 insert into HOLIDAY (holiday_id, holiday_value)
 values (100, '20171105');
-commit;
-prompt 100 records committed...
 insert into HOLIDAY (holiday_id, holiday_value)
 values (101, '20171111');
 insert into HOLIDAY (holiday_id, holiday_value)
@@ -244,10 +233,3 @@ insert into HOLIDAY (holiday_id, holiday_value)
 values (115, '20171230');
 insert into HOLIDAY (holiday_id, holiday_value)
 values (116, '20171231');
-commit;
-prompt 116 records loaded
-prompt Enabling triggers for HOLIDAY...
-alter table HOLIDAY enable all triggers;
-set feedback on
-set define on
-prompt Done.

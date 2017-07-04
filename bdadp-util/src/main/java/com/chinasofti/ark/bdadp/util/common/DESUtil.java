@@ -17,8 +17,8 @@ public class DESUtil {
   private static final String key = "ark-key";
 
   public static void main(String[] args) {
-    System.out.println(getEncryptString("arkdba"));
-    System.out.println(getEncryptString("cw7+zqBKF58="));
+    System.out.println(getEncryptString("oracle"));
+//    System.out.println(getEncryptString("cw7+zqBKF58="));
   }
 
   /**

@@ -57,7 +57,6 @@
         <module>${product.service}</module>
         <module>${product.servlet}</module>
         <module>${product.util}</module>
-        <module>${product.standalong}</module>
       </modules>
     </profile>
     <profile>
