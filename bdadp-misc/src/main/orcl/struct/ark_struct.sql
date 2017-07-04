@@ -386,10 +386,10 @@ NOCACHE
 -- ----------------------------
 
 CREATE TABLE ScheduleHistory   (
-  scenario_id   NVARCHAR2(255) NOT NULL ,
-  start_time   DATE NULL ,
+  schedulehistory_id   NVARCHAR2(255) NOT NULL ,
   schedule_status   NVARCHAR2(255) NULL ,
-  schedulehistory_id   NVARCHAR2(255) NULL ,
+  scenario_id   NVARCHAR2(255)  NULL ,
+  start_time   DATE NULL ,
   end_time   DATE NULL 
 )
 LOGGING
@@ -648,7 +648,7 @@ ALTER TABLE ScenarioExecuteHistory   ADD CHECK (  task_id   IS NOT NULL);
 -- ----------------------------
 -- Primary Key structure for table ScenarioExecuteHistory
 -- ----------------------------
-ALTER TABLE ScenarioExecuteHistory   ADD PRIMARY KEY (  execution_id  ,   task_id  );
+ALTER TABLE ScenarioExecuteHistory   ADD CONSTRAINTS SEH_PK PRIMARY KEY (  execution_id  ,   task_id  );
 
 -- ----------------------------
 -- Indexes structure for table ScenarioGraphdag
@@ -720,7 +720,7 @@ ALTER TABLE Schedule   ADD PRIMARY KEY (  scenario_id  );
 -- ----------------------------
 -- Primary Key structure for table ScheduleHistory
 -- ----------------------------
-ALTER TABLE ScheduleHistory   ADD PRIMARY KEY (  scenario_id  );
+ALTER TABLE ScheduleHistory   ADD PRIMARY KEY (  schedulehistory_id  );
 
 -- ----------------------------
 -- Indexes structure for table Scope

@@ -172,7 +172,7 @@ define(["component/BdaTable", 'js/scene-monitor/monitor-detail', 'js/scene-devel
                 {url: url + param});
             var language = settings.testLangType();
             if (language.substring(0, 2) == "zh") {
-                $tableContent.find("table").bootstrapTable("changeLocale", "zh-TW");
+              $tableContent.find("table").bootstrapTable("changeLocale", "zh-CN");
                 $tableContent.find("table").bootstrapTable("changeTitle", {
                     scenarioName: "场景名称",
                     scenarioId: "场景ID",

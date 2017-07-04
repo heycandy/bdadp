@@ -1,5 +1,10 @@
 package com.chinasofti.ark.bdadp.service.scenario.impl;
 
+import com.google.common.base.Charsets;
+import com.google.common.base.Joiner;
+import com.google.common.collect.Maps;
+import com.google.common.io.Files;
+
 import com.chinasofti.ark.bdadp.component.api.channel.Channel;
 import com.chinasofti.ark.bdadp.component.api.channel.MemoryChannel;
 import com.chinasofti.ark.bdadp.component.api.options.PipelineOptionsFactory;
@@ -9,7 +14,13 @@ import com.chinasofti.ark.bdadp.component.api.sink.SinkComponent;
 import com.chinasofti.ark.bdadp.component.api.source.SourceComponent;
 import com.chinasofti.ark.bdadp.component.api.transforms.MultiTransComponent;
 import com.chinasofti.ark.bdadp.component.api.transforms.TransformableComponent;
-import com.chinasofti.ark.bdadp.component.support.*;
+import com.chinasofti.ark.bdadp.component.support.CacheableTask;
+import com.chinasofti.ark.bdadp.component.support.ChannelInputable;
+import com.chinasofti.ark.bdadp.component.support.ChannelOutputable;
+import com.chinasofti.ark.bdadp.component.support.MultiTransformableTask;
+import com.chinasofti.ark.bdadp.component.support.SinkTask;
+import com.chinasofti.ark.bdadp.component.support.SourceTask;
+import com.chinasofti.ark.bdadp.component.support.TransformableTask;
 import com.chinasofti.ark.bdadp.entity.scenario.ScenarioGraphEdge;
 import com.chinasofti.ark.bdadp.service.components.ComponentService;
 import com.chinasofti.ark.bdadp.service.graph.bean.Edge;
@@ -17,16 +28,10 @@ import com.chinasofti.ark.bdadp.service.graph.bean.SimpleEdge;
 import com.chinasofti.ark.bdadp.service.graph.bean.TaskVertex;
 import com.chinasofti.ark.bdadp.service.graph.bean.Vertex;
 //import com.chinasofti.ark.bdadp.util.common.DecryptPropertyPlaceholderConfigurer;
-import com.google.common.base.Charsets;
-import com.google.common.base.Joiner;
-import com.google.common.collect.Maps;
-import com.google.common.io.Files;
-import java8.util.stream.Collectors;
-import java8.util.stream.StreamSupport;
+
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,6 +41,10 @@ import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Properties;
+
+import java8.util.stream.Collectors;
+import java8.util.stream.StreamSupport;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 /**
  * Created by White on 2016/09/18.
@@ -134,8 +143,8 @@ public class ScenarioExecutorServiceImpl$Channel
                 .getBean(PropertySourcesPlaceholderConfigurer.class)
                 .getAppliedPropertySources().get("localProperties").getSource();
 
-//        Properties localProperties = this.applicationContext
-//            .getBean(DecryptPropertyPlaceholderConfigurer.class).getProperties();
+//      Properties localProperties = this.applicationContext
+//          .getBean(DecryptPropertyPlaceholderConfigurer.class).getProperties();
 
         for (String key : localProperties.stringPropertyNames()) {
             if (key.startsWith("executor.service.spark")) {

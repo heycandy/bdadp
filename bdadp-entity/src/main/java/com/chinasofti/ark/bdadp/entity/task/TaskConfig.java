@@ -5,11 +5,12 @@ import com.chinasofti.ark.bdadp.entity.components.ComponentConfig;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Transient;
-import java.util.Date;
 
 /**
  * Created by TongTong on 2016/08/29.
@@ -68,21 +69,21 @@ public class TaskConfig implements java.io.Serializable {
     }
 
 //    public String getParamValue() {
-//        if (null != paramValue && !"".equals(paramValue)) {
-//            return DESUtil.getDecryptString(paramValue);
-//        } else {
-//            return "";
-//        }
+//      if (null != paramValue && !"".equals(paramValue)) {
+//        return DESUtil.getDecryptString(paramValue);
+//      } else {
+//        return "";
+//      }
 //
 //    }
 //
 //    public void setParamValue(String paramValue) {
 //
-//        if (null != paramValue && !"".equals(paramValue)) {
-//            this.paramValue = DESUtil.getEncryptString(paramValue);
-//        } else {
-//            this.paramValue = "";
-//        }
+//      if (null != paramValue && !"".equals(paramValue)) {
+//        this.paramValue = DESUtil.getEncryptString(paramValue);
+//      } else {
+//        this.paramValue = "";
+//      }
 //    }
 
     public String getParamValue() {
