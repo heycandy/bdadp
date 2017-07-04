@@ -1,7 +1,7 @@
 package com.chinasofti.ark.bdadp.entity.task;
 
 import com.chinasofti.ark.bdadp.entity.components.ComponentConfig;
-import com.chinasofti.ark.bdadp.util.common.DESUtil;
+//import com.chinasofti.ark.bdadp.util.common.DESUtil;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -68,31 +68,31 @@ public class TaskConfig implements java.io.Serializable {
         this.paramId = paramId;
     }
 
-    public String getParamValue() {
-      if (null != paramValue && !"".equals(paramValue)) {
-        return DESUtil.getDecryptString(paramValue);
-      } else {
-        return "";
-      }
-
-    }
-
-    public void setParamValue(String paramValue) {
-
-      if (null != paramValue && !"".equals(paramValue)) {
-        this.paramValue = DESUtil.getEncryptString(paramValue);
-      } else {
-        this.paramValue = "";
-      }
-    }
-
 //    public String getParamValue() {
-//        return paramValue;
+//      if (null != paramValue && !"".equals(paramValue)) {
+//        return DESUtil.getDecryptString(paramValue);
+//      } else {
+//        return "";
+//      }
+//
 //    }
 //
 //    public void setParamValue(String paramValue) {
-//        this.paramValue = paramValue;
+//
+//      if (null != paramValue && !"".equals(paramValue)) {
+//        this.paramValue = DESUtil.getEncryptString(paramValue);
+//      } else {
+//        this.paramValue = "";
+//      }
 //    }
+
+    public String getParamValue() {
+        return paramValue;
+    }
+
+    public void setParamValue(String paramValue) {
+        this.paramValue = paramValue;
+    }
 
     public Date getCreateTime() {
         return createTime;
