@@ -1,4 +1,4 @@
-//package com.chinasofti.ark.bdadp.util.common;
+///*package com.chinasofti.ark.bdadp.util.common;
 //
 //import java.security.InvalidKeyException;
 //import java.security.NoSuchAlgorithmException;
@@ -14,20 +14,20 @@
 //public class DESUtil {
 //
 //  private static final String DES_ALGORITHM = "DES";
-//  private static final String key = "ark-key";
+//    private static final String key = "ark-key";
 //
 //  public static void main(String[] args){
 //    System.out.println(getEncryptString("arkdba"));
 //    System.out.println(getEncryptString("cw7+zqBKF58="));
 //  }
 //
-//  /**
+//  *//**
 //   * DES加密
 //   *
 //   * @param plainData
 //   * @return
 //   * @throws Exception
-//   */
+//   *//*
 //  public static String getEncryptString(String plainData) {
 //
 //    Cipher cipher = null;
@@ -64,13 +64,13 @@
 //
 //  }
 //
-//  /**
+//  *//**
 //   * DES解密
 //   *
 //   * @param secretData
 //   * @return
 //   * @throws Exception
-//   */
+//   *//*
 //  public static String getDecryptString(String secretData) {
 //
 //    Cipher cipher = null;
@@ -94,13 +94,13 @@
 //    return new String(buf);
 //  }
 //
-//  /**
+//  *//**
 //   * 获得秘密密钥
 //   *
 //   * @param secretKey
 //   * @return
 //   * @throws NoSuchAlgorithmException
-//   */
+//   *//*
 //  private static SecretKey generateKey(String secretKey) throws NoSuchAlgorithmException {
 //    SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
 //    secureRandom.setSeed(secretKey.getBytes());
@@ -133,9 +133,9 @@
 //      codes['/'] = 63;
 //    }
 //
-//    /**
+//    *//**
 //     * 将原始数据编码为base64编码
-//     */
+//     *//*
 //    static public String encode(byte[] data) {
 //      char[] out = new char[((data.length + 2) / 3) * 4];
 //      for (int i = 0, index = 0; i < data.length; i += 3, index += 4) {
@@ -164,9 +164,9 @@
 //      return new String(out);
 //    }
 //
-//    /**
+//    *//**
 //     * 将base64编码的数据解码成原始数据
-//     */
+//     *//*
 //    static public byte[] decode(char[] data) {
 //      int len = ((data.length + 3) / 4) * 3;
 //      if (data.length > 0 && data[data.length - 1] == '=')
@@ -194,4 +194,4 @@
 //      return out;
 //    }
 //  }
-//}
+//}*/
