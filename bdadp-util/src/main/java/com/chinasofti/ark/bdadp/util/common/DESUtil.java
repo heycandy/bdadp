@@ -14,15 +14,19 @@ import javax.crypto.SecretKey;
 public class DESUtil {
 
   private static final String DES_ALGORITHM = "DES";
-  private static final String key = "ark-key";
+    private static final String key = "ark-key";
 
-  public static void main(String[] args) {
+  public static void main(String[] args){
     System.out.println(getEncryptString("arkdba"));
     System.out.println(getEncryptString("cw7+zqBKF58="));
   }
 
   /**
    * DES加密
+   *
+   * @param plainData
+   * @return
+   * @throws Exception
    */
   public static String getEncryptString(String plainData) {
 
@@ -62,6 +66,10 @@ public class DESUtil {
 
   /**
    * DES解密
+   *
+   * @param secretData
+   * @return
+   * @throws Exception
    */
   public static String getDecryptString(String secretData) {
 
@@ -88,6 +96,10 @@ public class DESUtil {
 
   /**
    * 获得秘密密钥
+   *
+   * @param secretKey
+   * @return
+   * @throws NoSuchAlgorithmException
    */
   private static SecretKey generateKey(String secretKey) throws NoSuchAlgorithmException {
     SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
@@ -103,27 +115,20 @@ public class DESUtil {
   }
 
 
+
   static class Base64Utils {
-
-    static private char[]
-        alphabet =
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="
-            .toCharArray();
+    static private char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="
+        .toCharArray();
     static private byte[] codes = new byte[256];
-
     static {
-      for (int i = 0; i < 256; i++) {
+      for (int i = 0; i < 256; i++)
         codes[i] = -1;
-      }
-      for (int i = 'A'; i <= 'Z'; i++) {
+      for (int i = 'A'; i <= 'Z'; i++)
         codes[i] = (byte) (i - 'A');
-      }
-      for (int i = 'a'; i <= 'z'; i++) {
+      for (int i = 'a'; i <= 'z'; i++)
         codes[i] = (byte) (26 + i - 'a');
-      }
-      for (int i = '0'; i <= '9'; i++) {
+      for (int i = '0'; i <= '9'; i++)
         codes[i] = (byte) (52 + i - '0');
-      }
       codes['+'] = 62;
       codes['/'] = 63;
     }
@@ -164,12 +169,10 @@ public class DESUtil {
      */
     static public byte[] decode(char[] data) {
       int len = ((data.length + 3) / 4) * 3;
-      if (data.length > 0 && data[data.length - 1] == '=') {
+      if (data.length > 0 && data[data.length - 1] == '=')
         --len;
-      }
-      if (data.length > 1 && data[data.length - 2] == '=') {
+      if (data.length > 1 && data[data.length - 2] == '=')
         --len;
-      }
       byte[] out = new byte[len];
       int shift = 0;
       int accum = 0;
@@ -186,9 +189,8 @@ public class DESUtil {
           }
         }
       }
-      if (index != out.length) {
+      if (index != out.length)
         throw new Error("miscalculated data length!");
-      }
       return out;
     }
   }

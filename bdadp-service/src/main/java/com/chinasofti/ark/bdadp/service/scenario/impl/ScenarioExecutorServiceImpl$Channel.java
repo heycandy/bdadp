@@ -27,7 +27,7 @@ import com.chinasofti.ark.bdadp.service.graph.bean.Edge;
 import com.chinasofti.ark.bdadp.service.graph.bean.SimpleEdge;
 import com.chinasofti.ark.bdadp.service.graph.bean.TaskVertex;
 import com.chinasofti.ark.bdadp.service.graph.bean.Vertex;
-import com.chinasofti.ark.bdadp.util.common.DecryptPropertyPlaceholderConfigurer;
+//import com.chinasofti.ark.bdadp.util.common.DecryptPropertyPlaceholderConfigurer;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -44,6 +44,7 @@ import java.util.Properties;
 
 import java8.util.stream.Collectors;
 import java8.util.stream.StreamSupport;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 /**
  * Created by White on 2016/09/18.
@@ -138,12 +139,12 @@ public class ScenarioExecutorServiceImpl$Channel
         }
 
         // 2、properties
-//        Properties localProperties = (Properties) this.applicationContext
-//                .getBean(PropertySourcesPlaceholderConfigurer.class)
-//                .getAppliedPropertySources().get("localProperties").getSource();
+        Properties localProperties = (Properties) this.applicationContext
+                .getBean(PropertySourcesPlaceholderConfigurer.class)
+                .getAppliedPropertySources().get("localProperties").getSource();
 
-      Properties localProperties = this.applicationContext
-          .getBean(DecryptPropertyPlaceholderConfigurer.class).getProperties();
+//      Properties localProperties = this.applicationContext
+//          .getBean(DecryptPropertyPlaceholderConfigurer.class).getProperties();
 
         for (String key : localProperties.stringPropertyNames()) {
             if (key.startsWith("executor.service.spark")) {
