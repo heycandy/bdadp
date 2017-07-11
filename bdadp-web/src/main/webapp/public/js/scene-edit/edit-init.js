@@ -135,7 +135,7 @@ define(["js/scene-edit/eidt-attributeTabs", "js/scene-edit/edit-form", "js/scene
                                                      function (e, node) {
                                                        var n = node;
                                                      }, function (e, node) {     //the dbclick callbck of node
-                       var isShow = $(".select-dropdown").css("display")
+                       var isShow = $("#"+sceneId+" .select-dropdown").css("display")
                        if (isShow != "none" && e.Hq.type != "mousemove" && e.targetObject.Qn
                                                                            != "Circle") {
                          // $("#"+sceneId+" li.empty-li").hide()

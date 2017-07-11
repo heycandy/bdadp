@@ -11,6 +11,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Properties;
@@ -24,55 +27,67 @@ import java8.util.stream.StreamSupport;
 
 public class PushServiceImpl implements PushService {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+  private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private Configuration config;
-    private SocketIOServer server;
+  private Configuration config;
+  private SocketIOServer server;
 
-    @Autowired
-    private UserSecurityService userSecurityService;
+  @Autowired
+  private UserSecurityService userSecurityService;
 
-    @Override
-    public void setInitProperties(Properties props) {
-        config = new Configuration();
+  @Override
+  public void setInitProperties(Properties props) {
+    config = new Configuration();
 
-        config.setHostname(props.getProperty("hostname", "localhost"));
-        config.setPort(Integer.valueOf(props.getProperty("port", "8081")));
-
-    }
-
-    @Override
-    public void destroy() throws Exception {
-        server.stop();
-    }
-
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        server = new SocketIOServer(config);
-
-        server.addConnectListener(
-                socketIOClient ->
-                        logger.info("onConnect {} {}",
-                                socketIOClient.getRemoteAddress(), socketIOClient.getSessionId()));
-
-        server.addDisconnectListener(
-                socketIOClient ->
-                    logger.info("onDisconnect {} {}",
-                                socketIOClient.getRemoteAddress(), socketIOClient.getSessionId()));
-
-        server.start();
+    config.setHostname(props.getProperty("hostname", "localhost"));
+    config.setPort(Integer.valueOf(props.getProperty("port", "8081")));
+    if (props.getProperty("secure", "false").equals("true")) {
+      InputStream keyStore = null;
+      try {
+        keyStore = new FileInputStream(props.getProperty("keystore.location"));
+      } catch (FileNotFoundException e) {
+        e.printStackTrace();
+      }
+      config.setKeyStoreFormat(props.getProperty("keystore.format"));
+      config.setKeyStore(keyStore);
+      config.setKeyStorePassword(props.getProperty("keystore.password"));
 
     }
 
-    @Override
-    public void sendEvent(EventBody event, User... users) {
-        Collection<User> collection = Arrays.asList(users);
-        Iterable<String> iterable = StreamSupport.stream(collection)
-                .map(userSecurityService::logged)
-                .collect(Collectors.toSet());
+  }
 
-        event.setTokens(iterable);
+  @Override
+  public void destroy() throws Exception {
+    server.stop();
+  }
 
-        server.getBroadcastOperations().sendEvent(event.getName(), event);
-    }
+  @Override
+  public void afterPropertiesSet() throws Exception {
+    server = new SocketIOServer(config);
+
+    server.addConnectListener(
+        socketIOClient ->
+            logger.info("onConnect {} {}",
+                        socketIOClient.getRemoteAddress(), socketIOClient.getSessionId()));
+
+    server.addDisconnectListener(
+        socketIOClient ->
+            logger.info("onDisconnect {} {}",
+                        socketIOClient.getRemoteAddress(), socketIOClient.getSessionId()));
+
+    server.start();
+
+  }
+
+  @Override
+  public void sendEvent(EventBody event, User... users) {
+    Collection<User> collection = Arrays.asList(users);
+    Iterable<String> iterable = StreamSupport.stream(collection)
+        .map(userSecurityService::logged)
+        .collect(Collectors.toSet());
+
+    event.setTokens(iterable);
+
+    server.getBroadcastOperations().sendEvent(event.getName(), event);
+  }
 }

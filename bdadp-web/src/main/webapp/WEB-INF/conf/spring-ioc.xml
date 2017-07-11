@@ -88,6 +88,10 @@
       <props>
         <prop key="hostname">${push.service.hostname}</prop>
         <prop key="port">${push.service.port}</prop>
+        <!--<prop key="secure">${push.service.secure}</prop>-->
+        <!--<prop key="keystore.format">${push.service.keystore.format}</prop>
+        <prop key="keystore.location">${push.service.keystore.location}</prop>
+        <prop key="keystore.password">${push.service.keystore.password}</prop>-->
       </props>
     </property>
   </bean>
