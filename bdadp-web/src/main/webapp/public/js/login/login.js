@@ -52,7 +52,7 @@ define(['public/js/settings', 'public/libs/i18n/international',
         var loginValid = bootstrapValidator.isValid();
         if (loginValid) {
             var paramObj = {};
-            paramObj.userName = $.base64.encode(userName);
+            paramObj.userName = userName;
             paramObj.userPwd = $.base64.encode(passWorld);
             settings.HttpClient("POST", paramObj, "/service/v1/user/login", function (response) {
                 //sessionStorage.setItem("ARK_PLATFORM_TOKEN", response);
