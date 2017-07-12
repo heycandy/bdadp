@@ -614,7 +614,7 @@ define(["js/scene-edit/eidt-attributeTabs", "js/scene-edit/edit-form", "js/scene
                  settings.InterNation(['.edit_sceneComponent', '.edit_dataExtraction',
                                        '.edit_dataImport', '.edit_dataConversion',
                                        '.edit_generalControl', '.edit_dataResource',
-                                       '.edit_dataHandling', '.edit_dataOutput',
+                                       '.edit_dataHandling', '.edit_dataOutput','.edit_machineLearning','.edit_predictive','.edit_visualization',
                                        '.edit_customerTarget',
                                        '.d_span_dnd_cut', '.d_span_dnd_copy', '.d_span_dnd_paste',
                                        '.d_span_dnd_delete'],
@@ -622,7 +622,7 @@ define(["js/scene-edit/eidt-attributeTabs", "js/scene-edit/edit-form", "js/scene
                                        'd_span_dataImport',
                                        'd_span_dataConversion', 'd_span_generalControl',
                                        'd_span_dataResource', 'd_span_dataHandling',
-                                       'd_span_dataOutput', 'd_span_customerTarget',
+                                       'd_span_dataOutput', 'd_span_machineLearning','d_span_predictive','d_span_visualization','d_span_customerTarget',
                                        'd_span_dnd_cut', 'd_span_dnd_copy', 'd_span_dnd_paste',
                                        'd_span_dnd_delete']);
                  $('.panel-heading .panel-title  .input-sm').attr('placeholder',
@@ -1327,6 +1327,36 @@ define(["js/scene-edit/eidt-attributeTabs", "js/scene-edit/edit-form", "js/scene
                             '<span>' + tJson[i].component_desc + '</span>';
                  var li = $(_li).append(_img).get(0);
                  $('#' + sceneId + ' .data-output ul:first').append(li);
+               } else if (tJson[i].component_pid == "component_pid_ml_model") {  //machine-learning
+                   var _src = baseUrl + '/service/v1/resources/components/' + tJson[i].component_id
+                           + '/icon?param=xs',
+                       _img = '<img draggable="false" data-pid="' + tJson[i].component_id + '" src="'
+                           + _src + '" ' +
+                           '"  style="width:20px;height: 20px;margin-right: 5px;vertical-align: bottom"/>'
+                           +
+                           '<span>' + tJson[i].component_desc + '</span>';
+                   var li = $(_li).append(_img).get(0);
+                   $('#' + sceneId + ' .machine-learning ul:first').append(li);
+               }else if (tJson[i].component_pid == "component_pid_ml_predict") {  //predictive
+                   var _src = baseUrl + '/service/v1/resources/components/' + tJson[i].component_id
+                           + '/icon?param=xs',
+                       _img = '<img draggable="false" data-pid="' + tJson[i].component_id + '" src="'
+                           + _src + '" ' +
+                           '"  style="width:20px;height: 20px;margin-right: 5px;vertical-align: bottom"/>'
+                           +
+                           '<span>' + tJson[i].component_desc + '</span>';
+                   var li = $(_li).append(_img).get(0);
+                   $('#' + sceneId + ' .predictive ul:first').append(li);
+               }else if (tJson[i].component_pid == "component_pid_visualization") {  //visualization
+                   var _src = baseUrl + '/service/v1/resources/components/' + tJson[i].component_id
+                           + '/icon?param=xs',
+                       _img = '<img draggable="false" data-pid="' + tJson[i].component_id + '" src="'
+                           + _src + '" ' +
+                           '"  style="width:20px;height: 20px;margin-right: 5px;vertical-align: bottom"/>'
+                           +
+                           '<span>' + tJson[i].component_desc + '</span>';
+                   var li = $(_li).append(_img).get(0);
+                   $('#' + sceneId + ' .visualization ul:first').append(li);
                }
                else {
                  var _src = baseUrl + '/service/v1/resources/components/' + tJson[i].component_id
@@ -1745,6 +1775,31 @@ define(["js/scene-edit/eidt-attributeTabs", "js/scene-edit/edit-form", "js/scene
                      $('#' + sceneId + ' .data-output').collapse('toggle');
                    })
                  })
+
+               // machine-learning --click
+               $('#' + sceneId + ' .machine-learning-title li.ion-arrow-right-b').each(
+                   function (index, dom) {
+                       $(dom).on('click', function (e) {
+                           $('#' + sceneId + ' .machine-learning').collapse('toggle');
+                       })
+                   })
+
+               // predictive --click
+               $('#' + sceneId + ' .predictive-title li.ion-arrow-right-b').each(
+                   function (index, dom) {
+                       $(dom).on('click', function (e) {
+                           $('#' + sceneId + ' .predictive').collapse('toggle');
+                       })
+                   })
+
+               // visualization --click
+               $('#' + sceneId + ' .visualization-title li.ion-arrow-right-b').each(
+                   function (index, dom) {
+                       $(dom).on('click', function (e) {
+                           $('#' + sceneId + ' .visualization').collapse('toggle');
+                       })
+                   })
+
              // data-resource of bind
              $('#' + sceneId + ' .data-resource').on('show.bs.collapse', function () {
                $('#' + sceneId
@@ -1802,6 +1857,66 @@ define(["js/scene-edit/eidt-attributeTabs", "js/scene-edit/edit-form", "js/scene
                      }
                    })
              })
+
+               // machine-learning of bind
+               $('#' + sceneId + ' .machine-learning').on('show.bs.collapse', function () {
+                   $('#' + sceneId
+                       + " .customer-assembly .machine-learning-title li[class*='ion-arrow']:first").each(
+                       function (index, dom) {
+                           if (0 == index) {
+                               $(this).attr("class", "ion-arrow-down-b");
+                           }
+                       })
+               })
+               $('#' + sceneId + ' .machine-learning').on('hide.bs.collapse', function () {
+                   $('#' + sceneId
+                       + " .customer-assembly .machine-learning-title li[class*='ion-arrow']:first").each(
+                       function (index, dom) {
+                           if (0 == index) {
+                               $(this).attr("class", "ion-arrow-right-b");
+                           }
+                       })
+               })
+
+               // predictive of bind
+               $('#' + sceneId + ' .predictive').on('show.bs.collapse', function () {
+                   $('#' + sceneId
+                       + " .customer-assembly .predictive-title li[class*='ion-arrow']:first").each(
+                       function (index, dom) {
+                           if (0 == index) {
+                               $(this).attr("class", "ion-arrow-down-b");
+                           }
+                       })
+               })
+               $('#' + sceneId + ' .predictive').on('hide.bs.collapse', function () {
+                   $('#' + sceneId
+                       + " .customer-assembly .predictive-title li[class*='ion-arrow']:first").each(
+                       function (index, dom) {
+                           if (0 == index) {
+                               $(this).attr("class", "ion-arrow-right-b");
+                           }
+                       })
+               })
+
+               // visualization of bind
+               $('#' + sceneId + ' .visualization').on('show.bs.collapse', function () {
+                   $('#' + sceneId
+                       + " .customer-assembly .visualization-title li[class*='ion-arrow']:first").each(
+                       function (index, dom) {
+                           if (0 == index) {
+                               $(this).attr("class", "ion-arrow-down-b");
+                           }
+                       })
+               })
+               $('#' + sceneId + ' .visualization').on('hide.bs.collapse', function () {
+                   $('#' + sceneId
+                       + " .customer-assembly .visualization-title li[class*='ion-arrow']:first").each(
+                       function (index, dom) {
+                           if (0 == index) {
+                               $(this).attr("class", "ion-arrow-right-b");
+                           }
+                       })
+               })
 
            }
 

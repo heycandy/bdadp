@@ -497,6 +497,36 @@
         opacity: 0.5;
     }
 
+    /*machine-learning*/
+    .componentList .panel-body {
+        padding-bottom: 0;
+        transition-delay: 0ms;
+        -webkit-transition-delay: 0ms;
+    }
+
+    .componentList .panel-body .inner-collapse-panel-body {
+        margin-top: -13px;
+        font-size: 13px;
+        user-select: none;
+        text-align: left;
+    }
+
+    .componentList .panel-body .inner-collapse-panel-body ul {
+        list-style: none;
+        margin-left: -28px;
+    }
+
+    .componentList .panel-body .inner-collapse-panel-body ul li {
+        margin-top: 5px
+    }
+
+    .componentList .panel-body .inner-collapse-panel-body ul li:HOVER {
+        cursor: pointer;
+        background-color: #d0ccc7;
+        opacity: 0.5;
+    }
+
+
     .scenario-extraction .panel-body {
         margin-bottom: -22px;
         transition-delay: 0ms;
@@ -540,7 +570,7 @@
         }
     }
 </style>
-<div class="panel-group">
+<div class="panel-group" id="accordion">
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
@@ -782,6 +812,78 @@
                                 </h4>
                             </div>
                             <div class="panel-collapse collapse data-output">
+                                <div class="panel-body">
+                                    <div class="inner-collapse-panel-body">
+                                        <ul>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--ML-->
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <div class="machine-learning-title">
+                                        <ul style="margin-right: -30px;">
+                                            <li class="ion-arrow-right-b"></li>
+                                        </ul>
+                                        <span
+                                                style="font-weight: bold;;font-size: 12px;text-transform: capitalize;padding-left: 4px;"
+                                                class="edit_machineLearning"></span>
+                                    </div>
+                                </h4>
+                            </div>
+                            <div class="panel-collapse collapse machine-learning componentList">
+                                <div class="panel-body">
+                                    <div class="inner-collapse-panel-body">
+                                        <ul>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--PA-->
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <div class="predictive-title">
+                                        <ul style="margin-right: -30px;">
+                                            <li class="ion-arrow-right-b"></li>
+                                        </ul>
+                                        <span
+                                                style="font-weight: bold;;font-size: 12px;text-transform: capitalize;padding-left: 4px;"
+                                                class="edit_predictive"></span>
+                                    </div>
+                                </h4>
+                            </div>
+                            <div class="panel-collapse collapse predictive componentList">
+                                <div class="panel-body">
+                                    <div class="inner-collapse-panel-body">
+                                        <ul>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--visual-->
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <div class="visualization-title">
+                                        <ul style="margin-right: -30px;">
+                                            <li class="ion-arrow-right-b"></li>
+                                        </ul>
+                                        <span
+                                                style="font-weight: bold;;font-size: 12px;text-transform: capitalize;padding-left: 4px;"
+                                                class="edit_visualization"></span>
+                                    </div>
+                                </h4>
+                            </div>
+                            <div class="panel-collapse collapse visualization componentList">
                                 <div class="panel-body">
                                     <div class="inner-collapse-panel-body">
                                         <ul>
