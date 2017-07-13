@@ -351,6 +351,7 @@ define(['js/scene-develop/add-package', 'js/modeldialog', 'js/scene-develop/scen
 
         _Scene.prototype.modify = function (modifyObj, data) {
         var self = this;
+        var descInfo = !!data[0]["scenario_desc"]?data[0]["scenario_desc"]:'';
         var message = '<div class="container-fluid" style="height:100%;">' +
                       '<form  id="editSceneForm" name="biaodan" class="form-horizontal" action="javascript:void(0);">'
                       +
@@ -378,7 +379,7 @@ define(['js/scene-develop/add-package', 'js/modeldialog', 'js/scene-develop/scen
             '<div class="form-group">' +
             '<div class="col-sm-12">' +
                       '<textarea id="" class="form-control sceneDesc" placeholder="" rows="6" style="resize: none;width:100%;margin:0px -10px;" name="sceneDesc">'
-                      + data[0]["scenario_desc"] + '</textarea>' +
+                      + descInfo + '</textarea>' +
             '</div>' +
             '</div>' +
             '</form>' +
