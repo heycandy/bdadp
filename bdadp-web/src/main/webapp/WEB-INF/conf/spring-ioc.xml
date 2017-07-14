@@ -86,7 +86,7 @@
     id="pushService">
     <property name="initProperties">
       <props>
-        <prop key="hostname">localhost</prop>
+        <prop key="hostname">${push.service.hostname}</prop>
         <prop key="port">${push.service.port}</prop>
         <!--<prop key="secure">${push.service.secure}</prop>-->
         <!--<prop key="keystore.format">${push.service.keystore.format}</prop>
