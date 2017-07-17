@@ -1,6 +1,5 @@
 package com.chinasofti.ark.bdadp.util.common
 
-import org.apache.commons.io.FileUtils
 import org.apache.spark.mllib.linalg.Vectors
 import org.apache.spark.mllib.regression.LabeledPoint
 import org.apache.spark.rdd.RDD
@@ -11,12 +10,12 @@ import org.apache.spark.sql.DataFrame
  */
 class DataFrameUtils {
 
-  def checkDirExists(path: String): Unit = {
-    val file = new java.io.File(path)
-    if (file.exists()) {
-      FileUtils.deleteDirectory(file);
-    }
-  }
+//  def checkDirExists(path: String): Unit = {
+//    val file = new java.io.File(path)
+//    if (file.exists()) {
+//      FileUtils.deleteDirectory(file);
+//    }
+//  }
 
   def preProcessData(df: DataFrame, labelCol: String, featuresCol: Array[String], trainDataPer: Double): Array[RDD[LabeledPoint]] = {
     val allArr = labelCol +: featuresCol
