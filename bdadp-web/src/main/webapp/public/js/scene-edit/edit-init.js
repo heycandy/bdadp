@@ -454,7 +454,6 @@ define(["js/scene-edit/eidt-attributeTabs", "js/scene-edit/edit-form", "js/scene
                                                     }, function () { //cancel
                                                       // diagram[0].diagram.commandHandler.undo();
                                                     }
-<<<<<<< HEAD
                          , {"message": $.i18n.prop('d_edit_err')}
                          , function () {
                            $('#cancelBtn').remove();
@@ -490,92 +489,6 @@ define(["js/scene-edit/eidt-attributeTabs", "js/scene-edit/edit-form", "js/scene
                            $(element).hide();
                          })
                          tabPanelArr.push({
-=======
-                                                    , {"message": $.i18n.prop('d_edit_pleaseCheck')}
-                                                    , function () {
-                                                        $('#cancelBtn').remove();
-                                                    });
-                                            }
-
-                                        })
-                                        break;
-                                    }
-                                }
-                            },function(data){
-                                //预览-------点击获取当前控件的key & task_id
-
-                                /*getAjaxGraphArg(sceneId, function (response) {
-                                    var res = response.result.graph_vertexs;
-                                    for(var i = 0; i < res.length; i++){
-                                        if(res[i].key == data.key){
-                                            var taskId = res[i].task.task_id;
-                                            var key = res[i].key;
-
-                                            //alert(key+"------"+taskId+"---"+res[i].task.task_name);
-                                            // new Dialog().initPreShowDialog(Id);
-
-                                        }
-                                    }
-                                })*/
-                            });
-
-                        var drag = new DFlow(diagram[0].diagram).platteInit(sceneId, "edit-platte", diagram);
-                        var diagramN = drag.workFlowInit(_diagramId);
-                        $('#' + sceneId + " .contextMenu ul li").each(function (index, dom) {
-                            $(dom).click(function () {
-                                var txtContent = this.textContent;
-                                diagramN.cxcommand(this.textContent);
-                            })
-                        })
-
-                        diagram[0].diagram.addDiagramListener("LinkDrawn", function (e) {
-                            var edge = new Edges();
-                            var isDAG = edge.isDAG(e.diagram.model.toJSON());
-                            if (!isDAG) {
-                                new Dialog().initConfirmDialog(function () {
-                                        diagram[0].diagram.commandHandler.undo();
-                                    }, function () { //cancel
-                                        // diagram[0].diagram.commandHandler.undo();
-                                    }
-                                    , {"message": $.i18n.prop('d_edit_err')}
-                                    , function () {
-                                        $('#cancelBtn').remove();
-                                    });
-                                // alert('this is not the DAG, please check your diagram or workflow!')
-                            }
-                        })
-
-                        diagram[0].diagram.commandHandler.undo = function(){
-                            //override the raw function
-                        }
-                  
-                        new Copy().init(sceneId, diagram[0].diagram, function (data) {
-                            data.forEach(function (_d) {
-                                var srcSceneId = _d.node.formId.split('_')[0],
-                                    componentId = _d.node.formId.split('_')[2],
-                                    thatKey = _d.pasternode.key, componentType = "component", nodeText = _d.node.text;
-                                if (componentId.indexOf('_') != -1) {
-                                    var _type = componentId.substring(componentId.indexOf('_') + 1);
-                                    if (_type == "scenario") {
-                                        componentId = componentId.substring(0, componentId.indexOf('_'));
-                                        componentType = "scenario";
-                                    } else {
-                                        componentType = "component";
-                                    }
-                                }
-                                getAjaxComponentArg(componentId, function (response) {
-                                    if (response.resultCode == 0) {
-                                        var res = response;
-                                        var formId = sceneId + "_component_" + componentId + "_form_" + thatKey
-                                            , attriTabId = sceneId + "_attri_" + thatKey
-                                            , descriTabId = sceneId + "_descri_" + thatKey
-                                            , tabPanelClass = sceneId + "_tabPanel_" + thatKey;
-                                        $('#' + sceneId + " .attribute-panel .tabPanel").each(function (index,
-                                                                                                        element) {
-                                            $(element).hide();
-                                        })
-                                        tabPanelArr.push({
->>>>>>> 5e0de9757f1af804c87cda1f1715f523489722ca
                                             "tabelPanel": tabPanelClass,
                                             "conponentType": componentType
                                           });   // tabPanelArr add the current show tabPanelClass
