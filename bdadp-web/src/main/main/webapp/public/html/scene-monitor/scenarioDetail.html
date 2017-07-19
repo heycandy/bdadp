@@ -1,0 +1,20 @@
+<script src='./libs/bootstrapTable/js/bootstrap-table.js'></script>
+<script src='./libs/bootstrapTable/js/bootstrap-table-i18n-enhance.js'></script>
+
+<table data-toggle="table"
+       data-pagination="true"
+       data-side-pagination="server"
+       data-show-refresh="true"
+       data-page-list="[5, 10, 20]">
+  <thead>
+  <tr>
+    <th data-field="taskName" data-halign="center"></th>
+    <th data-field="taskId" data-visible="false" data-halign="center"></th>
+    <th data-field="commitTime" data-halign="center"></th>
+    <th data-field="status" data-halign="center" data-formatter="statusFun"></th>
+    <th data-field="runTime" data-halign="center"></th>
+    <th data-field="taskLog" data-halign="center" data-formatter="taskFormatter"
+        data-events="taskEvents"></th>
+  </tr>
+  </thead>
+</table>

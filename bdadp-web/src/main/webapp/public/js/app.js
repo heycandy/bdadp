@@ -419,6 +419,9 @@ $(function () {
             }, function () {
                 $(this).css({"color": "#fff", "text-decoration": "none"});
             })
+            if (data.result.action == "scenario.import"){
+                $(".scene-content-header .pull-right.scene-left-tool label").trigger("click");
+            }
         } else if (exportState == 3) {
             // $("#" + exportId).find(".reminder-btn
             // span.statText").text($.i18n.prop('d_reminder_alreadyFail'));

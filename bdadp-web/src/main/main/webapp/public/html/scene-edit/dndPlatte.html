@@ -1,0 +1,938 @@
+<style>
+    /* 设置滚动条的样式 */
+    ::-webkit-scrollbar {
+        width: 7px;
+        height: 7px;
+    }
+
+    /* 滚动槽 */
+    ::-webkit-scrollbar-track {
+    / / -webkit-box-shadow : inset 0 0 6 px rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+    }
+
+    /* 滚动条滑块 */
+    ::-webkit-scrollbar-thumb {
+        opacity: 0.5;
+        border-radius: 15px;
+        background: #999999;
+        -webkit-box-shadow: inset 0 0 6px #999999;
+    }
+
+    ::-webkit-scrollbar-thumb:horizontal {
+        opacity: 0.5;
+        border-radius: 15px;
+        background: #999999;
+        -webkit-box-shadow: inset 0 0 6px #999999;
+    }
+
+    ::-webkit-scrollbar-thumb:window-inactive {
+        background: #999999;
+    }
+
+    .myOverview {
+        position: absolute;
+        width: 180px;
+        height: 90px;
+        top: 10px;
+        background-color: lightgray;
+        z-index: 300; /* make sure its in front */
+        border: solid 2px white;
+        right: 10px;
+        /*/box-shadow: 0px 0px 10px 10px gray;*/
+    }
+
+    .myLegend {
+        position: absolute;
+        width: 180px;
+        height: 30px;
+        z-index: 300; /* make sure its in front */
+        background-color: transparent;
+    }
+
+    .myZoom {
+        position: absolute;
+        width: 10px;
+        height: 110px;
+        z-index: 300; /* make sure its in front */
+        background-color: transparent;
+    }
+
+    .form-textarea-p {
+        width: 60%;
+        margin-left: 28%;
+        margin-top: -23px;
+    }
+
+    @media screen and (min-width: 1400px) {
+        .form-textarea-p {
+            margin-left: 23%;
+        }
+    }
+
+    @media screen and (min-width: 1800px) {
+        .form-textarea-p {
+            margin-left: 20%;
+        }
+    }
+
+    /* CSS for the traditional context menu */
+    .contextMenu {
+        z-index: 300;
+        position: absolute;
+        left: 5px;
+        border: 1px solid #7d7575;
+        background-color: #F5F5F5;
+        display: none;
+        box-shadow: 0 0 10px rgba(0, 0, 0, .4);
+        font-size: 12px;
+        font-family: sans-serif;
+        font-weight: bold;
+        border-radius: 10%;
+        width: 88px;
+    }
+
+    .contextMenu ul {
+        list-style: none;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 0;
+    }
+
+    .contextMenu li a {
+        position: relative;
+        min-width: 60px;
+        color: #888;
+        display: inline-block;
+        padding: 6px;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .contextMenu li:hover {
+        background: transparent;
+        opacity: 0.6;
+    }
+
+    .contextMenu li:hover {
+        color: transparent;
+        opacity: 0.6;
+    }
+
+    .contextMenu li ul li {
+        display: none;
+    }
+
+    .contextMenu li ul li a {
+        position: relative;
+        min-width: 60px;
+        padding: 6px;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .contextMenu li:hover ul li {
+        display: block;
+        margin-left: 0px;
+        margin-top: 0px;
+    }
+
+    .dropzone-top {
+        height: 29px;
+        width: 100%;
+        background-color: #cccccc;
+        background-image: linear-gradient(top, #e1e1e1, #d0ccc7);
+        background-image: -webkit-linear-gradient(top, #e1e1e1, #d0ccc7);
+        border-radius: 4px 4px 0 0;
+    }
+
+    .dropzone-top > div:first-child {
+        width: 100%;
+        height: 100%
+    }
+
+    .dropzone-top div ul {
+        display: inline;
+        list-style: none;
+    }
+
+    .dropzone-top div ul li {
+        font-size: 18px;
+        float: left;
+        margin-left: 15px;
+        margin-top: 4px;
+    }
+
+    .dropzone-top div ul li:hover {
+        cursor: pointer;
+        color: #4F8EF7;
+    }
+
+    .dropzone-top div ul > li:first-child {
+        font-size: 18px;
+        float: left;
+        margin-left: 30px;
+        margin-top: 6px;
+    }
+
+    .dropzone-top div ul > li:nth-child(2) {
+        font-size: 22px;
+        float: left;
+        margin-left: 15px;
+        margin-top: 1px;
+    }
+
+    .dropzone-top div ul > li:nth-child(3) {
+        font-size: 15px;
+        float: left;
+        margin-left: 15px;
+        margin-top: 8px;
+    }
+
+    .dropzone-top div ul > li:nth-child(4) {
+        font-size: 18px;
+        float: left;
+        margin-left: 15px;
+        margin-top: 5px;
+    }
+    .dropzone-top div ul > li:nth-child(5) {
+        font-size: 18px;
+        float: left;
+        margin-left: 15px;
+        margin-top: 7px;
+    }
+
+    .dropzone-top div ul li > span {
+        vertical-align: 10%;
+        font-size: 12px;
+    }
+
+    .dropzone-top div ul li:nth-child(3) > span {
+        font: 12px Arial, "\5b8b\4f53", sans-serif;
+    }
+
+    .dropzone-top div ul li > span:first-child {
+        padding-left: 5px;
+    }
+
+    .dropzone-top div ul li > span:nth-child(2) {
+        vertical-align: 10%;
+        font-size: 12px;
+    }
+
+    .edit-attribute .dropzone-top span {
+        font-size: 13px;
+        /* font-family: 微软雅黑; */
+        vertical-align: -22%;
+        font-weight: 600;
+    }
+
+    .edit-attribute .attribute-panel {
+        border: solid 1px #b3b3b3;
+        width: 100%;
+        height: 350px;
+        background-color: white
+    }
+
+    .data-assembly > .panel > .panel-heading {
+        background-color: transparent;
+    }
+
+    .panel.panel-default > .panel-heading {
+        padding: 6px 15px;
+        background-color: #cccccc;
+        background-image: linear-gradient(top, #e1e1e1, #d0ccc7);
+        background-image: -webkit-linear-gradient(top, #e1e1e1, #d0ccc7);
+        border-radius: 4px 4px 0 0;
+    }
+
+    .panel-heading .panel-title ul {
+        display: inline;
+        list-style: none;
+    }
+
+    .panel-heading .panel-title ul li {
+        font-size: 18px;
+        float: right;
+    }
+
+    .panel-heading .panel-title ul li:first-child {
+        font-size: 16px;
+        float: right;
+        margin-left: 8px;
+    }
+
+    .panel-heading .panel-title ul li:hover {
+        cursor: pointer;
+        color: #4F8EF7;
+    }
+
+    .collapseOne .panel-heading .panel-title ul li:first-child {
+        font-size: 18px;
+        float: left;
+        margin-left: -10px;
+    }
+
+    .collapseThree .panel-heading .panel-title ul li:first-child {
+        font-size: 18px;
+        float: left;
+        margin-left: -10px;
+    }
+
+    .collapseTwo .panel-heading .panel-title ul {
+        display: inline;
+        list-style: none;
+    }
+
+    .collapseTwo .panel-heading .panel-title ul li {
+        font-size: 21px;
+        margin-left: 0px;
+    }
+
+    .collapseTwo .panel-heading .panel-title ul li:first-child {
+        font-size: 18px;
+        float: left;
+        margin-left: -10px;
+    }
+
+    .data-extraction .panel-body {
+        padding-bottom: 0;
+        transition-delay: 0ms;
+        -webkit-transition-delay: 0ms;
+    }
+
+    .data-extraction .panel-body .inner-collapse-panel-body {
+        margin-top: -13px;
+        font-size: 13px;
+        user-select: none;
+        text-align: left;
+    }
+
+    .data-extraction .panel-body .inner-collapse-panel-body ul {
+        list-style: none;
+        margin-left: -28px;
+    }
+
+    .data-extraction .panel-body .inner-collapse-panel-body ul li {
+        margin-top: 5px
+    }
+
+    .data-extraction .panel-body .inner-collapse-panel-body ul li:HOVER {
+        cursor: pointer;
+        background-color: #d0ccc7;
+        opacity: 0.5;
+    }
+
+    .data-import .panel-body {
+        padding-bottom: 0;
+        transition-delay: 0ms;
+        -webkit-transition-delay: 0ms;
+    }
+
+    .data-import .panel-body .inner-collapse-panel-body {
+        margin-top: -13px;
+        font-size: 13px;
+        user-select: none;
+        text-align: left;
+    }
+
+    .data-import .panel-body .inner-collapse-panel-body ul {
+        list-style: none;
+        margin-left: -28px;
+    }
+
+    .data-import .panel-body .inner-collapse-panel-body ul li {
+        margin-top: 5px;
+        transition-delay: 0ms;
+        -webkit-transition-delay: 0ms;
+    }
+
+    .data-import .panel-body .inner-collapse-panel-body ul li:HOVER {
+        cursor: pointer;
+        background-color: #d0ccc7;
+        opacity: 0.5;
+    }
+
+    .data-transfer .panel-body {
+        padding-bottom: 0;
+        transition-delay: 0ms;
+        -webkit-transition-delay: 0ms;
+    }
+
+    .data-transfer .panel-body .inner-collapse-panel-body {
+        margin-top: -13px;
+        font-size: 13px;
+        user-select: none;
+        text-align: left;
+    }
+
+    .data-transfer .panel-body .inner-collapse-panel-body ul {
+        list-style: none;
+        margin-left: -28px;
+    }
+
+    .data-transfer .panel-body .inner-collapse-panel-body ul li {
+        margin-top: 5px
+    }
+
+    .data-transfer .panel-body .inner-collapse-panel-body ul li:HOVER {
+        cursor: pointer;
+        background-color: #d0ccc7;
+        opacity: 0.5;
+    }
+
+    .data-common .panel-body {
+        margin-bottom: -22px;
+        transition-delay: 0ms;
+        -webkit-transition-delay: 0ms;
+    }
+
+    .data-common .panel-body .inner-collapse-panel-body {
+        margin-top: -13px;
+        font-size: 13px;
+        user-select: none;
+        text-align: left;
+    }
+
+    .data-common .panel-body .inner-collapse-panel-body ul {
+        list-style: none;
+        margin-left: -28px;
+    }
+
+    .data-common .panel-body .inner-collapse-panel-body ul li {
+        margin-top: 5px
+    }
+
+    .data-common .panel-body .inner-collapse-panel-body ul li:HOVER {
+        cursor: pointer;
+        background-color: #d0ccc7;
+        opacity: 0.5;
+    }
+
+    /*data-resource*/
+    .data-resource .panel-body {
+        padding-bottom: 0;
+        transition-delay: 0ms;
+        -webkit-transition-delay: 0ms;
+    }
+
+    .data-resource .panel-body .inner-collapse-panel-body {
+        margin-top: -13px;
+        font-size: 13px;
+        user-select: none;
+        text-align: left;
+    }
+
+    .data-resource .panel-body .inner-collapse-panel-body ul {
+        list-style: none;
+        margin-left: -28px;
+    }
+
+    .data-resource .panel-body .inner-collapse-panel-body ul li {
+        margin-top: 5px
+    }
+
+    .data-resource .panel-body .inner-collapse-panel-body ul li:HOVER {
+        cursor: pointer;
+        background-color: #d0ccc7;
+        opacity: 0.5;
+    }
+
+    /*data-handling*/
+    .data-handling .panel-body {
+        padding-bottom: 0;
+        transition-delay: 0ms;
+        -webkit-transition-delay: 0ms;
+    }
+
+    .data-handling .panel-body .inner-collapse-panel-body {
+        margin-top: -13px;
+        font-size: 13px;
+        user-select: none;
+        text-align: left;
+    }
+
+    .data-handling .panel-body .inner-collapse-panel-body ul {
+        list-style: none;
+        margin-left: -28px;
+    }
+
+    .data-handling .panel-body .inner-collapse-panel-body ul li {
+        margin-top: 5px
+    }
+
+    .data-handling .panel-body .inner-collapse-panel-body ul li:HOVER {
+        cursor: pointer;
+        background-color: #d0ccc7;
+        opacity: 0.5;
+    }
+
+    /*data-output*/
+    .data-output .panel-body {
+        padding-bottom: 0;
+        transition-delay: 0ms;
+        -webkit-transition-delay: 0ms;
+    }
+
+    .data-output .panel-body .inner-collapse-panel-body {
+        margin-top: -13px;
+        font-size: 13px;
+        user-select: none;
+        text-align: left;
+    }
+
+    .data-output .panel-body .inner-collapse-panel-body ul {
+        list-style: none;
+        margin-left: -28px;
+    }
+
+    .data-output .panel-body .inner-collapse-panel-body ul li {
+        margin-top: 5px
+    }
+
+    .data-output .panel-body .inner-collapse-panel-body ul li:HOVER {
+        cursor: pointer;
+        background-color: #d0ccc7;
+        opacity: 0.5;
+    }
+
+    /*machine-learning*/
+    .componentList .panel-body {
+        padding-bottom: 0;
+        transition-delay: 0ms;
+        -webkit-transition-delay: 0ms;
+    }
+
+    .componentList .panel-body .inner-collapse-panel-body {
+        margin-top: -13px;
+        font-size: 13px;
+        user-select: none;
+        text-align: left;
+    }
+
+    .componentList .panel-body .inner-collapse-panel-body ul {
+        list-style: none;
+        margin-left: -28px;
+    }
+
+    .componentList .panel-body .inner-collapse-panel-body ul li {
+        margin-top: 5px
+    }
+
+    .componentList .panel-body .inner-collapse-panel-body ul li:HOVER {
+        cursor: pointer;
+        background-color: #d0ccc7;
+        opacity: 0.5;
+    }
+
+
+    .scenario-extraction .panel-body {
+        margin-bottom: -22px;
+        transition-delay: 0ms;
+        -webkit-transition-delay: 0ms;
+    }
+
+    .scenario-extraction .panel-body .inner-collapse-panel-body {
+        margin-top: -13px;
+        font-size: 13px;
+        user-select: none;
+        text-align: left;
+    }
+
+    .scenario-extraction .panel-body .inner-collapse-panel-body ul {
+        list-style: none;
+        margin-left: -28px;
+    }
+
+    .scenario-extraction .panel-body .inner-collapse-panel-body ul li {
+        margin-top: 15px;
+        transition-delay: 0ms;
+        -webkit-transition-delay: 0ms;
+    }
+
+    .scenario-extraction .panel-body .inner-collapse-panel-body ul li:HOVER {
+        cursor: pointer;
+        background-color: #d0ccc7;
+        opacity: 0.5;
+    }
+
+    .search-2 {
+        width: 80%;
+        height: 80%;
+        border: 0;
+        margin-left: -5px
+    }
+
+    @media screen and (max-width: 1400px) {
+        .search-2 {
+            width: 76%;
+        }
+    }
+</style>
+<div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <div>
+                    <input class="input-sm search-2" placeholder="" type="text"/>
+                    <ul style="margin-left: -20%;">
+                        <li class="ion-chevron-up"></li>
+                        <!-- <li class="ion-android-add"></li>-->
+                        <li class="ion-android-search"></li>
+                    </ul>
+                </div>
+            </h4>
+        </div>
+        <div class="panel-collapse collapse in collapseOne">
+            <div class="panel-body">
+                <div>
+                    <div class="panel-group scenario-assembly">
+                        <div class="panel">
+                            <div class="panel-heading" style="margin-top:-16px;">
+                                <h4 class="panel-title">
+                                    <div class="scenario-extr-title">
+                                        <ul style="margin-right: -30px;">
+                                            <li class="ion-arrow-right-b"></li>
+                                        </ul>
+                                        <span
+                                            style="font-weight: bold;;font-size: 12px;text-transform: capitalize;padding-left: 4px;"
+                                            class="edit_sceneComponent"></span>
+                                    </div>
+                                </h4>
+                            </div>
+                            <div class="panel-collapse collapse scenario-extraction" aria-expanded = "true">
+                                <div class="panel-body">
+                                    <div class="inner-collapse-panel-body">
+                                        <ul class="scenario-component">
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">   <!--second panel-->
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <div>
+                    <ul>
+                        <li class="ion-chevron-up"></li>
+                    </ul>
+                </div>
+            </h4>
+        </div>
+        <div class="panel-collapse collapse in collapseTwo">
+            <div class="panel-body">
+                <div>
+                    <div class="panel-group data-assembly">
+
+                        <div class="panel">
+                            <div class="panel-heading" style="margin-top:-16px;">
+                                <h4 class="panel-title">
+                                    <div class="data-extr-title">
+                                        <ul style="margin-right: -30px;">
+                                            <li class="ion-arrow-right-b"></li>
+                                        </ul>
+                                        <span
+                                            style="font-weight: bold;;font-size: 12px;text-transform: capitalize;padding-left: 4px;"
+                                            class="edit_dataExtraction"></span>
+                                    </div>
+                                </h4>
+                            </div>
+                            <div class="panel-collapse collapse data-extraction">
+                                <div class="panel-body">
+                                    <div class="inner-collapse-panel-body">
+                                        <ul>
+                                            <!--   <li class="draggable" draggable="true">
+                                                  <img draggable="false" data-pid="20160827" src="./img/component/small/extraction/FTP.png" style="width:20px;height: 20px;margin-right: 5px;vertical-align: bottom"/>
+                                                  <span>FTP</span>
+                                              </li> -->
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <div class="data-import-title">
+                                        <ul style="margin-right: -30px;">
+                                            <li class="ion-arrow-right-b"></li>
+                                        </ul>
+                                        <span
+                                            style="font-weight: bold;;font-size: 12px;text-transform: capitalize;padding-left: 4px;"
+                                            class="edit_dataImport"></span>
+                                    </div>
+                                </h4>
+                            </div>
+                            <div class="panel-collapse collapse data-import">
+                                <div class="panel-body">
+                                    <div class="inner-collapse-panel-body">
+                                        <ul>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <div class="data-transfer-title">
+                                        <ul style="margin-right: -30px;">
+                                            <li class="ion-arrow-right-b"></li>
+                                        </ul>
+                                        <span
+                                            style="font-weight: bold;;font-size: 12px;text-transform: capitalize;padding-left: 4px;"
+                                            class="edit_dataConversion"></span>
+                                    </div>
+                                </h4>
+                            </div>
+                            <div class="panel-collapse collapse data-transfer">
+                                <div class="panel-body">
+                                    <div class="inner-collapse-panel-body">
+                                        <ul>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <div class="data-common-title">
+                                        <ul style="margin-right: -30px;">
+                                            <li class="ion-arrow-right-b"></li>
+                                        </ul>
+                                        <span
+                                            style="font-weight: bold;;font-size: 12px;text-transform: capitalize;padding-left: 4px;"
+                                            class="edit_generalControl"></span>
+                                    </div>
+                                </h4>
+                            </div>
+                            <div class="panel-collapse collapse data-common">
+                                <div class="panel-body">
+                                    <div class="inner-collapse-panel-body">
+                                        <ul>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading customer">
+            <h4 class="panel-title">
+                <div>
+                    <ul>
+                        <li class="ion-chevron-up"></li>
+                        <!--  <li class="ion-android-menu"></li>
+                          <li class="ion-android-search"></li>-->
+                    </ul>
+                </div>
+            </h4>
+        </div>
+        <div class="panel-collapse collapse in collapseThree">
+            <div class="panel-body">
+                <div>
+                    <div class="panel-group customer-assembly">
+                        <div class="panel">
+                            <div class="panel-heading" style="margin-top:-16px;">
+                                <h4 class="panel-title">
+                                    <div class="data-resource-title">
+                                        <ul style="margin-right: -30px;">
+                                            <li class="ion-arrow-right-b"></li>
+                                        </ul>
+                                        <span
+                                            style="font-weight: bold;;font-size: 12px;text-transform: capitalize;padding-left: 4px;"
+                                            class="edit_dataResource"></span>
+                                    </div>
+                                </h4>
+                            </div>
+                            <div class="panel-collapse collapse data-resource">
+                                <div class="panel-body">
+                                    <div class="inner-collapse-panel-body">
+                                        <ul>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <div class="data-handling-title">
+                                        <ul style="margin-right: -30px;">
+                                            <li class="ion-arrow-right-b"></li>
+                                        </ul>
+                                        <span
+                                            style="font-weight: bold;;font-size: 12px;text-transform: capitalize;padding-left: 4px;"
+                                            class="edit_dataHandling"></span>
+                                    </div>
+                                </h4>
+                            </div>
+                            <div class="panel-collapse collapse data-handling">
+                                <div class="panel-body">
+                                    <div class="inner-collapse-panel-body">
+                                        <ul>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <div class="data-output-title">
+                                        <ul style="margin-right: -30px;">
+                                            <li class="ion-arrow-right-b"></li>
+                                        </ul>
+                                        <span
+                                            style="font-weight: bold;;font-size: 12px;text-transform: capitalize;padding-left: 4px;"
+                                            class="edit_dataOutput"></span>
+                                    </div>
+                                </h4>
+                            </div>
+                            <div class="panel-collapse collapse data-output">
+                                <div class="panel-body">
+                                    <div class="inner-collapse-panel-body">
+                                        <ul>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--ML-->
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <div class="machine-learning-title">
+                                        <ul style="margin-right: -30px;">
+                                            <li class="ion-arrow-right-b"></li>
+                                        </ul>
+                                        <span
+                                                style="font-weight: bold;;font-size: 12px;text-transform: capitalize;padding-left: 4px;"
+                                                class="edit_machineLearning"></span>
+                                    </div>
+                                </h4>
+                            </div>
+                            <div class="panel-collapse collapse machine-learning componentList">
+                                <div class="panel-body">
+                                    <div class="inner-collapse-panel-body">
+                                        <ul>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--PA-->
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <div class="predictive-title">
+                                        <ul style="margin-right: -30px;">
+                                            <li class="ion-arrow-right-b"></li>
+                                        </ul>
+                                        <span
+                                                style="font-weight: bold;;font-size: 12px;text-transform: capitalize;padding-left: 4px;"
+                                                class="edit_predictive"></span>
+                                    </div>
+                                </h4>
+                            </div>
+                            <div class="panel-collapse collapse predictive componentList">
+                                <div class="panel-body">
+                                    <div class="inner-collapse-panel-body">
+                                        <ul>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--visual-->
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <div class="visualization-title">
+                                        <ul style="margin-right: -30px;">
+                                            <li class="ion-arrow-right-b"></li>
+                                        </ul>
+                                        <span
+                                                style="font-weight: bold;;font-size: 12px;text-transform: capitalize;padding-left: 4px;"
+                                                class="edit_visualization"></span>
+                                    </div>
+                                </h4>
+                            </div>
+                            <div class="panel-collapse collapse visualization componentList">
+                                <div class="panel-body">
+                                    <div class="inner-collapse-panel-body">
+                                        <ul>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="contextMenu">
+    <ul>
+        <li class="cut" style="border-bottom: 1px"><a href="#" target="_self"><i class="icon-cut"
+                                                                                 style="margin-right: 8px;"></i><span
+            class="d_span_dnd_cut"></span></a></li>
+        <li class="copy" style="border-bottom: 1px"><a href="#" target="_self"><i class="icon-copy"
+                                                                                  style="margin-right: 8px;"></i><span
+            class="d_span_dnd_copy"></span></a></li>
+        <li class="paste" style="border-bottom: 1px"><a href="#" target="_self"><i
+            class="icon-paste"
+            style="margin-right: 8px;"></i><span
+            class="d_span_dnd_paste"></span></a></li>
+        <li class="delete" style="border-bottom: 1px"><a href="#" target="_self"><i
+            class="icon-trash"
+            style="margin-right: 8px;"></i><span
+            class="d_span_dnd_delete"></span></a></li>
+        <!--  <li class="show_log" style="border-bottom: 1px"><a href="#" target="_self">日志</a></li>-->
+    </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

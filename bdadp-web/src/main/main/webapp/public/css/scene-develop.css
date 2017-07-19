@@ -1,0 +1,350 @@
+@charset "UTF-8";
+.navbar-brand:focus {
+    background: #324a6f;
+    outline: none;
+}
+
+.scene-content-header {
+    height: 29px;
+    width: 100%;
+    background-color: #ccc;
+    background-image: linear-gradient(top, #e6e6e1, #d0ccc7);
+    background-image: -webkit-linear-gradient(top, #e6e6e6, #d9d9d9);
+    border-radius: 4px 4px 0 0;
+}
+
+/*scene left toolbar*/
+.scene-content-header div.header-tools {
+    margin-left: 10px;
+    font-size: 14px;
+    font-weight: lighter;
+    font-family: "微软雅黑";
+}
+
+.scene-content-header.scene-left-toolbar div.scene-left-tool {
+    float: left;
+}
+
+.scene-content-header.scene-left-toolbar div.scene-left-tool[name="scene-checkall"] {
+    margin-top: 2px;
+}
+
+.scene-content-header.scene-left-toolbar div.scene-left-tool[name="scene-checkall"] {
+    margin-top: 2px;
+}
+
+.scene-content-header.scene-left-toolbar div.scene-left-tool[name="scene-delete"] span {
+    font-size: 14px;
+}
+
+.scene-content-header.scene-left-toolbar div.scene-left-tool[name="scene-delete"] {
+    margin-top: 1px;
+}
+
+.scene-content-header.scene-left-toolbar div.scene-left-tool:hover {
+    color: #69bfd8;
+}
+
+.scene-content-header div.header-tools span {
+    margin-right: 6px;
+    marign-bottom: 0px;
+    line-height: 29px;
+    cursor: pointer;
+    font-size: 13px;;
+}
+
+.scene-content-header div.header-tools label {
+    margin-right: 12px;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: "微软雅黑";
+    font-weight: normal;
+}
+
+.scene-right-toolbar {
+    line-height: 29px;
+    font-size: 14px;
+    font-family: "微软雅黑";
+    color: #323232;
+    font-weight: normal;
+}
+
+.scene-right-toolbar div {
+    line-height: 29px;
+    margin-right: 10px;
+    padding-left: 10px;
+}
+
+.scene-right-toolbar div span {
+    margin-right: 6px;
+}
+
+.scene-right-toolbar div label {
+    margin-right: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: "微软雅黑";
+    font-weight: normal;
+}
+
+.search-underline {
+    width: 130px;
+    height: 29px;
+    border-bottom: none;
+    margin-bottom: 2px;
+    line-height: 29px;
+    background-color: transparent !important;
+    outline: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-size: 12px;
+}
+
+/*scene right toolbar*/
+.scene-content-header.scene-right-toolbar div {
+    cursor: pointer;
+}
+
+.scene-content-header.scene-right-toolbar div:hover {
+    color: #69bfd8;
+}
+
+.scene-content-main {
+    padding: 20px 9px;
+    background-color: #fff;
+}
+
+.scene-content-inner {
+    background-color: #ECF0F5;
+    width: 100%;
+    height: 500px;
+}
+
+.row-no-margin {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.scene-content-inner {
+    padding: 30px 25px;
+}
+
+.category-img {
+    width: 80%;
+    height: auto;
+    max-width: 80%;
+}
+
+.scene-add {
+    background: #ffffff;
+    padding: 6px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.scene-add:hover {
+    cursor: pointer;
+}
+
+.scene-category-main {
+    position: relative;
+    border-radius: 4px;
+    /*height: 140px;*/
+    background-color: #fff;
+    /*overflow: hidden;*/
+}
+
+.scene-category-main .close {
+    position: absolute;
+    right: 5px;
+    top: -2px;
+}
+
+.scene-category-main .category-title {
+    background-color: #DCDCDC;
+    border-radius: 3px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 8px;
+}
+
+.scene-addcategory-mask {
+    position: absolute;
+    z-index: 8;
+    border-radius: 4px;
+    background-color: rgba(91, 98, 105, 0.55);
+    opacity: 1;
+    display: none;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.scene-addcategory-mask span {
+    font-size: 25px;
+    color: #ffffff;
+    background-color: #7B9BF9;
+    border-radius: 90px;
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    text-align: center;
+    z-index: 9;
+    display: none;
+    cursor: pointer;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+}
+
+.scene-addcategory-mask span:hover {
+    color: #c0c0c0;
+}
+
+.scene-addcategory-mask span.fa-eye {
+    margin-left: 30%;
+    margin-top: 20%;
+}
+
+.scene-addcategory-mask span.ion-close {
+    margin-right: 30%;
+    margin-top: 20%;
+}
+
+.xdsoft_dialog_content span.ion-close {
+    position: absolute;
+    cursor: pointer;
+    right: 11px;
+    background: #C7C7C7;;
+    width: 15px;
+    height: 15px;
+    line-height: 16px;
+    border-radius: 90px;
+}
+
+.row-no-padding {
+    padding-right: 0px;
+    padding-left: 0px;
+    text-align: center;
+}
+
+.scene-content-inner .scene-add:hover {
+    cursor: pointer;
+    background-color: #BFBFBF;
+
+}
+
+.modal-content .modal-header {
+    background-color: #F3F3F3;
+}
+
+.modal-content {
+    width: 460px;
+    background-color: #FBFBFB;
+}
+
+.scene-category-main .category-contain {
+    height: 101px;
+    padding: 0px 8px;
+}
+
+.scene-category-main .category-contain .row-no-padding {
+    margin-bottom: 9px;
+}
+
+.picbox {
+    position: relative;
+    overflow: hidden;
+    cursor: move;
+    box-shadow: 4px 4px 12px #B0B0B0;
+    height: 160px;
+    width: 164px;
+    padding: 0px;
+    border: 1px solid #aaa;
+    background: #fff;
+}
+
+#modifySceneForm .picbox {
+    position: relative;
+    overflow: hidden;
+    cursor: move;
+    box-shadow: 4px 4px 12px #B0B0B0;
+    height: 160px;
+    width: 164px;
+    padding: 0px;
+    border: 1px solid #aaa;
+    background: #fff;
+}
+
+.picbox .thumbBox {
+    position: absolute;
+    height: 160px;
+    width: 164px;
+    box-sizing: border-box;
+    border: 1px solid rgb(102, 102, 102);
+    box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.5);
+    background: none repeat scroll 0% 0% transparent;
+}
+
+/*nav tabs*/
+.chrome-tabs * {
+    -webkit-user-select: none;
+    cursor: default;
+    font-family: "微软雅黑";
+    font-size: 14px;
+    line-height: 13px;
+}
+
+#editSceneForm .sceneName {
+    margin-bottom: 23%;
+    font-size: 15px;
+}
+
+#editSceneForm .fileLoad {
+    background: #f2f2f2;
+    width: 111px;
+    height: 36px;
+    font-size: 14px;
+    display: inline;
+    -webkit-padding-right: 6px;
+}
+
+#editSceneForm .choiceImg {
+    height: 36px;
+    background-color: #F1F1F1;
+    color: #525252;
+    border: 1px solid #C7C7C7;
+    margin-bottom: 4px;
+    margin-left: 8px;
+    width: 81px;
+    padding: 6px 6px;
+}
+
+#editSceneForm .customWrap {
+    width: 204px;
+    height: 158px;
+    border: 1px solid #ccc;
+    display: none;
+    position: absolute;
+    left: 6%;
+    top: 101%;
+    background: #f2f2f2;
+    z-index: 99;
+    overflow-y: scroll;
+}
+
+.change-fileload {
+    border-radius: 4px;
+    margin-bottom: 4px;
+}
+
+/*场景导入表格样式*/
+#importTableId tbody tr:hover {
+    background-color: #e6e6e6;
+}
+
+

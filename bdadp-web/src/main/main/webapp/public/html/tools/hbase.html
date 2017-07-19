@@ -1,0 +1,97 @@
+<div class="col-sm-4 col-md-4"
+     style="background:white;height:100%;padding-left: 5%;padding-right: 3%">
+    <div class="col-sm-11" id="clusterName"
+         style="height: 8%;text-align: center;font-size: 25px;font-weight: 200;padding-top: 10px;">
+
+    </div>
+    <div class="col-sm-11" style="margin:0px;padding:0px;height:85%">
+        <label class="scene-content-header toolsFont hbaseTableName">
+            <span>HBase Tables</span>
+
+        </label>
+
+        <div style="border: 1px solid #cacaca;width: 100%;height: 93%">
+
+            <div class="col-md-12 tree" style="padding: 0px;overflow: auto;height: 100%">
+                <ul id="tableTreee" class="nav nav-stacked" style="width: 100%;">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="htab_title" class="col-sm-8 col-md-8" style="height:100%;">
+    <span class="col-md-12 toolsTableName"
+          style="height: 8%;padding-top: 2%" id="htable_name">No-Table-Selected</span>
+
+    <div class="btn-group" style="height: 6%;">
+        <button id="hbaseQuery" type="button" class="btn btn-default"
+                style="width: 150px;line-height: 15px"><span id="I_span_tool_query"></span>
+        </button>
+        <button id="hbaseScript" type="button" class="btn btn-default"
+                style="width: 150px;line-height: 15px"><span
+            id="I_span_tool_scriptActuators"></span>
+        </button>
+    </div>
+    <div class="tab-content col-md-12" style="height:86%;width:100%;padding-left: 0px;">
+        <div class="tab-pane active" id="tab1" style="overflow-y:auto;height:100%;width:100%;">
+            <div class="col-md-12"
+                 style="border:0px solid #DCDCDC;border-top:0px;height:100%;padding-left: 0px;">
+                <form class="" style="height: 12%;">
+                    <div class="" style="padding-top:2%;">
+                        <div class="col-md-1 toolsTableName" style="padding: 0px;">Rowkey:</div>
+                        <div class="col-md-10">
+                            <input id="startkey" type="text" placeholder="startkey"
+                                   class="hbaseInput" style="width: 30%">
+                            <panel> -</panel>
+                            <input id="endkey" type="text" placeholder="endkey" class="hbaseInput"
+                                   style="width: 30%">
+                            <button id="findHbaseTables" type="button" class="btn btn-default"
+                                    style="margin-left:2%;line-height: 1px">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <hr style="border:1px solid #cacaca;margin-top: 0px">
+                <div style="height: 78%" id="queryTable">
+
+                </div>
+                <!-- <div align="left" style="height: 10%;text-align: center;">
+                     <ul id="pagination" class="pagination">
+                     </ul>
+                 </div>-->
+            </div>
+        </div>
+        <div class="tab-pane" id="tab2" style="height:100%;width:100%;display: none;">
+            <form style="height:45%;width:100%;">
+                <div style="height:85%;width:100%;padding-top: 3%">
+                    <div style="height:85%;width:100%;">
+                        <textarea id="shellString" style="height:100%;width:96%;resize: none;"
+                                  name="hShellcontext" class="form-control toolsTextColor"
+                                  placeholder="Input hbase shell">
+
+                        </textarea>
+                    </div>
+                </div>
+                <div class="" style="margin-left:69%;">
+                    <button type="button" id="executeShell" class="btn btn-primary toolsButton">
+                        <span id="I_span_hbase_execute"></span>
+                    </button>
+                    <button type="button" id="resetShell" class="btn btn-primary toolsButton"
+                            style="margin-left:10%;"><span id="I_span_hbase_reset"></span>
+                    </button>
+                </div>
+            </form>
+            <!-- execute results display -->
+            <div style="height:46%;width:100%;">
+                <div class="col-md-12 toolsFont" style="height:10%;"><span
+                    id="I_span_hbase_executionResult"></span></div>
+                <div id="shellRsp" class="toolsTextColor"
+                     style="width:96%;height:88%;overflow:auto;">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

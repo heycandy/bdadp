@@ -1,0 +1,158 @@
+@charset "UTF-8";
+.scene-name {
+    color: #646464;
+    font-size: 12px;
+    margin-top: 8px;
+    margin-bottom: -2px;
+}
+h4 {
+    text-transform: capitalize;
+    letter-spacing: 0;
+}
+.element-item .img-toolbar {
+    display: none;
+    color: #ffffff;
+    position: absolute;
+    bottom: -4px;
+    width: 159px;
+    left: 0px;
+    padding-left: 6px;
+    padding-right: 5px;
+    background: #7b9bf9;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    padding-top: 3px;
+    z-index: 2;
+}
+
+.element-item .img-toolbar input[type='checkbox'], .element-item .img-toolbar label {
+    cursor: pointer;
+}
+
+.scene-up-down {
+    cursor: pointer;
+}
+
+.scene-content-main .isotope .dropdown-menu {
+    min-width: 94px;
+}
+
+.scene-time {
+    color: #7b9bf9;
+}
+
+.scene-time {
+    margin-top: 6px;
+}
+
+.scene-check {
+    display: none;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    border-top-right-radius: 4px;
+    width: 40px;
+    height: 40px;
+    background: #7b9bf9;
+    border-bottom-left-radius: 10px;
+    text-align: center;
+    line-height: 40px;
+    color: white;
+    font-size: 19px;
+    z-index: 1;
+}
+
+.scene-check:hover {
+    cursor: pointer;
+}
+
+.element-item {
+    position: relative;
+    border: 1px solid #F7F0F0;
+}
+
+.scene-common {
+    position: relative;
+    width: 159px;
+    height: 155px;
+    background-size: cover;
+    border-radius: 4px;
+    /*border: 1px dashed rgba(170, 170, 170, 0.1);*/
+}
+
+.scene-common:hover {
+    background-color: #f5f5f5
+}
+
+/*.scene-img {
+    background: url("../img/scene-develop/img1.png") no-repeat center center;
+}*/
+
+.add-img {
+    background: url("../img/scene-develop/add.png") no-repeat center center;
+}
+
+.add-img:hover {
+    cursor: pointer;
+}
+
+.scene-cover-black {
+    position: absolute;
+    top: 10px;
+    left: 9px;
+    right: 11px;
+    bottom: 56px;
+    z-index: 1;
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: none;
+    overflow: hidden;
+}
+
+/**/
+.element-item .scene-add {
+    width: 165px;
+    height: 160px;
+    margin: 0px;
+    padding: 0px;
+    border: 1px dashed #b4b4b4;
+    background-color: #f7f7f7;
+    cursor: pointer;
+}
+
+.element-item .scene-add:hover {
+    width: 165px;
+    height: 160px;
+    margin: 0px;
+    padding: 0px;
+    border: 1px dashed #B9B9B9;
+    background-color: #F1F1F1;
+    cursor: pointer;
+}
+
+.element-item-self {
+    float: left;
+    width: 187px;
+    height: 226px;
+    margin: 5px;
+    padding: 10px;
+    background: white;
+    color: #262524;
+    border-radius: 5px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+/*bootstrap*/
+.glyphicon {
+    word-spacing: -9px;
+    text-align: justify;
+}
+
+.monitor-right-content .tab-pane label {
+    width: 100px;
+    text-align: right;
+    margin-right: 20px;
+}
+
+

@@ -1,0 +1,69 @@
+<form id="addUserForm" class="form-inline">
+    <div class="row addUser">
+        <div class="form-group  col-sm-12 col-md-12 title">
+            <label class="" id="I_label_addUser_addUser"></label>
+            <hr/>
+        </div>
+        <div class="form-group col-sm-6 col-md-6 content" style="display: none;">
+            <div class="row">
+                <div class="col-sm-12">
+                    <label class="control-label col-sm-4" id="I_label_addUser_userCode"
+                           style="text-align: right"></label>
+                    <input class="form-control number col-sm-8" type="text" name="number" value="0"
+                           disabled/>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-sm-6 col-md-6 content">
+            <div class="row">
+                <div class="col-sm-12">
+                    <label class="control-label col-sm-4" id="I_label_addUser_userName"
+                           style="text-align: right"></label>
+                    <input class="form-control userName col-sm-8" type="text" name="userName"/>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-sm-6 col-md-6 content">
+            <div class="row">
+                <div class="col-sm-12">
+                    <label class="control-label col-sm-4" id="I_label_addUser_userPassword"
+                           style="text-align: right"></label>
+                    <input class="form-control userPwd col-sm-8" type="password" name="userPwd"/>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-sm-6 col-md-6 content">
+            <div class="row">
+                <div class="col-sm-12">
+                    <label class="control-label col-sm-4" id="I_label_addUser_confirmPassword"
+                           style="text-align: right"></label>
+                    <input class="form-control userPwd col-sm-8" type="password" name="confirmPwd"/>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-sm-6 col-md-6 content">
+            <div class="row">
+                <div class="col-sm-12">
+                    <label class="control-label col-sm-4" style=""
+                           id="I_label_addUser_userRole"></label>
+
+                    <select class="form-control roleId col-sm-8" name="roleId"
+                            style="width: 60%;"></select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-sm-6 col-md-6 content">
+            <div class="row">
+                <div class="col-sm-12">
+                    <label class="control-label col-sm-4" id="I_label_addUser_userDescribe"
+                           style="text-align: right;line-height:118px;"></label>
+                    <textarea class="form-control userDesc col-sm-8" name="userDesc" rows="6"
+                              style="resize: none;"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    settings.interFun();
+</script>

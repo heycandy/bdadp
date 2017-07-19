@@ -58,13 +58,13 @@ public class ScenarioGraphDagServiceImpl implements ScenarioGraphDagService {
     private ComponentService componentService;
 
     public ScenarioGraphDAG updateScenarioGraph(ScenarioGraphDAG scenarioGraphDAG)
-            throws ScenarioServiceException {
+        throws ScenarioServiceException {
         return updateScenarioGraph(scenarioGraphDAG, true);
     }
 
     @Override
     public ScenarioGraphDAG updateScenarioGraph(ScenarioGraphDAG scenarioGraphDAG, boolean isResolve)
-            throws ScenarioServiceException {
+        throws ScenarioServiceException {
         ScenarioServiceAssert.nonExistsGraph(scenarioGraphDAG.getScenarioId() == null);
         String graphId = scenarioGraphDAG.getGraphId();
 
@@ -106,26 +106,26 @@ public class ScenarioGraphDagServiceImpl implements ScenarioGraphDagService {
                 List<TaskConfig> taskConfigs = task.getTaskConfigs();
                 if (!taskConfigs.isEmpty()) {
                     Iterable<ComponentConfig> elements =
-                            componentService.findComponentConfigs(task.getRelationId(), language);
+                        componentService.findComponentConfigs(task.getRelationId(), language);
                     List<ComponentConfig> list = Lists.newArrayList(elements);
                     for (TaskConfig taskConfig : taskConfigs) {
                         StreamSupport.stream(list)
-                                .filter(c -> c.getParamId().equals(taskConfig.getParamId()))
-                                .findFirst()
-                                .ifPresent(taskConfig::setComponentConfig);
+                            .filter(c -> c.getParamId().equals(taskConfig.getParamId()))
+                            .findFirst()
+                            .ifPresent(taskConfig::setComponentConfig);
 
                     }
                 }
 
                 List<TaskConfig> sortedByOrderId = StreamSupport.stream(taskConfigs)
-                        .sorted((o1, o2) -> {
-                            if (o1 == null || o1.getComponentConfig() == null ||
-                                    o2 == null || o2.getComponentConfig() == null) {
-                                return 0;
-                            } else {
-                                return o1.getComponentConfig().getOrderId() - o2.getComponentConfig().getOrderId();
-                            }
-                        }).collect(Collectors.toList());
+                    .sorted((o1, o2) -> {
+                        if (o1 == null || o1.getComponentConfig() == null ||
+                            o2 == null || o2.getComponentConfig() == null) {
+                            return 0;
+                        } else {
+                            return o1.getComponentConfig().getOrderId() - o2.getComponentConfig().getOrderId();
+                        }
+                    }).collect(Collectors.toList());
 
                 task.setTaskConfigs(sortedByOrderId);
             }
@@ -143,13 +143,13 @@ public class ScenarioGraphDagServiceImpl implements ScenarioGraphDagService {
 
     @Override
     public ScenarioGraphDAG createScenarioGraph(ScenarioGraphDAG scenarioGraphDAG)
-            throws ScenarioServiceException {
+        throws ScenarioServiceException {
         return createScenarioGraph(scenarioGraphDAG, true);
     }
 
     @Override
     public ScenarioGraphDAG createScenarioGraph(ScenarioGraphDAG scenarioGraphDAG, boolean isResolve)
-            throws ScenarioServiceException {
+        throws ScenarioServiceException {
         if (isResolve) {
             isCycleDependency(scenarioGraphDAG);
         }
@@ -178,14 +178,14 @@ public class ScenarioGraphDagServiceImpl implements ScenarioGraphDagService {
         scenarioGraphDAG.setGraphId(graphId);
         scenarioGraphDAG.setVersionId(versionId);
 
-      List<ScenarioGraphEdge> edges = scenarioGraphDAG.getGraphEdges();
-      for (int i = 0; i < edges.size(); i++) {
-        ScenarioGraphEdge edge = edges.get(i);
+        List<ScenarioGraphEdge> edges = scenarioGraphDAG.getGraphEdges();
+        for (int i = 0; i < edges.size(); i++) {
+            ScenarioGraphEdge edge = edges.get(i);
 
             String edgeId = UUID.randomUUID().toString();
 
             edge.setEdgeId(edgeId);
-        edge.setOrderId(i);
+            edge.setOrderId(i);
             edge.setCreateTime(new Date());
             edge.setGraphId(graphId);
         }
@@ -255,10 +255,10 @@ public class ScenarioGraphDagServiceImpl implements ScenarioGraphDagService {
             int index = visited.indexOf(relationId);
 
             String args = StreamSupport.stream(visited)
-                    .skip(index)
-                    .map(s -> scenarioDao.findOne(s).getScenarioName())
-                    .reduce((s1, s2) -> s1 + " -> " + s2)
-                    .orElse("");
+                .skip(index)
+                .map(s -> scenarioDao.findOne(s).getScenarioName())
+                .reduce((s1, s2) -> s1 + " -> " + s2)
+                .orElse("");
 
             ScenarioServiceAssert.isCycleDependency(true, args);
         }

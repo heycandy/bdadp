@@ -1,0 +1,151 @@
+@charset "UTF-8";
+#header-reminder {
+    width: 300px;
+    margin-top: 50%;
+    padding: 0;
+    margin-right: -115%;
+    font-size: 12px;
+}
+
+#header-reminder i {
+    font-style: normal;
+}
+
+.dropdown-menu > li > a {
+    padding: 0px 20px;
+    padding-top: 5px;
+}
+
+.reminder-scenario {
+    list-style: none;
+    overflow: auto;
+    height: 365px;
+}
+
+
+#export-wrap {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+    font-style: normal;
+
+}
+
+/*.reminder-scenario li a:hover {*/
+    /*color: #fff;*/
+    /*text-decoration: none;*/
+    /*background-color: #f5f5f5;*/
+/*}*/
+
+.reminder-bell {
+    position: relative;
+}
+
+.reminder-bell span {
+    background-color: red;
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 11px;
+}
+
+#header-reminder li {
+    border-bottom: 1px solid #f5f5f5;
+}
+
+#header-reminder li:hover {
+    background-color: #f5f5f5;
+}
+
+.progress-tiao {
+    height: 10px;
+    margin-bottom: 0;
+}
+
+.reminder-btn {
+    padding: 10px 0;
+}
+
+.reminder-btn button {
+    background-color: #446087;
+    border: 0;
+    font-size: 12px;
+    padding: 0;
+    color: #FFF;
+    width: 48px;
+    margin-top: -3px;
+}
+.reminder-btn a {
+    background-color: #446087;
+    border-radius: 4px;
+    margin-left: 10px;
+    text-align: center;
+    font-size: 12px;
+    display: inline-block;
+    height: 17px;
+    color: #FFF;
+    width: 48px;
+    text-decoration:none;
+}
+
+.reminder-btn .reminder-download {
+    background-color: #ccc;
+    color: #fff;
+    cursor: context-menu;
+}
+
+/*.reminder-btn .reminder-download:hover {*/
+    /*background-color: #d2d4d9;*/
+/*}*/
+
+.reminder-btn .reminder-download a:hover {
+    background-color: #446087;
+}
+
+.reminder-down {
+    position: absolute;
+    height: 0;
+    width: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 12px solid #fff;
+    top: -2%;
+    left: 74%;
+    z-index: -5;
+}
+
+.reminder-btn .exportDownload a {
+    padding: 0 2px;
+}
+
+.scene-preview .scene-preview-title li {
+    float: left;
+    list-style: none;
+    line-height: 45px;
+    text-align: center;
+    width: 92px;
+    margin-right: 85px !important;
+    font-size: 14px;
+
+}
+
+.reminder-btn .statText {
+    display: inline-block;
+    color: red;
+    width: 145px;
+}
+
+.export-wrap .statwidth {
+    display: inline-block;
+    width: 215px;
+}
+input::-ms-clear { display: none; }

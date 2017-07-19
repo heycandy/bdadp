@@ -1,0 +1,203 @@
+<div class="container-fuild dispatch">
+  <div class="row dispatch_content">
+    <div class="col-md-9 col-sm-9 col-xs-9 dispatch_left">
+      <div class="scene-content-header scene-left-toolbar dispatch-left-toolbar">
+        <div class="header-tools">
+          <div name="dispatch-checkall" class="scene-left-tool dispatch-left-tool"><span
+              class="ion-android-checkbox-outline-blank" id="allCheck"></span><label
+              id="I_label_disp_selectall"></label></div>
+          <div name="dispatch-inverse" class="scene-left-tool dispatch-left-tool"><span
+              class="iconfont tab-icon" id="inverse">&#xe74a;</span><label
+              id="I_label_disp_inverse"></label></div>
+          <div name="dispatch-online" class="scene-left-tool dispatch-left-tool"><span
+              class="glyphicon glyphicon-circle-arrow-up"></span><label
+              id="I_label_disp_goonline"></label></div>
+          <div name="dispatch-downline" class="scene-left-tool dispatch-left-tool"><span
+              class=" glyphicon glyphicon glyphicon-circle-arrow-down"></span><label
+              id="I_label_disp_offline"></label></div>
+          <div name="dispatch-search" class="scene-left-tool dispatch-left-tool"><span
+              class="ion-ios-search-strong"></span><input class="search-underline" placeholder=""/>
+          </div>
+
+          <div class="pull-right dispatch-left-tool" name="dispatch-refresh">
+            <span class="ion-refresh"></span><label id="I_label_disp_refresh"></label>
+          </div>
+        </div>
+            </div>
+      <div class="sence-content-main sence-content-left" id="dispatch-istop-left">
+        <!-- data-category -->
+        <div id="dispatch-isotope" class="dispatch-isotope"></div>
+            </div>
+    </div>
+    <!-----------------------------------left is over-->
+    <div class="dispatch_right col-md-3 col-sm-3 col-xs-3">
+      <div class="dispatch right-header scene-content-header"
+           id="I_label_disp_scheduleattribute"></div>
+      <div class="dispatch right_content">
+        <div class="dispatch right-form">
+          <form class="form-horizontal dispatch-content" id="dispatchFormId" role="form">
+            <div class="form-group" style="margin-top: 0px;margin-left: 12px;margin-right: 0px;">
+              <label class="col-sm-8" for="sceneNameInputtestarea"
+                     style="padding-left: 0px; padding-bottom: 5px;"
+                     name="sceneNameLabel" id="I_label_disp_scenename"></label>
+                            <textarea class="form-control" id="sceneNameInputtestarea"
+                                      style="resize: none;"
+                                      disabled></textarea>
+            </div>
+            <div class="form-group" style="display: none">
+              <label for="AssociationClusterInputText" class="col-sm-4 control-label"
+                     style="text-align: left;padding-top: 4px;"
+                     id="I_label_disp_associationCluster"></label>
+
+              <div class="col-sm-8" style="padding-left: 0">
+                <select class="form-control" id="AssociationClusterInputText"></select>
+              </div>
+            </div>
+            <div class="form-group" style="display: none">
+              <label for="frontSeniorInputText" class="col-sm-4 control-label"
+                     style="text-align: left;padding-top: 4px; "
+                     id="I_label_disp_frontScene"></label>
+
+              <div class="col-sm-8" style="padding-left: 0">
+                <select class="form-control" id="frontSeniorInputText"></select>
+              </div>
+            </div>
+            <div class="form-group creatorWrap">
+
+              <label class="col-sm-4 control-label"
+                     style="text-align: left;padding-top: 4px;" id="I_label_disp_developer"></label>
+
+              <div class="col-sm-8 creator" style="padding-left: 0px">
+                ---
+              </div>
+
+            </div>
+
+
+            <div class="form-group starttimeWrap">
+              <label for="startTimeinputText" class="col-sm-4 control-label"
+                     style="text-align: left;padding-top: 4px;" id="I_label_disp_startTime"></label>
+
+              <div class="col-sm-8" style="padding-left: 0px">
+                <input class="form-control datainp" id="startTimeinputText" type="text"
+                       placeholder="" readonly>
+              </div>
+
+            </div>
+            <div class="form-group overtimeWrap">
+              <label for="overTimeinputText" class="col-sm-4 control-label"
+                     style="text-align: left;padding-top: 4px;" id="I_label_disp_endTime"></label>
+
+              <div class="col-sm-8" style="padding-left: 0">
+                <input type="text" class="form-control datainp" id="overTimeinputText"
+                       placeholder="" readonly>
+              </div>
+              <!--<div class="col-sm-1" style="padding-left: 0px; ">
+                  <i class="fa fa-calendar" aria-hidden="true" id="overTimeinputImg"
+                     style=" padding-top: 4px;"></i>
+              </div>-->
+              <!-- <span class="wstxt col-sm-4">结束日期：</span>
+               <div class="col-sm-8">
+                   <input type="text" class="workinput wicon mr25" id="inpend">
+               </div>-->
+            </div>
+            <div class="form-group actionWrap">
+              <label class="col-sm-4 control-label"
+                     style="text-align: left;padding-top: 4px; "
+                     id="I_label_disp_executionCycle"></label>
+
+              <div class="col-sm-4" style="padding-left: 0">
+                <input type="text" class="form-control" name="executionCycle"
+                       id="ExecutionCycleinputText">
+              </div>
+              <div class="col-sm-4" style="padding-left: 0">
+                <select class="form-control" id="ExecutionTime">
+                  <option id="I_label_disp_choice" value=4 selected></option>
+                  <option id="I_label_disp_hour" value="hour"></option>
+                  <option id="I_label_disp_day" value="day"></option>
+                  <option id="I_label_disp_week" value="week"></option>
+                  <option id="I_label_disp_month" value="month"></option>
+                </select>
+              </div>
+            </div>
+            <!-- <div class="form-group">
+                 <label for="ExecutionTimeinputText" class="col-sm-4 control-label"
+                        style="text-align: left;padding-top: 4px;" id="I_label_disp_executionTime"></label>
+
+                 <div class="col-sm-8" style="padding-left: 0">
+                     <input type="text" class="form-control" id="ExecutionTimeinputText">
+                 </div>
+             </div>-->
+
+
+            <div class="form-group actionweekWrap" style="display: none;">
+              <label for="weeksWrap" class="col-sm-4 control-label"
+                     style="text-align: left;padding-top: 4px;"><span
+                  id="I_span_actionDayWeek"></span></label>
+
+              <div class="col-sm-8" style="position:relative; padding-left: 0">
+                <input type="text" id="weeksWrap" readonly="readonly"
+                       style="width: 100%;  border-radius: 4px; border: 1px solid #ccc;"/>
+
+                <div></div>
+              </div>
+            </div>
+
+            <div class="form-group actionmonthWrap" style="display: none">
+              <label for="monthWrap" class="col-sm-4 control-label"
+                     style="text-align: left;padding-top: 4px;"><span
+                  id="I_span_actionDayMonth"></span></label>
+
+              <div class="col-sm-8" style="position:relative; padding-left: 0">
+                <input type="text" id="monthWrap" readonly="readonly"
+                       style="width: 100%; border-radius: 4px; border: 1px solid #ccc;"/>
+
+                <div></div>
+              </div>
+            </div>
+
+            <div class="form-group actiontimeWrap" style="display: none;">
+              <label for="timeWrap" class="col-sm-4 control-label"
+                     style="text-align: left;padding-top: 4px;">
+                <span id="I_span_actionTime"></span></label>
+
+
+              <div class="col-sm-8" style="position:relative; padding-left: 0">
+                <input type="text" id="timeWrap"
+                       style="width: 100%;  border-radius: 4px; border: 1px solid #ccc;" readonly/>
+
+                <div></div>
+              </div>
+            </div>
+
+
+            <div class="form-group cornWrap" style="display: none;">
+              <label for="corninputText" class="col-sm-4 control-label"
+                     style="text-align: left;padding-top: 4px; "
+                     id="I_label_disp_cronExpression"></label>
+
+              <div class="col-sm-8" style="padding-left: 0">
+                <input type="text" class="form-control" id="cornInputText" title="">
+              </div>
+            </div>
+            <input type="text" id="seciorIdText" style="display: none;">
+
+          </form>
+          <!--<a><img src="img/scene-develop/online.png"/> </a>-->
+
+
+        </div>
+        <p class="dispatch_btns">
+          <button type="button" class="btn" id="advance"><span id="I_btn_disp_advance"></span>
+          </button>
+          <button type="button" class="btn" id="I_btn_disp_reset"></button>
+          <button type="button" class="btn" id="I_btn_disp_save"></button>
+        </p>
+      </div>
+        </div>
+    </div>
+</div>
+<script>
+  settings.interFun();
+</script>
+

@@ -1,0 +1,253 @@
+.toolsFont {
+    cursor: pointer;
+    font-size: 14px;
+    font-family: "微软雅黑";
+    color: #323232;
+    font-weight: normal;
+}
+
+.toolsGraphic {
+    font-size: 15px;
+    color: #646464;
+}
+
+.toolsButton {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    width: 80px;
+    background: #2e4c7a;
+}
+
+.toolsTableName {
+    text-align: center;
+    vertical-align: middle;
+    font-size: 14px;
+    font-family: "微软雅黑";
+    color: #323232;
+}
+
+.hbaseTableName {
+    text-align: center;
+    padding-top: 2%;
+    margin: 0px
+}
+
+.toolsTextColor {
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    border: 1px solid #DCDCDC;
+}
+
+.hbaseTable th, td {
+    text-align: center;
+}
+
+.hbaseInput {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    height: 25px;
+}
+
+.toolsLeft {
+    text-align: center;
+    border-bottom: 1px solid rgb(217, 217, 217);
+    background: #e6e6e6;
+    cursor: pointer;
+}
+
+.hbaseALabel:hover {
+    padding: 0px 18px !important;
+    display: block !important;
+    width: 120px !important;
+    line-height: 20px !important;
+}
+
+.tree {
+    min-height: 20px;
+    padding: 19px;
+    background-color: #fbfbfb;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05)
+}
+
+.tree li {
+    list-style-type: none;
+    margin: 0;
+    position: relative
+}
+
+.tree li::before, .tree li::after {
+    content: '';
+    left: -20px;
+    position: absolute;
+    right: auto
+}
+
+.tree li::before {
+    border-left: 1px solid #cacaca;
+    bottom: 50px;
+    height: 100%;
+    top: 0;
+    width: 1px
+}
+
+.tree li::after {
+    border-top: 1px solid #cacaca;
+    height: 20px;
+    top: 15px;
+    width: 35px
+}
+
+.tree li span {
+    /*  -moz-border-radius:5px;
+      -webkit-border-radius:5px;
+      border-radius:5px;*/
+    display: inline-block;
+    text-decoration: none;
+    font-family: 微软雅黑;
+    font-size: 12px;
+    line-height: 25px;
+    padding: 0px 0px 0px 30px;
+    background-color: #e6e6e6;
+    border-bottom: 1px solid #cacaca;
+    color: #646464;
+}
+
+.tree li.parent_li > span {
+    cursor: pointer
+}
+
+.tree > ul > li::before, .tree > ul > li::after {
+    border: 0
+}
+
+.tree li:last-child::before {
+    height: 15px
+}
+
+.tree li.parent_li > span:hover, .tree li.parent_li > span:hover + ul li span {
+    background: #eee;
+    border: 1px solid #94a0b4;
+    color: #000
+}
+
+.hbaseClickTab {
+    background: #e6e6e6;
+}
+
+.hiveAllScreen {
+    height: 100%;
+    position: absolute;
+    left: 0px;
+    width: 100%;
+}
+
+#menu_holder {
+    height: 35px;
+    width: 18%;
+    display: none;
+    position: absolute;
+    top: -58px;
+    z-index: 10;
+    margin-left: 41%;
+}
+
+#nav1 {
+    height: 30px;
+    width: 100px;
+    margin: 0px auto;
+    padding: 6px 4px;
+    text-align: center;
+    border: 1px solid #DCDCDC;
+    border-top: hidden;
+    border-bottom-left-radius: 35px;
+    border-bottom-right-radius: 35px;
+    background: #f2f2f2;
+}
+
+#hit_area {
+    height: 7px;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    display: none;
+    position: absolute;
+    z-index: 10;
+}
+
+#hit_area2 {
+    height: 100%;
+    width: 100%;
+}
+
+#nav1 ul {
+    list-style-type: none;
+}
+
+#nav1 li {
+    font-size: 15px;
+    padding: 0px 15px;
+    float: left;
+}
+
+#nav1 li a:link, #nav1 li a:active, #nav1 li a:visited {
+    height: 35px;
+    display: block;
+    font-weight: bold;
+    color: #ffffff;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 120%;
+}
+
+#nav1 li a:focus, #nav1 li a:hover {
+    text-decoration: none;
+    -moz-outline: 0;
+}
+
+.menu_holder {
+    height: 58px;
+    width: 100%;
+    display: block;
+    position: absolute;
+    top: 0px;
+}
+
+/*hive tab  样式*/
+.hiveTabClickStyle {
+    background-color: #f2f2f2;
+}
+
+#tableHeader > li > a:hover {
+    background-color: #f2f2f2;
+}
+
+.hiveTabStyle {
+    margin-right: 0px !important;
+    border: 0px solid transparent !important;
+    border-radius: 0px 0px 0 0 !important;
+    padding: 5px 15px !important;
+}
+
+.showOrHide {
+    display: none;
+}
+
+.hiveOutPut {
+    position: relative;
+    display: block;
+    padding: 5px 15px;
+}
+
+.hiveRightClick {
+    padding: 9px 0px;
+}
+
+.hiveSql {
+    padding: 6px;
+    font-weight: bold;
+    font-family: Arial;
+    font-size: 15px;
+}
