@@ -114,17 +114,25 @@
   <bean id="scenarioService"
         class="com.chinasofti.ark.bdadp.service.scenario.impl.ScenarioExecutorServiceImpl$Channel"/>
 
+  <!-- visualService -->
+  <!--  for mysql -->
+  <bean id="visualService"
+        class="com.chinasofti.ark.bdadp.service.visual.impl.ScenarioVisualServiceImpl"/>
+  <!--  for oracle -->
+  <!--<bean id="visualService"-->
+  <!--class="com.chinasofti.ark.bdadp.service.visual.impl.ScenarioVisualServiceOracleImpl"/>-->
+
   <!-- Hive jdbcConnPool -->
   <!--<bean id="jdbcConnPool" class="com.chinasofti.ark.bdadp.util.jdbc.pool.JDBCConnPool"/>-->
 
   <context:annotation-config/>
   <context:component-scan base-package="com.chinasofti.ark.bdadp.service">
-    <context:exclude-filter expression="com.chinasofti.ark.bdadp.service.tools.HbaseInfoService"
-      type="assignable"/>
-    <context:exclude-filter expression="com.chinasofti.ark.bdadp.service.tools.HdfsInfoService"
-      type="assignable"/>
-    <context:exclude-filter expression="com.chinasofti.ark.bdadp.service.tools.HiveInfoService"
-      type="assignable"/>
+    <!--<context:exclude-filter expression="com.chinasofti.ark.bdadp.service.tools.HbaseInfoService"-->
+    <!--type="assignable"/>-->
+    <!--<context:exclude-filter expression="com.chinasofti.ark.bdadp.service.tools.HdfsInfoService"-->
+    <!--type="assignable"/>-->
+    <!--<context:exclude-filter expression="com.chinasofti.ark.bdadp.service.tools.HiveInfoService"-->
+    <!--type="assignable"/>-->
   </context:component-scan>
 
   <!-- orm.properties -->
