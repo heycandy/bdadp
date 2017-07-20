@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <project
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.chinasofti.ark</groupId>
@@ -79,19 +79,19 @@
       <artifactId>mysql-connector-java</artifactId>
     </dependency>
 
-      <!-- oracle driver -->
-      <dependency>
-          <groupId>com.oracle</groupId>
-          <artifactId>ojdbc6</artifactId>
-      </dependency>
+    <!-- oracle driver -->
+    <dependency>
+      <groupId>com.oracle</groupId>
+      <artifactId>ojdbc6</artifactId>
+    </dependency>
 
-      <!-- HikariCP datasource -->
+    <!-- HikariCP datasource -->
     <dependency>
       <groupId>com.zaxxer</groupId>
       <artifactId>HikariCP</artifactId>
     </dependency>
 
-      <!-- bonecp datasource -->
+    <!-- bonecp datasource -->
     <dependency>
       <groupId>com.jolbox</groupId>
       <artifactId>bonecp</artifactId>
@@ -285,8 +285,8 @@
             <configuration>
               <target>
                 <copy
-                  file="${project.build.directory}/${project.artifactId}-${project.version}.war"
-                  tofile="../${build.outputDir}/${project.artifactId}-${project.version}.war"/>
+                    file="${project.build.directory}/${project.artifactId}-${project.version}.war"
+                    tofile="../${build.outputDir}/${project.artifactId}-${project.version}.war"/>
               </target>
             </configuration>
             <goals>

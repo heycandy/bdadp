@@ -3,6 +3,7 @@ package com.chinasofti.ark.bdadp.service.scenario.impl;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import com.chinasofti.ark.bdadp.component.ComponentProps;
@@ -38,7 +39,6 @@ import com.chinasofti.ark.bdadp.service.scenario.bean.ScenarioInspectListener;
 import com.chinasofti.ark.bdadp.service.scenario.bean.ScenarioScheduleListener;
 import com.chinasofti.ark.bdadp.service.scenario.bean.ScenarioServiceAssert;
 import com.chinasofti.ark.bdadp.util.common.UUID;
-import com.clearspring.analytics.util.Lists;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -207,8 +207,8 @@ public class ScenarioExecutorServiceImpl implements ScenarioExecutorService {
   }
 
   // Step vertex.
-  private void stepVertex(Graph graph, List<String> selected, Map<String, Integer> vertexMapKey,
-                          Vertex curr) {
+  private void stepVertex(
+      Graph graph, List<String> selected, Map<String, Integer> vertexMapKey, Vertex curr) {
     String vertexId = curr.getId();
     Integer keyId = java8.util.Maps.getOrDefault(vertexMapKey, vertexId, 0);
 

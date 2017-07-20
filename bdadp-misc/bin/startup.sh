@@ -60,7 +60,7 @@ JAVA_AGRS="$ARK_PORT $ARK_HOST $ARK_CONTEXT"
 MAIN_CLASS=com.chinasofti.ark.bdadp.standalone.Launcher
 
 echo "Starting ARK..."
-nohup $JAVA_BIN -cp ".:$ARK_HOME:$ARK_WAR/WEB-INF:$ARK_WAR/WEB-INF/lib/*" $JAVA_OPTS $MAIN_CLASS $JAVA_AGRS > $BASEDIR/logs/ark.out 2>&1 &
+nohup "$JAVA_BIN" -cp ".:$ARK_HOME:$ARK_WAR/WEB-INF:$ARK_WAR/WEB-INF/lib/*" $JAVA_OPTS $MAIN_CLASS $JAVA_AGRS > $BASEDIR/logs/ark.out 2>&1 &
 
 PIDFILE="$BASEDIR/current.pid"
 

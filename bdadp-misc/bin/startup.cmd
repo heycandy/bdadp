@@ -56,4 +56,4 @@ set "JAVA_AGRS=%ARK_PORT% %ARK_HOST% %ARK_CONTEXT%"
 set "MAIN_CLASS=com.chinasofti.ark.bdadp.standalone.Launcher"
 
 echo Starting ARK...
-%JAVA_BIN% -cp ".;%ARK_HOME%;%ARK_WAR%/WEB-INF;%ARK_WAR%/WEB-INF/lib/*" %JAVA_OPTS% %MAIN_CLASS% %JAVA_AGRS%
+"%JAVA_BIN%" -cp ".;%ARK_HOME%;%ARK_WAR%/WEB-INF;%ARK_WAR%/WEB-INF/lib/*" %JAVA_OPTS% %MAIN_CLASS% %JAVA_AGRS%
