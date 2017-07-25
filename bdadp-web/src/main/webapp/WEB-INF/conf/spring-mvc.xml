@@ -53,8 +53,8 @@
     <!--type="assignable"/>-->
     <!--<context:exclude-filter expression="com.chinasofti.ark.bdadp.controller.tools.HdfsController"-->
     <!--type="assignable"/>-->
-    <context:exclude-filter expression="com.chinasofti.ark.bdadp.controller.tools.hiveController"
-                            type="assignable"/>
+    <!--<context:exclude-filter expression="com.chinasofti.ark.bdadp.controller.tools.hiveController"-->
+    <!--type="assignable"/>-->
   </context:component-scan>
 
   <aop:aspectj-autoproxy proxy-target-class="true"/>

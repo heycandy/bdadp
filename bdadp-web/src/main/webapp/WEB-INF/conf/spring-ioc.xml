@@ -131,8 +131,8 @@
     <!--type="assignable"/>-->
     <!--<context:exclude-filter expression="com.chinasofti.ark.bdadp.service.tools.HdfsInfoService"-->
     <!--type="assignable"/>-->
-    <context:exclude-filter expression="com.chinasofti.ark.bdadp.service.tools.HiveInfoService"
-                            type="assignable"/>
+    <!--<context:exclude-filter expression="com.chinasofti.ark.bdadp.service.tools.HiveInfoService"-->
+    <!--type="assignable"/>-->
   </context:component-scan>
 
   <!-- orm.properties -->
