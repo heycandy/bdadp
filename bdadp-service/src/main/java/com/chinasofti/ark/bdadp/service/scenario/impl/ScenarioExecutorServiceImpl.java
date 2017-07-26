@@ -1,5 +1,6 @@
 package com.chinasofti.ark.bdadp.service.scenario.impl;
 
+import com.chinasofti.ark.bdadp.service.scenario.bean.ScenarioScheduleMailListener;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableMap;
@@ -110,7 +111,7 @@ public class ScenarioExecutorServiceImpl implements ScenarioExecutorService {
     options.setExecutionId(UUID.getId());
     options.setDebug(true);
 
-    return execute(options, ScenarioScheduleListener.class);
+    return execute(options, ScenarioScheduleListener.class,ScenarioScheduleMailListener.class);
   }
 
   protected Map<String, String> defaultSettings() throws Exception {
