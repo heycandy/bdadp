@@ -1,5 +1,6 @@
 package com.chinasofti.ark.bdadp.service.scenario.impl;
 
+import com.chinasofti.ark.bdadp.service.PropsService;
 import com.google.common.base.Charsets;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Maps;
@@ -142,7 +143,6 @@ public class ScenarioExecutorServiceImpl$Channel
         Properties localProperties = (Properties) this.applicationContext
                 .getBean(PropertySourcesPlaceholderConfigurer.class)
                 .getAppliedPropertySources().get("localProperties").getSource();
-
 //      Properties localProperties = this.applicationContext
 //          .getBean(DecryptPropertyPlaceholderConfigurer.class).getProperties();
 
