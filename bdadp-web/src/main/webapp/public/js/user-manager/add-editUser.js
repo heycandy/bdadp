@@ -46,9 +46,9 @@ define(["js/user-manager/userCommon", 'js/modeldialog'], function (userPackage, 
                     $(this).unbind("click");
                     return true;
                 }
-            });
-
+            });settings.interFun();
                                                               });
+
     };
 
     var _clickRemove = function (userTables, row) {

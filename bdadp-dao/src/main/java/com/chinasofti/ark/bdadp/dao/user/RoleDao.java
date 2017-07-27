@@ -8,4 +8,6 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface RoleDao extends CrudRepository<Role, String> {
 
+  Role findAllByRoleName(String roleName);
+
 }
