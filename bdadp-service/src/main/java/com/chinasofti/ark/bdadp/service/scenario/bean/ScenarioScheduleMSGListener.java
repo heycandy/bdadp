@@ -17,17 +17,14 @@ import java.util.Properties;
 /**
  * Created by White on 2016/10/14.
  */
-public class ScenarioScheduleMailListener implements Listener {
+public class ScenarioScheduleMSGListener implements Listener {
 
-  //  private Properties currentProps = PropsService.getConfigProps();
-//  private String roleName = currentProps.getProperty("mail.receivergroup.rolename");
-  private String roleName = "oper";
   private UserDao userDao;
   private RoleDao roleDao;
   private ScenarioExecutorService service;
   private MailService mailService;
 
-  public ScenarioScheduleMailListener() {
+  public ScenarioScheduleMSGListener() {
     this.service = ServiceContext.getService(ScenarioExecutorService.class);
     this.userDao = ServiceContext.getService(UserDao.class);
     this.roleDao = ServiceContext.getService(RoleDao.class);
@@ -41,7 +38,7 @@ public class ScenarioScheduleMailListener implements Listener {
       SimpleCallableFlow flow = ((SimpleCallableFlow) component);
 
       if (flow.getState() == 3) {
-
+        // send mail
         String subject = "Schedule failed Scenario name : " + flow.getName();
         String content = "See : < " + System.getProperty("loginUrl")
             + " > \r\n ------------------------------------------ \r\n \r\n \r\n";
@@ -51,7 +48,10 @@ public class ScenarioScheduleMailListener implements Listener {
           e.printStackTrace();
         }
 //        MailUtils.sendMails(subject, content, getReceivers(ROLE_NAME));
+        String roleName = PropsService.getConfigProps().getProperty("mail.receivergroup.rolename");
         mailService.sendEmail(subject, content, getReceivers(roleName));
+
+        //send msg
       }
     }
   }

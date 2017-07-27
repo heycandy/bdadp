@@ -143,8 +143,6 @@ public class ScenarioExecutorServiceImpl$Channel
         Properties localProperties = (Properties) this.applicationContext
                 .getBean(PropertySourcesPlaceholderConfigurer.class)
                 .getAppliedPropertySources().get("localProperties").getSource();
-//        Properties localProperties = PropsService.getConfigProps();
-
 //      Properties localProperties = this.applicationContext
 //          .getBean(DecryptPropertyPlaceholderConfigurer.class).getProperties();
 

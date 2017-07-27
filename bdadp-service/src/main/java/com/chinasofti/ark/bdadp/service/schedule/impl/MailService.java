@@ -16,16 +16,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class MailService {
 
-
   private final Logger log = LoggerFactory.getLogger(MailService.class);
-//  private Properties currentProps = PropsService.getConfigProps();
-//  private String host = currentProps.getProperty("mail.hosturl");
-//  private Integer port = Integer.parseInt(currentProps.getProperty("mail.port"));
-//  private String user = currentProps.getProperty("mail.sender.username");
-//  private String pwd = currentProps.getProperty("mail.sender.pwd");
 
   @Async
   public void sendEmail(String subject, String content, String[] receivers) {
+    if (null == receivers || receivers.length <= 0) {
+      log.info("mail receivers is null !!!!");
+      return;
+    }
 
     JavaMailSenderImpl sender = getSender();
     MimeMessage mimeMessage = sender.createMimeMessage();
