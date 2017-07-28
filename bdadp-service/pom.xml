@@ -85,11 +85,13 @@
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase-client</artifactId>
         </dependency>
+
         <dependency>
-            <groupId>com.chinasofti.ark</groupId>
-            <artifactId>bdadp-util</artifactId>
-            <version>${project.parent.version}</version>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.7</version>
         </dependency>
+
     </dependencies>
 
 </project>
