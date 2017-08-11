@@ -205,19 +205,6 @@
         <artifactId>ojdbc6</artifactId>
         <version>11.2.0.3</version>
       </dependency>
-      <!-- c3p0 datasource -->
-      <dependency>
-        <groupId>c3p0</groupId>
-        <artifactId>c3p0</artifactId>
-        <version>0.9.1.2</version>
-      </dependency>
-
-      <!-- HikariCP datasource -->
-      <dependency>
-        <groupId>com.zaxxer</groupId>
-        <artifactId>HikariCP</artifactId>
-        <version>2.4.7</version>
-      </dependency>
 
       <!-- BoneCP datasource -->
       <dependency>
@@ -358,13 +345,6 @@
         <groupId>org.javassist</groupId>
         <artifactId>javassist</artifactId>
         <version>3.20.0-GA</version>
-      </dependency>
-
-      <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
-      <dependency>
-        <groupId>org.projectlombok</groupId>
-        <artifactId>lombok</artifactId>
-        <version>1.14.4</version>
       </dependency>
 
       <!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->

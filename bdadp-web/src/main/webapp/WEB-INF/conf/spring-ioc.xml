@@ -19,11 +19,12 @@
 
   <!-- BoneCP configuration -->
   <bean id="dataSource" class="${bonecp.pool.dataSourceClassName}">
-    <property name="driverClass" value="${database.driverClassName}" />
-    <property name="jdbcUrl" value="${database.jdbcUrl}" />
+    <property name="driverClass" value="${database.driverClassName}"/>
+    <property name="jdbcUrl" value="${database.jdbcUrl}"/>
     <property name="username" value="${database.username}"/>
     <property name="password" value="${database.password}"/>
-    <property name="idleConnectionTestPeriodInMinutes" value="${bonecp.pool.idleConnectionTestPeriodInMinutes}"/>
+    <property name="idleConnectionTestPeriodInMinutes"
+      value="${bonecp.pool.idleConnectionTestPeriodInMinutes}"/>
     <property name="idleMaxAgeInMinutes" value="${bonecp.pool.idleMaxAgeInMinutes}"/>
     <property name="maxConnectionsPerPartition" value="${bonecp.pool.maxConnectionsPerPartition}"/>
     <property name="minConnectionsPerPartition" value="${bonecp.pool.minConnectionsPerPartition}"/>
@@ -88,10 +89,6 @@
       <props>
         <prop key="hostname">${push.service.hostname}</prop>
         <prop key="port">${push.service.port}</prop>
-        <!--<prop key="secure">${push.service.secure}</prop>-->
-        <!--<prop key="keystore.format">${push.service.keystore.format}</prop>
-        <prop key="keystore.location">${push.service.keystore.location}</prop>
-        <prop key="keystore.password">${push.service.keystore.password}</prop>-->
       </props>
     </property>
   </bean>
@@ -108,11 +105,11 @@
 
   <!-- executorService -->
   <bean id="executorService"
-        class="com.chinasofti.ark.bdadp.service.flow.impl.SimpleFlowExecutorService"/>
+    class="com.chinasofti.ark.bdadp.service.flow.impl.SimpleFlowExecutorService"/>
 
   <!-- executorService -->
   <bean id="scenarioService"
-        class="com.chinasofti.ark.bdadp.service.scenario.impl.ScenarioExecutorServiceImpl$Channel"/>
+    class="com.chinasofti.ark.bdadp.service.scenario.impl.ScenarioExecutorServiceImpl$Channel"/>
 
   <!-- Hive jdbcConnPool -->
   <!--<bean id="jdbcConnPool" class="com.chinasofti.ark.bdadp.util.jdbc.pool.JDBCConnPool"/>-->
@@ -126,17 +123,6 @@
     <context:exclude-filter expression="com.chinasofti.ark.bdadp.service.tools.HiveInfoService"
       type="assignable"/>
   </context:component-scan>
-
-  <!-- orm.properties -->
-  <context:property-placeholder location="/WEB-INF/orm.properties"/>
-  <!--<bean class="com.chinasofti.ark.bdadp.util.common.DecryptPropertyPlaceholderConfigurer">-->
-    <!--<property name="ignoreUnresolvablePlaceholders" value="true"></property>-->
-    <!--<property name="locations">-->
-      <!--<list>-->
-        <!--<value>/WEB-INF/orm.properties</value>-->
-      <!--</list>-->
-    <!--</property>-->
-  <!--</bean>-->
 
   <aop:config expose-proxy="true">
     <aop:pointcut expression="execution(* com.chinasofti.ark.bdadp.service..*.*(..))"
@@ -153,4 +139,30 @@
 
   <jpa:repositories base-package="com.chinasofti.ark.bdadp.dao"/>
 
+  <beans profile="local">
+    <context:property-placeholder location="/WEB-INF/local-orm.properties"/>
+  </beans>
+
+  <beans profile="dev">
+    <context:property-placeholder location="/WEB-INF/dev-orm.properties"/>
+  </beans>
+
+  <beans profile="test">
+    <context:property-placeholder location="/WEB-INF/test-orm.properties"/>
+  </beans>
+
+  <beans profile="prod">
+    <context:property-placeholder location="/WEB-INF/prod-orm.properties"/>
+  </beans>
+
+  <!--<context:property-placeholder location="/WEB-INF/orm.properties"/>-->
+  <!--Decrypt orm-->
+  <!--<bean class="com.chinasofti.ark.bdadp.util.common.DecryptPropertyPlaceholderConfigurer">-->
+  <!--<property name="ignoreUnresolvablePlaceholders" value="true"></property>-->
+  <!--<property name="locations">-->
+  <!--<list>-->
+  <!--<value>/WEB-INF/local-orm.properties</value>-->
+  <!--</list>-->
+  <!--</property>-->
+  <!--</bean>-->
 </beans>

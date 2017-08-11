@@ -90,6 +90,12 @@
             <artifactId>bdadp-util</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.1</version>
+        </dependency>
     </dependencies>
 
 </project>

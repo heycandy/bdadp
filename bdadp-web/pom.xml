@@ -85,12 +85,6 @@
           <artifactId>ojdbc6</artifactId>
       </dependency>
 
-      <!-- HikariCP datasource -->
-    <dependency>
-      <groupId>com.zaxxer</groupId>
-      <artifactId>HikariCP</artifactId>
-    </dependency>
-
       <!-- bonecp datasource -->
     <dependency>
       <groupId>com.jolbox</groupId>

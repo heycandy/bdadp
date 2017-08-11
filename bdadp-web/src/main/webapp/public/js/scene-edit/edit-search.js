@@ -31,7 +31,7 @@ define([], function () {
         function _search(sceneId, searchValue) {
             _filterLi(sceneId, ' .collapseOne .scenario-assembly .panel', searchValue);
             _filterLi(sceneId, ' .collapseTwo .data-assembly .panel', searchValue);
-            _filterLi(sceneId, ' .collapseThree .customer-assembly .panel');
+            _filterLi(sceneId, ' .collapseThree .customer-assembly .panel',searchValue);
         }
 
         function _filterLi(sceneId, panelClass, searchValue) {

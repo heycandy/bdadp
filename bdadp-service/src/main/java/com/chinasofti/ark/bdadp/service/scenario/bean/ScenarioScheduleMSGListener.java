@@ -11,8 +11,10 @@ import com.chinasofti.ark.bdadp.service.schedule.impl.MailService;
 import com.chinasofti.ark.bdadp.service.ServiceContext;
 import com.chinasofti.ark.bdadp.service.flow.bean.SimpleCallableFlow;
 import com.chinasofti.ark.bdadp.service.scenario.ScenarioExecutorService;
+import com.chinasofti.ark.bdadp.util.common.StringUtils;
+import com.google.common.collect.Lists;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 /**
  * Created by White on 2016/10/14.
@@ -39,31 +41,41 @@ public class ScenarioScheduleMSGListener implements Listener {
 
       if (flow.getState() == 3) {
         // send mail
-        String subject = "Schedule failed Scenario name : " + flow.getName();
+        String subject = "Schedule failed scenario name : " + flow.getName();
         String content = "See : < " + System.getProperty("loginUrl")
-            + " > \r\n ------------------------------------------ \r\n \r\n \r\n";
+            + " > \r\n  ------------------------------------------  \r\n \r\n \r\n ";
         try {
           content += service.execute(flow.getId(), flow.getExecutionId()).toString();
         } catch (Exception e) {
           e.printStackTrace();
         }
-//        MailUtils.sendMails(subject, content, getReceivers(ROLE_NAME));
-        String roleName = PropsService.getConfigProps().getProperty("mail.receivergroup.rolename");
-        mailService.sendEmail(subject, content, getReceivers(roleName));
+        mailService.sendEmail(subject, content, getReceivers(), getLoginUserMail());
 
         //send msg
+        /*
+        ...
+        */
       }
     }
   }
 
   public String[] getReceivers(String roleName) {
-    Role role = roleDao.findAllByRoleName(roleName);
-    List<User> users = userDao.findAllByRoles(role);
+    List<User> users = userDao.findAllByRoles(roleDao.findAllByRoleName(roleName));
     String[] mails = new String[users.size()];
     for (int i = 0; i < users.size(); i++) {
       mails[i] = users.get(i).getUserDesc();
     }
     return mails;
+  }
+
+  public String[] getReceivers() {
+    return getReceivers(PropsService.getConfigProps().getProperty("mail.receivergroup.rolename"));
+  }
+
+  public String getLoginUserMail() {
+    String loginUser = System.getProperty("loginUser");
+    return StringUtils.isNotEmpty(loginUser) ? null
+        : userDao.findAllByUserName(loginUser).getUserDesc();
   }
 
 }
