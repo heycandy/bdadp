@@ -113,8 +113,8 @@ public class UserController {
         String loginUrl =
             "http://" + request.getServerName() + ":" + request.getServerPort() + request
                 .getContextPath();
-        System.setProperty("loginUrl", loginUrl
-        );
+        System.setProperty("loginUrl", loginUrl);
+        System.setProperty("loginUser", s.getUserName());
         body.setResult(token);
       }
 

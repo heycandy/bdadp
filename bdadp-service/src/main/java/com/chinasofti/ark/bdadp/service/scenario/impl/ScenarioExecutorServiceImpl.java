@@ -92,7 +92,7 @@ public class ScenarioExecutorServiceImpl implements ScenarioExecutorService {
     options.setScenarioId(scenarioId);
     options.setExecutionId(UUID.getId());
     options.setDebug(true);
-
+//    System.setProperty("loginUser", condition.getUserName());
     // Skip
     String keys = Joiner.on(',').join(condition.getSelected());
     options.getSettings().put(SCENARIO_SELECTED_KEYS, keys);
@@ -111,7 +111,7 @@ public class ScenarioExecutorServiceImpl implements ScenarioExecutorService {
     options.setExecutionId(UUID.getId());
     options.setDebug(true);
 
-    return execute(options, ScenarioScheduleListener.class,ScenarioScheduleMSGListener.class);
+    return execute(options, ScenarioScheduleListener.class, ScenarioScheduleMSGListener.class);
   }
 
   protected Map<String, String> defaultSettings() throws Exception {
@@ -171,7 +171,7 @@ public class ScenarioExecutorServiceImpl implements ScenarioExecutorService {
   }
 
   Graph newSimpleGraph(String scenarioId, ScenarioOptions options,
-                       Class<? extends Listener>... listeners) throws Exception {
+      Class<? extends Listener>... listeners) throws Exception {
 
     ScenarioGraphDAG graphDAG = scenarioGraphDagService.findScenarioByScenarioId(scenarioId);
 
@@ -208,8 +208,8 @@ public class ScenarioExecutorServiceImpl implements ScenarioExecutorService {
   }
 
   // Step vertex.
-  private void stepVertex(
-      Graph graph, List<String> selected, Map<String, Integer> vertexMapKey, Vertex curr) {
+  private void stepVertex(Graph graph, List<String> selected, Map<String, Integer> vertexMapKey,
+      Vertex curr) {
     String vertexId = curr.getId();
     Integer keyId = java8.util.Maps.getOrDefault(vertexMapKey, vertexId, 0);
 
@@ -265,7 +265,7 @@ public class ScenarioExecutorServiceImpl implements ScenarioExecutorService {
             CallableFlow
                 simpleCallableFlow =
                 new SimpleCallableFlow(taskId, taskName, options.getScenarioId(),
-                                       options.getExecutionId(), innerGraph);
+                    options.getExecutionId(), innerGraph);
 
             // TODO
             for (Class<? extends Listener> listenerClass : listeners) {
@@ -292,7 +292,7 @@ public class ScenarioExecutorServiceImpl implements ScenarioExecutorService {
   Collection<Edge> buildEdges(Collection<ScenarioGraphEdge> edges, Map<Integer, Vertex> vertexMap) {
     return StreamSupport.stream(edges)
         .map(e -> new SimpleEdge(e.getEdgeId(), vertexMap.get(e.getFromKey()),
-                                 vertexMap.get(e.getToKey())))
+            vertexMap.get(e.getToKey())))
         .collect(Collectors.toList());
   }
 

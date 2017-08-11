@@ -20,10 +20,6 @@
             <artifactId>jackson-annotations</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.chinasofti.ark</groupId>
             <artifactId>bdadp-util</artifactId>
             <version>${project.parent.version}</version>

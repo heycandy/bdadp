@@ -87,13 +87,14 @@
       <artifactId>mongo-spark-connector_${scala.binary.version}</artifactId>
     </dependency>
 
-    <!-- HikariCP datasource -->
-    <dependency>
-      <groupId>com.zaxxer</groupId>
-      <artifactId>HikariCP</artifactId>
-    </dependency>
 
-    <!-- bonecp datasource -->
+      <!-- oracle driver -->
+      <dependency>
+          <groupId>com.oracle</groupId>
+          <artifactId>ojdbc6</artifactId>
+      </dependency>
+
+      <!-- bonecp datasource -->
     <dependency>
       <groupId>com.jolbox</groupId>
       <artifactId>bonecp</artifactId>
