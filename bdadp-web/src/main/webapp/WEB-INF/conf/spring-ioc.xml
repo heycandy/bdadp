@@ -147,7 +147,8 @@
 
   <jpa:repositories base-package="com.chinasofti.ark.bdadp.dao"/>
 
-  <beans profile="local">
+  <!--orm-->
+  <!--<beans profile="local">
     <context:property-placeholder location="/WEB-INF/local-orm.properties"/>
   </beans>
 
@@ -161,9 +162,9 @@
 
   <beans profile="prod">
     <context:property-placeholder location="/WEB-INF/prod-orm.properties"/>
-  </beans>
-
-  <!--<context:property-placeholder location="/WEB-INF/orm.properties"/>-->
+  </beans>-->
+  <!--orm-->
+  <context:property-placeholder location="/WEB-INF/orm.properties"/>
   <!--Decrypt orm-->
   <!--<bean class="com.chinasofti.ark.bdadp.util.common.DecryptPropertyPlaceholderConfigurer">-->
   <!--<property name="ignoreUnresolvablePlaceholders" value="true"></property>-->
