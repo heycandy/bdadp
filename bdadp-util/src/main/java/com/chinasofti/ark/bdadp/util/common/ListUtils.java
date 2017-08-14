@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by wgzhang on 2016/8/28.
  */
-public class ListUtil {
+public class ListUtils {
 
     /**
      * iterator转List

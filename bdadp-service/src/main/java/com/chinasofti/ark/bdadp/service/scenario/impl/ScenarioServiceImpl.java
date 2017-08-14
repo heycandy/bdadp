@@ -10,7 +10,7 @@ import com.chinasofti.ark.bdadp.entity.scenario.ScenarioVersion;
 import com.chinasofti.ark.bdadp.service.scenario.ScenarioService;
 import com.chinasofti.ark.bdadp.service.scenario.bean.ScenarioStatus;
 import com.chinasofti.ark.bdadp.util.common.BeanHelper;
-import com.chinasofti.ark.bdadp.util.common.ListUtil;
+import com.chinasofti.ark.bdadp.util.common.ListUtils;
 import com.chinasofti.ark.bdadp.util.common.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -75,7 +75,7 @@ public class ScenarioServiceImpl implements ScenarioService {
             Iterable<Scenario> myIterator = scenarioDao
                     .findByScenarioStatusNotOrderByCreateTimeDesc(ScenarioStatus.DELETE.ordinal());
             if (myIterator.iterator().hasNext()) {
-                list = ListUtil.convertIterToList(myIterator.iterator());
+                list = ListUtils.convertIterToList(myIterator.iterator());
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -7,6 +7,9 @@ import java.util.List;
  */
 public class ScenarioInspectCondition {
 
+
+  private String userName;
+
   private List<Integer> selected;
 
   public List<Integer> getSelected() {
@@ -15,6 +18,14 @@ public class ScenarioInspectCondition {
 
   public void setSelected(List<Integer> selected) {
     this.selected = selected;
+  }
+
+  public String getUserName() {
+    return userName;
+  }
+
+  public void setUserName(String userName) {
+    this.userName = userName;
   }
 
 }
