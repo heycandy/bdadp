@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-  <property>
-    <name>hbase.zookeeper.quorum</name>
-    <value>host7,host6,host4</value>
-  </property>
-  <property>
-    <name>hbase.regionserver.kerberos.principal</name>
-    <value>hbase/hadoop.hadoop.com@HADOOP.COM</value>
-  </property>
-  <property>
-    <name>hbase.master.kerberos.principal</name>
-    <value>hbase/hadoop.hadoop.com@HADOOP.COM</value>
-  </property>
-  <property>
-    <name>hbase.zookeeper.property.clientPort</name>
-    <value>24002</value>
-  </property>
+    <property>
+        <name>hbase.zookeeper.quorum</name>
+        <value>host7,host6,host4</value>
+    </property>
+    <property>
+        <name>hbase.regionserver.kerberos.principal</name>
+        <value>hbase/hadoop.hadoop.com@HADOOP.COM</value>
+    </property>
+    <property>
+        <name>hbase.master.kerberos.principal</name>
+        <value>hbase/hadoop.hadoop.com@HADOOP.COM</value>
+    </property>
+    <property>
+        <name>hbase.zookeeper.property.clientPort</name>
+        <value>24002</value>
+    </property>
 </configuration>
