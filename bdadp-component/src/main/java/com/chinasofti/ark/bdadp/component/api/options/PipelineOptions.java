@@ -1,6 +1,6 @@
 package com.chinasofti.ark.bdadp.component.api.options;
 
-public interface PipelineOptions {
+public interface PipelineOptions extends StreamingOptions {
 
     /**
      * Transforms this object into an object of type {@code <T>} saving each property that has been

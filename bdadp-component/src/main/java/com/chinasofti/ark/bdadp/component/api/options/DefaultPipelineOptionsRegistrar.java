@@ -12,7 +12,6 @@ public class DefaultPipelineOptionsRegistrar implements PipelineOptionsRegistrar
         return ImmutableList.<Class<? extends PipelineOptions>>builder()
                 .add(PipelineOptions.class)
                 .add(ScenarioOptions.class)
-                .add(StreamingOptions.class)
                 .build();
     }
 }

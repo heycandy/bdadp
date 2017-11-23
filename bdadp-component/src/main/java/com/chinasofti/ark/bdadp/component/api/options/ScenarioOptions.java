@@ -1,17 +1,19 @@
 package com.chinasofti.ark.bdadp.component.api.options;
 
+import com.google.common.collect.Maps;
+
 import com.chinasofti.ark.bdadp.component.api.channel.Channel;
 import com.chinasofti.ark.bdadp.component.api.channel.MemoryChannel;
 import com.chinasofti.ark.bdadp.component.api.data.Data;
 import com.chinasofti.ark.bdadp.component.api.data.DataType;
 import com.chinasofti.ark.bdadp.component.api.data.StringData;
-import com.google.common.collect.Maps;
-import java8.util.stream.StreamSupport;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.Map;
+
+import java8.util.stream.StreamSupport;
 
 public class ScenarioOptions implements PipelineOptions {
 
@@ -23,7 +25,7 @@ public class ScenarioOptions implements PipelineOptions {
     private String tempLocation;
     private String executionId;
     private boolean debug;
-
+  private boolean isStreaming;
 
     public ScenarioOptions() {
         this(Maps.newConcurrentMap());
@@ -146,4 +148,15 @@ public class ScenarioOptions implements PipelineOptions {
 
         return this;
     }
+
+  @Override
+  public boolean isStreaming() {
+    return this.isStreaming;
+  }
+
+  @Override
+  public void setStreaming(boolean value) {
+    this.isStreaming = value;
+  }
+
 }

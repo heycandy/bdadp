@@ -1,24 +1,29 @@
 package com.chinasofti.ark.bdadp.component.api.options;
 
+import com.google.common.collect.Maps;
+
 import com.chinasofti.ark.bdadp.component.api.channel.Channel;
 import com.chinasofti.ark.bdadp.component.api.channel.MemoryChannel;
 import com.chinasofti.ark.bdadp.component.api.data.Data;
 import com.chinasofti.ark.bdadp.component.api.data.DataType;
 import com.chinasofti.ark.bdadp.component.api.data.SparkData;
 import com.chinasofti.ark.bdadp.security.SecurityLogin;
-import com.google.common.collect.Maps;
-import java8.util.stream.StreamSupport;
+
 import org.apache.spark.SparkConf;
 import org.apache.spark.SparkContext;
 import org.apache.spark.sql.DataFrame;
 import org.apache.spark.sql.SQLContext;
 import org.apache.spark.sql.hive.HiveContext;
+import org.apache.spark.streaming.Durations;
+import org.apache.spark.streaming.StreamingContext;
 
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.Map;
+
+import java8.util.stream.StreamSupport;
 
 /**
  * Created by White on 2017/1/5.
@@ -31,6 +36,7 @@ public class SparkScenarioOptions extends ScenarioOptions {
     private SparkContext sparkContext;
     private SQLContext sqlContext;
     private HiveContext hiveContext;
+    private StreamingContext streamingContext;
 
     public SparkScenarioOptions() throws IOException {
         this(Maps.newConcurrentMap());
@@ -105,7 +111,6 @@ public class SparkScenarioOptions extends ScenarioOptions {
             this.sqlContext = new SQLContext(this.sparkContext);
 //      this.hiveContext = new HiveContext(this.sparkContext);
         }
-
     }
 
     private SparkContext defaultSparkContext() {
@@ -173,5 +178,30 @@ public class SparkScenarioOptions extends ScenarioOptions {
 
     public HiveContext hiveContext() {
         return hiveContext;
+    }
+
+    public synchronized StreamingContext streamingContext() {
+        if (streamingContext == null) {
+            String
+                batchInterval =
+                java8.util.Maps
+                    .getOrDefault(this.settings, "spark.streaming.batchInterval", "5000");
+            long milliseconds = Long.valueOf(batchInterval);
+            streamingContext =
+                new StreamingContext(this.sparkContext, Durations.milliseconds(milliseconds));
+
+            super.setStreaming(true);
+        }
+
+        return streamingContext;
+    }
+
+    public void startAndAwaitTermination() {
+        this.streamingContext().start();
+        this.streamingContext().awaitTermination();
+    }
+
+    public void stop() {
+        this.streamingContext().stop(false);
     }
 }

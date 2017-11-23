@@ -20,12 +20,12 @@ package com.chinasofti.ark.bdadp.component.api.options;
 /**
  * Options used to configure streaming.
  */
-public abstract class StreamingOptions extends ScenarioOptions {
+public interface StreamingOptions {
 
     /**
      * Set to true if running a streaming pipeline.
      */
-    abstract boolean isStreaming();
+    boolean isStreaming();
 
-    abstract void setStreaming(boolean value);
+  void setStreaming(boolean value);
 }
