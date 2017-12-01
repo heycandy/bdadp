@@ -1,5 +1,11 @@
 package com.chinasofti.ark.bdadp.service.flow.impl;
 
+import com.google.common.base.Strings;
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
+
 import com.chinasofti.ark.bdadp.service.flow.FlowExecutorService;
 import com.chinasofti.ark.bdadp.service.flow.bean.CacheMode;
 import com.chinasofti.ark.bdadp.service.flow.bean.CacheableFlow;
@@ -8,15 +14,15 @@ import com.chinasofti.ark.bdadp.service.flow.bean.CallableFlowVertex;
 import com.chinasofti.ark.bdadp.service.graph.bean.TaskVertex;
 import com.chinasofti.ark.bdadp.service.graph.bean.Vertex;
 import com.chinasofti.ark.bdadp.util.hdfs.common.ConfigurationClient;
-import com.google.common.base.Strings;
-import com.google.common.util.concurrent.FutureCallback;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListeningExecutorService;
-import com.google.common.util.concurrent.MoreExecutors;
+
 import org.apache.hadoop.fs.FileSystem;
 
 import java.io.IOException;
-import java.nio.file.*;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Properties;
 import java.util.concurrent.Executors;
@@ -31,6 +37,18 @@ public class CacheableFlowExecutorService implements FlowExecutorService {
     protected CacheMode cacheMode;
     protected String cachePath;
     private boolean cacheClean;
+
+  @Override
+  public void submit(CallableFlow flow) {
+    if (flow instanceof CacheableFlow) {
+      Path executionPath = Paths.get(this.cachePath, ((CacheableFlow) flow).getExecutionId());
+
+      ((CacheableFlow) flow).setCacheMode(this.cacheMode);
+      ((CacheableFlow) flow).setExecutionPath(executionPath.toString());
+
+    }
+    executor.submit(() -> flow.onSubmit().call(getExecutor()));
+  }
 
     @Override
     public void submit(CallableFlow flow, Vertex vertex) {
@@ -105,15 +123,8 @@ public class CacheableFlowExecutorService implements FlowExecutorService {
     }
 
     @Override
-    public void submit(CallableFlow flow) {
-        if (flow instanceof CacheableFlow) {
-            Path executionPath = Paths.get(this.cachePath, ((CacheableFlow) flow).getExecutionId());
-
-            ((CacheableFlow) flow).setCacheMode(this.cacheMode);
-            ((CacheableFlow) flow).setExecutionPath(executionPath.toString());
-
-        }
-        executor.submit(() -> flow.onSubmit().call(getExecutor()));
+    public CallableFlow remove(String executionId) {
+      return null;
     }
 
     @Override

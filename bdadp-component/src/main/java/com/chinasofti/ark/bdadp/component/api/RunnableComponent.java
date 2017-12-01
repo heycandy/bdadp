@@ -5,13 +5,17 @@ import org.slf4j.Logger;
 /**
  * Created by White on 2016/09/03.
  */
-public abstract class RunnableComponent extends AbstractComponent implements java.lang.Runnable {
+public abstract class RunnableComponent extends AbstractComponent implements Runnable {
 
-    public RunnableComponent(String id, String name, Logger log) {
-        super(id, name, log);
-    }
+  public RunnableComponent(String id, String name, Logger log) {
+    super(id, name, log);
+  }
 
-    @Override
-    public abstract void run();
+  @Override
+  public abstract void run();
+
+  public void stop() {
+
+  }
 
 }

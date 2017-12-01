@@ -1,6 +1,5 @@
 package com.chinasofti.ark.bdadp.service.scenario.impl;
 
-import com.chinasofti.ark.bdadp.service.scenario.bean.ScenarioScheduleMSGListener;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableMap;
@@ -38,6 +37,7 @@ import com.chinasofti.ark.bdadp.service.scenario.ScenarioService;
 import com.chinasofti.ark.bdadp.service.scenario.bean.ScenarioInspectCondition;
 import com.chinasofti.ark.bdadp.service.scenario.bean.ScenarioInspectListener;
 import com.chinasofti.ark.bdadp.service.scenario.bean.ScenarioScheduleListener;
+import com.chinasofti.ark.bdadp.service.scenario.bean.ScenarioScheduleMSGListener;
 import com.chinasofti.ark.bdadp.service.scenario.bean.ScenarioServiceAssert;
 import com.chinasofti.ark.bdadp.util.common.UUID;
 
@@ -92,7 +92,7 @@ public class ScenarioExecutorServiceImpl implements ScenarioExecutorService {
     options.setScenarioId(scenarioId);
     options.setExecutionId(UUID.getId());
     options.setDebug(true);
-//    System.setProperty("loginUser", condition.getUserName());
+
     // Skip
     String keys = Joiner.on(',').join(condition.getSelected());
     options.getSettings().put(SCENARIO_SELECTED_KEYS, keys);

@@ -54,7 +54,6 @@
         <module>${product.dao}</module>
         <module>${product.entity}</module>
         <module>${product.service}</module>
-        <module>${product.servlet}</module>
         <module>${product.util}</module>
       </modules>
     </profile>
@@ -69,7 +68,6 @@
         <module>${product.expression}</module>
         <module>${product.security}</module>
         <module>${product.service}</module>
-        <module>${product.servlet}</module>
         <module>${product.standalone}</module>
         <module>${product.util}</module>
         <module>${product.web}</module>

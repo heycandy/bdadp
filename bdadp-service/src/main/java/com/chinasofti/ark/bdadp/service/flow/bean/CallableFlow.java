@@ -57,12 +57,17 @@ public abstract class CallableFlow<V> extends Flow implements Future<V>, Stateab
   }
 
   @Override
+  public String getExecutionId() {
+    return this._executionId;
+  }
+
+
+  @Override
   public double getProgress() throws Exception {
     return StreamSupport.stream(getGraph().getAllVertex())
                .filter(vertex -> vertex.getState() > VertexState.COMPLETING.ordinal())
                .count() / 1.0 / getGraph().getAllVertex().size();
   }
-
   @Override
   protected Graph getGraph() {
     return _graph;
@@ -163,6 +168,7 @@ public abstract class CallableFlow<V> extends Flow implements Future<V>, Stateab
 
   @Override
   public boolean cancel(boolean var1) {
+    // TODO
     return false;
   }
 

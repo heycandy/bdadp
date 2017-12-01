@@ -9,8 +9,6 @@ import org.dom4j.Document;
 import java.io.File;
 import java.sql.Connection;
 
-import scala.Tuple2;
-
 /**
  * Created by White on 2017/1/6.
  */
@@ -32,7 +30,7 @@ public class Builder {
         return new SparkData(rawData);
     }
 
-    public static StreamData build(DStream<Tuple2<String, String>> rawData) {
+  public static StreamData build(DStream<String> rawData) {
         return new StreamData(rawData);
     }
 

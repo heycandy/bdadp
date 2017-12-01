@@ -7,39 +7,39 @@ import com.chinasofti.ark.bdadp.service.graph.bean.VertexState;
  */
 public class SimpleCallableFlowVertex implements CallableFlowVertex {
 
-    private final String id;
-    private final CallableFlow flow;
+  private final String id;
+  private final CallableFlow flow;
 
-    private VertexState state;
+  private VertexState state;
 
   private boolean skip;
 
-    public SimpleCallableFlowVertex(CallableFlow flow) {
-        this.id = flow.getId();
-        this.flow = flow;
+  public SimpleCallableFlowVertex(CallableFlow flow) {
+    this.id = flow.getId();
+    this.flow = flow;
 
-        setState(VertexState.READY.name());
-    }
+    setState(VertexState.READY.name());
+  }
 
-    @Override
-    public CallableFlow get() {
-        return flow;
-    }
+  @Override
+  public CallableFlow get() {
+    return flow;
+  }
 
-    @Override
-    public int getState() {
-        return this.state.ordinal();
-    }
+  @Override
+  public int getState() {
+    return this.state.ordinal();
+  }
 
-    @Override
-    public void setState(String name) {
-        this.state = VertexState.valueOf(name);
-    }
+  @Override
+  public void setState(String name) {
+    this.state = VertexState.valueOf(name);
+  }
 
-    @Override
-    public String getId() {
-        return this.id;
-    }
+  @Override
+  public String getId() {
+    return this.id;
+  }
 
   @Override
   public boolean isSkip() {
@@ -51,13 +51,13 @@ public class SimpleCallableFlowVertex implements CallableFlowVertex {
     this.skip = skip;
   }
 
-    @Override
-    public String toString() {
-      return "SimpleCallableFlowVertex{" +
-             "id='" + id + '\'' +
-             ", flow=" + flow +
-             ", state=" + state +
-             ", skip=" + skip +
-             '}';
-    }
+  @Override
+  public String toString() {
+    return "SimpleCallableFlowVertex{" +
+           "id='" + id + '\'' +
+           ", flow=" + flow +
+           ", state=" + state +
+           ", skip=" + skip +
+           '}';
+  }
 }

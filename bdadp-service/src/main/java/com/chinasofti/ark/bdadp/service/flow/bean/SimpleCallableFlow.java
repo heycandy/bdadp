@@ -14,15 +14,13 @@ import java8.util.stream.StreamSupport;
 public class SimpleCallableFlow extends CallableFlow {
 
   private final String _scenarioId;
-  private final String _executionId;
 
-  public SimpleCallableFlow(String id, String name, String scenarioId, String executionId,
-                            Graph graph) {
+  public SimpleCallableFlow(
+      String id, String name,
+      String scenarioId, String executionId, Graph graph) {
     super(id, name, executionId, graph);
 
     _scenarioId = scenarioId;
-    _executionId = executionId;
-
     setState(FlowState.READY.name());
   }
 
@@ -37,7 +35,7 @@ public class SimpleCallableFlow extends CallableFlow {
         executor.submit(getFlow(), vertex);
       }
 
-      awaitTermination();
+      super.awaitTermination();
 
       if (getState() > FlowState.SUCCESS.ordinal()) {
         TaskLogProvider.close(getLog());
@@ -67,6 +65,10 @@ public class SimpleCallableFlow extends CallableFlow {
           }
         }
       }
+
+      if (super.getState() >= FlowState.COMPLETING.ordinal()) {
+        executor.remove(super.getExecutionId());
+      }
     };
   }
 
@@ -78,11 +80,23 @@ public class SimpleCallableFlow extends CallableFlow {
     };
   }
 
+  @Override
+  public boolean cancel(boolean var1) {
+    // TODO
+    return super.cancel(var1);
+  }
+
   protected void completing(Vertex vertex) {
     this.completing(vertex, null);
   }
 
   protected synchronized void completing(Vertex vertex, Throwable throwable) {
+    this.status(vertex, throwable);
+    this.status(vertex, throwable);
+
+  }
+
+  protected void status(Vertex vertex, Throwable throwable) {
     if (throwable == null) {
       vertex.setState(VertexState.SUCCESS.name());
       info("Success: " + vertex);
@@ -91,6 +105,9 @@ public class SimpleCallableFlow extends CallableFlow {
       error("Failure: " + vertex, throwable);
     }
 
+  }
+
+  protected void status(Vertex vertex) {
     boolean terminal = this.getGraph().isTerminalVertex(vertex.getId()) &&
                        vertex.getState() == VertexState.SUCCESS.ordinal();
     boolean anyMatch = StreamSupport.stream(this.getGraph().getAllVertex())
@@ -114,11 +131,7 @@ public class SimpleCallableFlow extends CallableFlow {
   }
 
   public String getScenarioId() {
-    return _scenarioId;
-  }
-
-  public String getExecutionId() {
-    return _executionId;
+    return this._scenarioId;
   }
 
 }

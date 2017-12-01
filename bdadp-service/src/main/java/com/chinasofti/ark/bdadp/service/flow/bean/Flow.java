@@ -8,5 +8,7 @@ import com.chinasofti.ark.bdadp.service.graph.bean.Graph;
  */
 public abstract class Flow implements Component {
 
-    protected abstract Graph getGraph();
+  protected abstract String getExecutionId();
+
+  protected abstract Graph getGraph();
 }

@@ -113,6 +113,12 @@ public class SimpleTask<K extends Component> extends AbstractTask<Data> {
     this.finish();
   }
 
+  public void stop() {
+    if (this.obj instanceof RunnableComponent) {
+      ((RunnableComponent) obj).stop();
+    }
+  }
+
   @Override
   public double getProgress() throws Exception {
     return 0;
