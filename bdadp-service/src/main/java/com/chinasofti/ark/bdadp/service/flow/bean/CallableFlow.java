@@ -92,6 +92,7 @@ public abstract class CallableFlow<V> extends Flow implements Future<V>, Stateab
 
     if (this.state.ordinal() > FlowState.COMPLETING.ordinal()) {
       LockSupport.unpark(thread);
+      thread = null;
     }
 
     reportAll();
@@ -163,13 +164,24 @@ public abstract class CallableFlow<V> extends Flow implements Future<V>, Stateab
 
   @Override
   public void removeAllListener() {
-    this.listeners.removeAll(this.listeners);
+    this.listeners.clear();
   }
 
   @Override
   public boolean cancel(boolean var1) {
-    // TODO
-    return false;
+    if (!this.isCancelled() && !this.isDone()) {
+      if (var1 && this.thread != null) {
+        try {
+          this.thread.interrupt();
+        } finally {
+          setState(FlowState.CANCELLED.name());
+        }
+      }
+
+      return true;
+    } else {
+      return false;
+    }
   }
 
   @Override
@@ -179,8 +191,7 @@ public abstract class CallableFlow<V> extends Flow implements Future<V>, Stateab
 
   @Override
   public boolean isDone() {
-    return StreamSupport.stream(this.getGraph().getEndVertexes())
-        .allMatch(vertex -> vertex.getState() > VertexState.COMPLETING.ordinal());
+    return this.getState() == FlowState.SUCCESS.ordinal();
   }
 
   @Override

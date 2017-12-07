@@ -153,7 +153,7 @@ public abstract class AbstractTask<V extends Data> implements Task<V> {
 
   @Override
   public void removeAllListener() {
-    this.listeners.removeAll(this.listeners);
+    this.listeners.clear();
   }
 
   @Override
@@ -167,11 +167,17 @@ public abstract class AbstractTask<V extends Data> implements Task<V> {
   public void setState(String name) {
     this.state = TaskState.valueOf(name);
     if (this.state == TaskState.COMPLETING) {
+      runner = Thread.currentThread();
+
       try {
         this._log = TaskLogProvider.getLog(_id, _options.getExecutionId());
       } catch (Exception e) {
         e.printStackTrace();
       }
+    }
+
+    if (this.state.ordinal() >= TaskState.COMPLETING.ordinal()) {
+      runner = null;
     }
 
     reportAll();

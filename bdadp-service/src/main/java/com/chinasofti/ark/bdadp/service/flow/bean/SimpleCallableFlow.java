@@ -3,6 +3,7 @@ package com.chinasofti.ark.bdadp.service.flow.bean;
 import com.chinasofti.ark.bdadp.component.support.TaskLogProvider;
 import com.chinasofti.ark.bdadp.service.graph.bean.Edge;
 import com.chinasofti.ark.bdadp.service.graph.bean.Graph;
+import com.chinasofti.ark.bdadp.service.graph.bean.TaskVertex;
 import com.chinasofti.ark.bdadp.service.graph.bean.Vertex;
 import com.chinasofti.ark.bdadp.service.graph.bean.VertexState;
 
@@ -82,7 +83,14 @@ public class SimpleCallableFlow extends CallableFlow {
 
   @Override
   public boolean cancel(boolean var1) {
-    // TODO
+    StreamSupport.stream(super.getGraph().getAllVertex())
+        .filter(vertex -> vertex.getState() >= VertexState.COMPLETING.ordinal())
+        .forEach(vertex -> {
+          if (vertex instanceof TaskVertex) {
+            ((TaskVertex) vertex).get().cancel(var1);
+          }
+        });
+
     return super.cancel(var1);
   }
 
