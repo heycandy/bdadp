@@ -82,10 +82,10 @@ public abstract class AbstractTask<V extends Data> implements Task<V> {
   }
 
   @Override
-  public boolean cancel(boolean mayInterruptIfRunning) {
+  public boolean cancel(boolean var1) {
     if (!this.isCancelled() && !this.isDone()) {
       setState(TaskState.INTERRUPTING.name());
-      if (mayInterruptIfRunning && this.runner != null) {
+      if (var1 && this.runner != null) {
         try {
           this.runner.interrupt();
         } finally {

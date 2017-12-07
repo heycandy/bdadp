@@ -114,12 +114,12 @@ public class SimpleTask<K extends Component> extends AbstractTask<Data> {
   }
 
   @Override
-  public boolean cancel(boolean mayInterruptIfRunning) {
+  public boolean cancel(boolean var1) {
     if (this.obj instanceof RunnableComponent) {
       ((RunnableComponent) obj).stop();
     }
 
-    return super.cancel(mayInterruptIfRunning);
+    return super.cancel(var1);
   }
 
   @Override
