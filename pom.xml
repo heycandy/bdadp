@@ -524,6 +524,17 @@
         <artifactId>spark-mllib_${scala.binary.version}</artifactId>
         <version>${spark.version}</version>
       </dependency>
+      <dependency>
+        <groupId>org.apache.spark</groupId>
+        <artifactId>spark-streaming-flume_${scala.binary.version}</artifactId>
+        <version>${spark.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.spark</groupId>
+        <artifactId>spark-streaming-kafka_${scala.binary.version}</artifactId>
+        <version>${spark.version}</version>
+      </dependency>
+
 
       <!-- external datasource -->
       <dependency>
