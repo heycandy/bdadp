@@ -18,6 +18,7 @@
     <hive.version>1.2.1</hive.version>
     <hbase.version>1.0.2</hbase.version>
     <spark.version>1.6.3</spark.version>
+    <flume.version>1.8.0</flume.version>
 
     <spring.version>4.2.4.RELEASE</spring.version>
     <spring.jpa.version>1.10.2.RELEASE</spring.jpa.version>
@@ -569,6 +570,18 @@
         <groupId>org.apache.velocity</groupId>
         <artifactId>velocity</artifactId>
         <version>1.7</version>
+      </dependency>
+
+      <!-- flume -->
+      <dependency>
+        <groupId>org.apache.flume</groupId>
+        <artifactId>flume-ng-embedded-agent</artifactId>
+        <version>${flume.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.flume.flume-ng-sinks</groupId>
+        <artifactId>flume-ng-kafka-sink</artifactId>
+        <version>${flume.version}</version>
       </dependency>
 
       <!-- Backport of Java 8 java.util.stream API to Java 6/7 -->

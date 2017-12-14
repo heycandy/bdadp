@@ -85,11 +85,7 @@
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase-client</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.chinasofti.ark</groupId>
-            <artifactId>bdadp-util</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
+
     </dependencies>
 
 </project>

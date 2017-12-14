@@ -110,6 +110,15 @@
     </dependency>
 
     <dependency>
+      <groupId>org.apache.flume</groupId>
+      <artifactId>flume-ng-embedded-agent</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.flume.flume-ng-sinks</groupId>
+      <artifactId>flume-ng-kafka-sink</artifactId>
+    </dependency>
+
+    <dependency>
       <groupId>net.sourceforge.streamsupport</groupId>
       <artifactId>streamsupport</artifactId>
     </dependency>
