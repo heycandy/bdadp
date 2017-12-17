@@ -1,17 +1,15 @@
 package com.chinasofti.ark.bdadp.component.support;
 
+import com.google.common.collect.Lists;
+
 import com.chinasofti.ark.bdadp.component.api.channel.Channel;
 import com.chinasofti.ark.bdadp.component.api.data.Data;
-import com.chinasofti.ark.bdadp.component.api.data.SparkData;
-import com.chinasofti.ark.bdadp.component.api.data.StringData;
 import com.chinasofti.ark.bdadp.component.api.options.ScenarioOptions;
 import com.chinasofti.ark.bdadp.component.api.options.SparkScenarioOptions;
 import com.chinasofti.ark.bdadp.component.api.source.SourceComponent;
 import com.chinasofti.ark.bdadp.component.api.source.SparkSourceAdapter;
+import com.chinasofti.ark.bdadp.component.api.source.StreamSourceAdapter;
 import com.chinasofti.ark.bdadp.component.api.source.StringSourceAdapter;
-import com.google.common.collect.Lists;
-import java8.util.stream.Collectors;
-import java8.util.stream.StreamSupport;
 
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
@@ -19,6 +17,9 @@ import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+
+import java8.util.stream.Collectors;
+import java8.util.stream.StreamSupport;
 
 /**
  * Created by White on 2017/1/4.
@@ -49,10 +50,12 @@ public class SourceTask extends SimpleTask<SourceComponent> implements ChannelOu
             Class<? extends Data> outputT = entry.getKey();
             List<Channel> channels = entry.getValue();
             Data data;
-            if (outputT.isAssignableFrom(SparkData.class) && this.obj instanceof SparkSourceAdapter) {
+          if (this.obj instanceof SparkSourceAdapter) {
                 data = ((SparkSourceAdapter) this.obj).spark(options().as(SparkScenarioOptions.class));
-            } else if (outputT.isAssignableFrom(StringData.class)
-                    && this.obj instanceof StringSourceAdapter) {
+          } else if (this.obj instanceof StreamSourceAdapter) {
+            data =
+                ((StreamSourceAdapter) this.obj).stream(options().as(SparkScenarioOptions.class));
+          } else if (this.obj instanceof StringSourceAdapter) {
                 data = ((StringSourceAdapter) this.obj).string();
             } else {
                 data = this.obj.call();

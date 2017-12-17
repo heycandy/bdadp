@@ -7,6 +7,7 @@ import com.chinasofti.ark.bdadp.component.api.channel.MemoryChannel;
 import com.chinasofti.ark.bdadp.component.api.data.Data;
 import com.chinasofti.ark.bdadp.component.api.data.DataType;
 import com.chinasofti.ark.bdadp.component.api.data.SparkData;
+import com.chinasofti.ark.bdadp.component.api.data.StreamData;
 import com.chinasofti.ark.bdadp.security.SecurityLogin;
 
 import org.apache.spark.SparkConf;
@@ -16,6 +17,7 @@ import org.apache.spark.sql.SQLContext;
 import org.apache.spark.sql.hive.HiveContext;
 import org.apache.spark.streaming.Durations;
 import org.apache.spark.streaming.StreamingContext;
+import org.apache.spark.streaming.dstream.DStream;
 
 import java.io.IOException;
 import java.net.URL;
@@ -154,13 +156,24 @@ public class SparkScenarioOptions extends ScenarioOptions {
 
     @Override
     public Channel union(Collection<Channel> channels) {
-        DataFrame rawData = StreamSupport.stream(channels)
-                .filter(channel -> channel.output().getType() == DataType.SPARK)
-                .map(channel -> (DataFrame) channel.output().getRawData())
-                .reduce(DataFrame::unionAll)
-                .orElse(this.sqlContext().emptyDataFrame());
+      Data data = null;
 
-        Data data = new SparkData(rawData);
+      if (StreamSupport.stream(channels)
+          .allMatch(channel -> channel.output().getType() == DataType.SPARK)) {
+        DataFrame rawData = StreamSupport.stream(channels)
+            .map(channel -> (DataFrame) channel.output().getRawData())
+            .reduce(DataFrame::unionAll)
+            .orElse(this.sqlContext().emptyDataFrame());
+        data = new SparkData(rawData);
+      } else if (StreamSupport.stream(channels)
+          .allMatch(channel -> channel.output().getType() == DataType.STREAM)) {
+        DStream<String> rawData = StreamSupport.stream(channels)
+            .map(channel -> (DStream<String>) channel.output().getRawData())
+            .reduce(DStream::union)
+            .get();
+        data = new StreamData(rawData);
+      }
+
         Channel channel = new MemoryChannel();
 
         channel.input(data);
@@ -197,11 +210,16 @@ public class SparkScenarioOptions extends ScenarioOptions {
     }
 
     public void startAndAwaitTermination() {
-        this.streamingContext().start();
-        this.streamingContext().awaitTermination();
+      if (this.streamingContext != null) {
+        this.streamingContext.start();
+        this.streamingContext.awaitTermination();
+      }
+
     }
 
     public void stop() {
-        this.streamingContext().stop(false);
+      if (this.streamingContext != null) {
+        this.streamingContext.stop(false);
+      }
     }
 }

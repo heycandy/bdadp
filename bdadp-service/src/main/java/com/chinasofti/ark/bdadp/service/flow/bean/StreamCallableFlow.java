@@ -24,20 +24,6 @@ public class StreamCallableFlow extends SimpleCallableFlow {
   }
 
   @Override
-  protected void status(Vertex vertex, Throwable throwable) {
-    if (throwable == null) {
-      if (!this.options.isStreaming() ||
-          super.getGraph().isTerminalVertex(vertex.getId())) {
-        vertex.setState(VertexState.SUCCESS.name());
-      }
-      info("Success: " + vertex);
-    } else {
-      vertex.setState(VertexState.FAILURE.name());
-      error("Failure: " + vertex, throwable);
-    }
-  }
-
-  @Override
   protected void status(Vertex vertex) {
     boolean terminal = super.getGraph().isTerminalVertex(vertex.getId()) &&
                        vertex.getState() == VertexState.SUCCESS.ordinal();
@@ -45,12 +31,13 @@ public class StreamCallableFlow extends SimpleCallableFlow {
         .anyMatch(v -> v.getState() == VertexState.COMPLETING.ordinal());
     boolean allMatch = StreamSupport.stream(super.getGraph().getEndVertexes())
         .allMatch(v -> v.getState() == VertexState.SUCCESS.ordinal());
-    System.out.println(String.format(
+    info(String.format(
         "###SSE-10819### %s, %s, %s, %s", vertex, terminal, anyMatch, allMatch));
     if (terminal || anyMatch) {
       reportAll();
     } else if (allMatch) {
-      // For real-time flow scenario
+      info(String.format(
+          "###SSE-11214### %s", this.options.isStreaming()));
       if (this.options.isStreaming()) {
         this.options.as(SparkScenarioOptions.class).startAndAwaitTermination();
       }

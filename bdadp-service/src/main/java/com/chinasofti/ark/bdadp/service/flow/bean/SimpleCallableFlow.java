@@ -100,7 +100,7 @@ public class SimpleCallableFlow extends CallableFlow {
 
   protected synchronized void completing(Vertex vertex, Throwable throwable) {
     this.status(vertex, throwable);
-    this.status(vertex, throwable);
+    this.status(vertex);
 
   }
 

@@ -86,6 +86,7 @@ public class SimpleTask<K extends Component> extends AbstractTask<Data> {
   }
 
   protected void finish() {
+    setState(TaskState.NORMAL.name());
     TaskLogProvider.close(getLog());
   }
 
@@ -108,7 +109,6 @@ public class SimpleTask<K extends Component> extends AbstractTask<Data> {
       this.exception(e);
     }
 
-    setState(TaskState.NORMAL.name());
     info(String.format("finish %s.", this));
     this.finish();
   }
@@ -118,6 +118,8 @@ public class SimpleTask<K extends Component> extends AbstractTask<Data> {
     if (this.obj instanceof RunnableComponent) {
       ((RunnableComponent) obj).stop();
     }
+
+    TaskLogProvider.close(getLog());
 
     return super.cancel(var1);
   }
